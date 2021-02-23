@@ -1,2 +1,2 @@
-# InnovDev
+# SPIRTY
 Meditation app
