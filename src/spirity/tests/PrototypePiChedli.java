@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tests;
-
+package spirity.tests;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,14 +14,12 @@ import javafx.stage.Stage;
  *
  * @author shidono
  */
-public class Prototype extends Application {
+public class PrototypePiChedli extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-        
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/Prototype.fxml"));
         Scene scene = new Scene(root);
-        
         stage.setScene(scene);
         stage.show();
     }

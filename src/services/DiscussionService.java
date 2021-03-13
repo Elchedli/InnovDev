@@ -18,7 +18,7 @@ import utils.DataSource;
  *
  * @author shidono
  */
-public class DiscussionService {
+public class DiscussionService implements CRUD{
     Connection cnx = DataSource.getInstance().getCnx();
     public void creerDiscussion(Discussion disc){
          try {
@@ -47,14 +47,14 @@ public class DiscussionService {
         }
     }
     
-    public ArrayList<Message> AfficherMessageDiscussion(){
+     public ArrayList<Message> AfficherMessageDiscussion(int id){
         ArrayList<Message> messages = new ArrayList<>();
         try {
-            String requete = "Select * from evenement";
+            String requete = "Select * from message JOIN discussion disc where disc.id_disc = message.id_disc";
             PreparedStatement pst = cnx.prepareStatement(requete);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                //messages.add();
+                messages.add(new Message(rs.getString(2),rs.getDate(4)));
             }
         } catch (SQLException ex) {
             System.out.println("Erreur lors d'extraction des données \n" + ex.getMessage());
@@ -72,5 +72,20 @@ public class DiscussionService {
         } catch (SQLException ex) {
             System.out.println("Erreur lors d'extraction des données \n" + ex.getMessage());
         }
+    }
+
+    @Override
+    public void Ajouter() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void Modifier() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void Supprimer() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

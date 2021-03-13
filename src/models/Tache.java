@@ -11,6 +11,7 @@ package models;
  */
 public class Tache {
     private int id_tache;
+    private String username;
     private boolean etat_tache;
     private String difficulte_tache; // don't forget to change type
     private String description_tache;
@@ -25,5 +26,9 @@ public class Tache {
 
     public String getDescription_tache() {
         return description_tache;
+    }
+    
+     public String getUsername() {
+        return username;
     }
 }
