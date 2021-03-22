@@ -1,2 +1,0 @@
-# SPIRTY
-Meditation app
