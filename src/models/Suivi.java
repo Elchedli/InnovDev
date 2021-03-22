@@ -15,12 +15,36 @@ import javafx.scene.control.TextField;
  */
 public class Suivi {
     private Integer id_s;
-    private String user;
+    private String client;
     private String titre_s;
     private Date date_ds;
     private Date date_fs;
     private Time temps_ds;
     private Time temps_fs;
+
+    public void setClient(String client) {
+        this.client = client;
+    }
+
+    public void setTitre_s(String titre_s) {
+        this.titre_s = titre_s;
+    }
+
+    public void setDate_ds(Date date_ds) {
+        this.date_ds = date_ds;
+    }
+
+    public void setDate_fs(Date date_fs) {
+        this.date_fs = date_fs;
+    }
+
+    public void setTemps_ds(Time temps_ds) {
+        this.temps_ds = temps_ds;
+    }
+
+    public void setTemps_fs(Time temps_fs) {
+        this.temps_fs = temps_fs;
+    }
 
     public Suivi(int id, String titre, Date debut, Date fin, Time timedeb, Time timefin) {
         this.id_s = id;
@@ -31,8 +55,8 @@ public class Suivi {
         this.temps_fs = timefin;
     }
 
-    public Suivi(String user,String titre, Date datedeb, Date datefin, Time timedeb, Time timefin) {
-        this.user = user;
+    public Suivi(String client,String titre, Date datedeb, Date datefin, Time timedeb, Time timefin) {
+        this.client = client;
         this.titre_s = titre;
         this.date_ds = datedeb;
         this.date_fs = datefin;
@@ -42,7 +66,7 @@ public class Suivi {
 
     public Suivi(int id,String user, String titre, Date debut, Date fin, Time timedeb, Time timefin) {
         this.id_s = id;
-        this.user = user;
+        this.client = user;
         this.titre_s = titre;
         this.date_ds = debut;
         this.date_fs = fin;
@@ -54,12 +78,12 @@ public class Suivi {
 //        
 //    }
     
-    public int getId() {
+    public Integer getId_s() {
         return id_s;
     }
-    
-    public String getUser() {
-        return user;
+
+    public String getClient() {
+        return client;
     }
     
     public String getTitre_s() {
@@ -84,7 +108,7 @@ public class Suivi {
 
     @Override
     public String toString() {
-        return "Suivi{" + "id_s=" + id_s + ", user=" + user + ", titre_s=" + titre_s + ", date_ds=" + date_ds + ", date_fs=" + date_fs + ", temps_ds=" + temps_ds + ", temps_fs=" + temps_fs + '}';
+        return "Suivi{" + "id_s=" + id_s + ", user=" + client + ", titre_s=" + titre_s + ", date_ds=" + date_ds + ", date_fs=" + date_fs + ", temps_ds=" + temps_ds + ", temps_fs=" + temps_fs + '}';
     }
     
     

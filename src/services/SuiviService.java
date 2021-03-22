@@ -14,6 +14,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 import models.Message;
 import models.Suivi;
+import models.user;
 import utils.DataSource;
 
 /**
@@ -24,9 +25,10 @@ public class SuiviService implements CRUD{
     Connection cnx = DataSource.getInstance().getCnx();
     public void ajouterSuivi(Suivi suiv){
         try {
-            String requete = "INSERT INTO suivi VALUES (null,?,?,?,?,?,?)";
+            String requete = "INSERT INTO suivi VALUES (null,?,?,?,?,?,?,?)";
             PreparedStatement pst = cnx.prepareStatement(requete);
-            pst.setString(1, suiv.getUser());
+            pst.setString(1, user.getUsername());
+            pst.setString(1, suiv.getClient());
             pst.setString(2,suiv.getTitre_s());
             pst.setDate(3, suiv.getDate_ds());
             pst.setDate(4, suiv.getDate_fs());
@@ -35,7 +37,7 @@ public class SuiviService implements CRUD{
             pst.executeUpdate();
             System.out.println("Suivi crée !");
         } catch (SQLException ex) {
-            System.out.println("erreur lors de la création du suivi \n " + ex.getMessage());
+            System.out.println("erreur lors de la création du suivi \n " + ex.getMessage());  
         }
             
     }
@@ -56,28 +58,29 @@ public class SuiviService implements CRUD{
         }
     }
 
-   
-    public static void method(Object obj) {
-        if (obj instanceof String)
-            System.out.println("I am a String!");
-
-        if (obj instanceof Integer)
-            System.out.println("I am an Integer!");
-
-        // Similarly for other types of Object
-        // The .getClass() is for any Object
-        System.out.println(obj.getClass());
-    }
     
-    public ArrayList<Suivi> AfficherSuivi(String user){
+   
+//    public static void method(Object obj) {
+//        if (obj instanceof String)
+//            System.out.println("I am a String!");
+//
+//        if (obj instanceof Integer)
+//            System.out.println("I am an Integer!");
+//
+//        // Similarly for other types of Object
+//        // The .getClass() is for any Object
+//        System.out.println(obj.getClass());
+//    }
+    
+    public ArrayList<Suivi> AfficherSuivi(){
         ArrayList<Suivi> suivliste = new ArrayList<>();
         try {
             String requete = "select * from suivi WHERE username=?";
             PreparedStatement pst = cnx.prepareStatement(requete);
-            pst.setString(1,user);
+            pst.setString(1,user.getUsername());
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                suivliste.add(new Suivi(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getDate(4),rs.getDate(5),rs.getTime(6),rs.getTime(7)));
+                suivliste.add(new Suivi(rs.getInt(1),rs.getString(3),rs.getString(4),rs.getDate(5),rs.getDate(6),rs.getTime(7),rs.getTime(8)));
             }
             return suivliste;
         } catch (SQLException ex) {
