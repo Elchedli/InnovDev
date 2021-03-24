@@ -23,34 +23,50 @@ import utils.DataSource;
  */
 public class SuiviService implements CRUD{
     Connection cnx = DataSource.getInstance().getCnx();
-    public void ajouterSuivi(Suivi suiv){
+    public boolean check(Suivi suiv){
+        return suiv.getClient() != null && suiv.getDate_ds() != null && suiv.getDate_fs() != null && suiv.getTitre_s() != null && suiv.getTemps_ds() != null && suiv.getTemps_fs() != null;
+    }
+    public String ajouterSuivi(Suivi suiv){
+        String result=" ";
         try {
-            String requete = "INSERT INTO suivi VALUES (null,?,?,?,?,?,?,?)";
+            if(suiv.getDate_ds().compareTo(suiv.getDate_fs())>0) result+="date ";
+            if(suiv.getTemps_ds().compareTo(suiv.getTemps_fs())>0) result+="temps ";
+            String requete = "select username from simple where username=?";
             PreparedStatement pst = cnx.prepareStatement(requete);
-            pst.setString(1, user.getUsername());
             pst.setString(1, suiv.getClient());
-            pst.setString(2,suiv.getTitre_s());
-            pst.setDate(3, suiv.getDate_ds());
-            pst.setDate(4, suiv.getDate_fs());
-            pst.setTime(5, suiv.getTemps_ds());
-            pst.setTime(6, suiv.getTemps_fs());
-            pst.executeUpdate();
-            System.out.println("Suivi crée !");
+            ResultSet rs = pst.executeQuery();
+            if(!rs.next()) result+="foreign ";
+            if(result == " " && check(suiv)){
+                requete = "INSERT INTO suivi VALUES (null,?,?,?,?,?,?,?)";
+                pst = cnx.prepareStatement(requete);
+                pst.setString(1, user.getUsername());
+                pst.setString(2, suiv.getClient());
+                pst.setString(3,suiv.getTitre_s());
+                pst.setDate(4, suiv.getDate_ds());
+                pst.setDate(5, suiv.getDate_fs());
+                pst.setTime(6, suiv.getTemps_ds());
+                pst.setTime(7, suiv.getTemps_fs());
+                pst.executeUpdate();
+                System.out.println("Suivi crée !");
+            }
         } catch (SQLException ex) {
-            System.out.println("erreur lors de la création du suivi \n " + ex.getMessage());  
+            String message = ex.getMessage();
+            System.out.println("erreur lors de la création du suivi \n " + ex.getMessage()); 
+//            if(message.contains("foreign key")) result+="foreign ";
+            return result.substring(0, result.length() - 1);
+//            else if(message.contains(""))
         }
-            
+        return result.substring(0, result.length() - 1);
     }
     
-    public void ModifierSuivi(String row,Object obj,int id){   
+    public void ModifierSuivi(int id,Object obj,String row){   
         try {
-            String requete = "UPDATE Suivi set ?=? WHERE id_s=?";
+            String requete = "UPDATE Suivi set "+row+"=? WHERE id_s=?";
             PreparedStatement pst = cnx.prepareStatement(requete);
-            pst.setString(1,row);
-            if(obj instanceof String) pst.setString(2, (String) obj);
-               else if(obj instanceof Time) pst.setTime(2, (Time) obj);
-               else if(obj instanceof Date) pst.setDate(2,(Date) obj);
-            pst.setInt(3,id);
+            if(obj instanceof String) pst.setString(1, (String) obj);
+               else if(obj instanceof Time) pst.setTime(1, (Time) obj);
+               else if(obj instanceof Date) pst.setDate(1,(Date) obj);
+            pst.setInt(2,id);
            pst.executeUpdate();
            System.out.println("Row suivi modifier : "+id);
         } catch (SQLException ex) {
@@ -58,7 +74,17 @@ public class SuiviService implements CRUD{
         }
     }
 
-    
+    public void SupprimerSuivi(int id){
+        try {
+            String requete = "DELETE FROM suivi WHERE id_s=?";
+            PreparedStatement pst = cnx.prepareStatement(requete);
+            pst.setInt(1, id);
+            pst.executeUpdate();
+            System.out.println("Suivi effacer !");
+        } catch (SQLException ex) {
+            System.out.println("erreur lors de l'effacement du suivi \n " + ex.getMessage());  
+        }
+    }
    
 //    public static void method(Object obj) {
 //        if (obj instanceof String)

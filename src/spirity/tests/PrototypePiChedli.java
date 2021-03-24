@@ -20,6 +20,7 @@ public class PrototypePiChedli extends Application {
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("../GUI/Prototype.fxml"));
         Scene scene = new Scene(root);
+        scene.getStylesheets().add("design/design.css");
         stage.setScene(scene);
         stage.show();
     }

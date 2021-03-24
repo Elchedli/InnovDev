@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package controller;
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTimePicker;
 import java.sql.Date;
 import java.sql.Time;
@@ -41,6 +43,12 @@ import javafx.util.Callback;
 import javax.swing.JOptionPane;
 import models.user;
 import java.sql.Timestamp;
+import javafx.event.EventHandler;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.WindowEvent;
 import org.controlsfx.control.Notifications;
 import tweaks.DateEditingCell;
 import tweaks.TimeEditingCell;
@@ -49,72 +57,10 @@ import tweaks.TimeEditingCell;
  * @author shidono
  */
 
-//class DateEditingCell extends TableCell<Suivi, Date> {
-//
-//        private DatePicker datePicker;
-//
-//        DateEditingCell() {
-//        }
-//
-//        @Override
-//        public void startEdit() {
-//            if (!isEmpty()) {
-//                super.startEdit();
-//                createDatePicker();
-//                setText(null);
-//                setGraphic(datePicker);
-//            }
-//        }
-//
-//        @Override
-//        public void cancelEdit() {
-//            super.cancelEdit();
-//
-//            setText(getDate().toString());
-//            setGraphic(null);
-//        }
-//
-//        @Override
-//        public void updateItem(Date item, boolean empty) {
-//            super.updateItem(item, empty);
-//            if (empty) {
-//                setText(null);
-//                setGraphic(null);
-//            } else {
-//                if (isEditing()) {
-//                    if (datePicker != null) {
-//                        datePicker.setValue(getDate());
-//                    }
-//                    setText(null);
-//                    setGraphic(datePicker);
-//                } else {
-//                    setText(getDate().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM)));
-//                    setGraphic(null);
-//                }
-//            }
-//        }
-//
-//        private void createDatePicker() {
-//            datePicker = new DatePicker(getDate());
-//            datePicker.setMinWidth(this.getWidth() - this.getGraphicTextGap() * 2);
-//            datePicker.setOnAction((e) -> {
-//                System.out.println("Committed: " + datePicker.getValue().toString());
-//                commitEdit(Date.valueOf(datePicker.getValue()));
-//            });
-////            datePicker.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-////                if (!newValue) {
-////                    commitEdit(Date.from(datePicker.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()));
-////                }
-////            });
-//        }
-//
-//        private LocalDate getDate() {
-//            return getItem() == null ? LocalDate.now() : getItem().toLocalDate();
-//        }
-//    }
 
 
 public class PrototypeController{
+    String verif;
     SuiviService suivser = new SuiviService();
     ArrayList listesuivi = new ArrayList();
     ObservableList<String> trieList = FXCollections.observableArrayList("identifiant","Titre","Date","Temps");
@@ -122,10 +68,10 @@ public class PrototypeController{
     private final FilteredList <Suivi> filter = new FilteredList <> (SuiviList, e -> true);
     private final SortedList <Suivi> sortsuivi = new SortedList<>(filter);
     @FXML
-    private DatePicker date_deb;
+    private JFXDatePicker date_deb;
 
     @FXML
-    private DatePicker date_fin;
+    private JFXDatePicker date_fin;
 
     @FXML
     private JFXTimePicker temp_deb;
@@ -134,10 +80,10 @@ public class PrototypeController{
     private JFXTimePicker temps_fin;
 
     @FXML
-    private TextField client;
+    private JFXTextField client;
     
     @FXML
-    private TextField titre;
+    private JFXTextField titre;
     
     @FXML
     private ComboBox<String> trie;
@@ -170,7 +116,17 @@ public class PrototypeController{
     private JFXToggleButton ReverseSuivi;
     
      @FXML
-    private TextField tabrecherche;
+    private JFXTextField tabrecherche;
+     
+      @FXML
+    private Label labelclient;
+
+    @FXML
+    private Label labeldate;
+
+    @FXML
+    private Label labeltemps;
+
     
     
     @FXML
@@ -178,17 +134,41 @@ public class PrototypeController{
 //        Date date = Date.from(date_deb.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant());
 //        Suivi nouvsuiv = new Suivi(client.getText(),titre.getText(),Date.from(date_deb.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()),Date.from(date_fin.getValue().atStartOfDay(ZoneId.systemDefault()).toInstant()), Time.valueOf(temp_deb.getValue()),Time.valueOf(temps_fin.getValue()));
         Suivi nouvsuiv = new Suivi(client.getText(),titre.getText(),Date.valueOf(date_deb.getValue()), Date.valueOf(date_fin.getValue()), Time.valueOf(temp_deb.getValue()),Time.valueOf(temps_fin.getValue()));
-        suivser.ajouterSuivi(nouvsuiv);
-        System.out.println("utilisateur ajouter");
-        SuiviList.add(nouvsuiv);
-        suivitable.setItems(SuiviList);
-        JOptionPane.showMessageDialog(null, "Suivi ajouter");  
-        Notifications notificationBuilder;
-        notificationBuilder = Notifications.create()
-                .title("Suivi ajouter").text("Le nouveau suivi avec le titre "+nouvsuiv.getTitre_s()+" a était ajouter.").graphic(null).hideAfter(javafx.util.Duration.seconds(5))
-                .position(Pos.BOTTOM_RIGHT)
-                .onAction((ActionEvent event1) -> {System.out.println("clicked ON ");});
-        notificationBuilder.show();
+        verif = suivser.ajouterSuivi(nouvsuiv);
+        System.out.println("verif est : "+verif);
+        labelclient.setVisible(false);
+        labeldate.setVisible(false);
+        labeltemps.setVisible(false);
+        client.setStyle("-jfx-unfocus-color: black");
+        date_deb.lookup(".jfx-text-field").setStyle("-jfx-unfocus-color: black");
+        temp_deb.lookup(".jfx-text-field").setStyle("-jfx-unfocus-color: black");
+        if(verif.isEmpty()){
+            System.out.println("utilisateur ajouter");
+            SuiviList.add(nouvsuiv);
+            suivitable.setItems(SuiviList);
+            JOptionPane.showMessageDialog(null, "Suivi ajouter");  
+            Notifications notificationBuilder;
+            notificationBuilder = Notifications.create()
+                    .title("Suivi ajouter").text("Le nouveau suivi avec le titre "+nouvsuiv.getTitre_s()+" a était ajouter.").graphic(null).hideAfter(javafx.util.Duration.seconds(5))
+                    .position(Pos.BOTTOM_RIGHT)
+                    .onAction((ActionEvent event1) -> {System.out.println("clicked ON ");});
+            notificationBuilder.show();
+        }else{
+            if(verif.contains("foreign")){
+                labelclient.setVisible(true);
+                client.setStyle("-jfx-unfocus-color: red");
+            }
+            if(verif.contains("date")){
+                labeldate.setVisible(true);
+                date_deb.lookup(".jfx-text-field").setStyle("-jfx-unfocus-color: red");
+            }
+            if(verif.contains("temps")){
+                labeltemps.setVisible(true);
+                temp_deb.lookup(".jfx-text-field").setStyle("-jfx-unfocus-color: red");
+                
+                
+            }
+        }
     }
 
     @FXML
@@ -271,35 +251,41 @@ public class PrototypeController{
         Suivi suiviSelected = suivitable.getSelectionModel().getSelectedItem();
          String newvar = editcell.getNewValue().toString();
         suiviSelected.setClient(newvar);
+        suivser.ModifierSuivi(suiviSelected.getId_s(),newvar,"client");
     }
     
     public void changeCellTitre(CellEditEvent editcell){
         Suivi suiviSelected = suivitable.getSelectionModel().getSelectedItem();
         String newvar = editcell.getNewValue().toString();
         suiviSelected.setTitre_s(newvar);
+        suivser.ModifierSuivi(suiviSelected.getId_s(),newvar,"titre_s");
     }
     
     public void changeCellDateDeb(CellEditEvent editcell){
         Suivi suiviSelected = suivitable.getSelectionModel().getSelectedItem();
         Date newvar = Date.valueOf(editcell.getNewValue().toString());
         suiviSelected.setDate_ds(newvar);
+        suivser.ModifierSuivi(suiviSelected.getId_s(),newvar,"date_ds");
     }
     
     public void changeCellDateFin(CellEditEvent editcell){
         Suivi suiviSelected = suivitable.getSelectionModel().getSelectedItem();
         Date newvar = Date.valueOf(editcell.getNewValue().toString());
         suiviSelected.setDate_fs(newvar);
+        suivser.ModifierSuivi(suiviSelected.getId_s(),newvar,"date_fs");
     }
     
     public void changeCellTempsDeb(CellEditEvent editcell){
         Suivi suiviSelected = suivitable.getSelectionModel().getSelectedItem();
         Time newvar = Time.valueOf(editcell.getNewValue().toString());
         suiviSelected.setTemps_ds(newvar);
+         suivser.ModifierSuivi(suiviSelected.getId_s(),newvar,"temps_ds");
     }
     public void changeCellTempsFin(CellEditEvent editcell){
         Suivi suiviSelected = suivitable.getSelectionModel().getSelectedItem();
         Time newvar = Time.valueOf(editcell.getNewValue().toString());
         suiviSelected.setTemps_fs(newvar);
+        suivser.ModifierSuivi(suiviSelected.getId_s(),newvar,"temps_fs");
     }
     public void initialize() {
         trie.setItems(trieList);
@@ -327,24 +313,66 @@ public class PrototypeController{
         tempsdeb_table.setCellFactory(TimeCellFactory);
         tempsfin_table.setCellFactory(TimeCellFactory);
         
-        client_table.setCellFactory(new Callback<TableColumn<Suivi, String>, TableCell<Person, String>>() {
-    @Override
-    public TableCell<Person, String> call(TableColumn<Person, String> col) {
-        final TableCell<Person, String> cell = new TableCell<>();
-        cell.textProperty().bind(cell.itemProperty()); // in general might need to subclass TableCell and override updateItem(...) here
-        cell.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        ContextMenu contextMenuSuivi = new ContextMenu();
+        MenuItem DeleteItem = new MenuItem("Supprimer Suivi");
+        MenuItem DisplayTasks = new MenuItem("Afficher les taches");
+        
+        
+        DisplayTasks.setOnAction(new EventHandler<ActionEvent>(){
             @Override
-            public void handle(MouseEvent event) {
-                if (event.getButton == MouseButton.SECONDARY) {
-                    // handle right click on cell...
-                    // access cell data with cell.getItem();
-                    // access row data with (Person)cell.getTableRow().getItem();
-                }
+            public void handle(ActionEvent event){
+                
             }
         });
-        return cell ;
-    }
-});
-    }
+        
+        DeleteItem.setOnAction(new EventHandler<ActionEvent>(){
+            @Override
+            public void handle(ActionEvent event){
+                Object item = suivitable.getSelectionModel().getSelectedItem();
+                Suivi nouvsuiv = (Suivi) item;
+                System.out.println(nouvsuiv.toString());
+                suivser.SupprimerSuivi(nouvsuiv.getId_s());
+                SuiviList.clear();
+                SuiviList.removeAll(SuiviList);
+                suivser.AfficherSuivi().forEach(e->{
+                    SuiviList.add(e);
+                });
+                suivitable.setItems(SuiviList);
+            }
+        }
+        );
+        
+        
+            EventHandler<WindowEvent> event = new EventHandler<WindowEvent>()
+            {
+                @Override
+                public void handle(WindowEvent e)
+                {
+                    if(contextMenuSuivi.isShowing())
+                    {
+                       //System.out.println("Showing");
+                    }
+                    else
+                    {
+                       //System.out.println("Hidden");
+                    }
+                }
+            };
+             EventHandler<MouseEvent> handler = new EventHandler<MouseEvent>() {  
+        @Override
+        public void handle(MouseEvent event) {
+        }  
+          
+    };
+            contextMenuSuivi.getItems().add(DisplayTasks);
+            contextMenuSuivi.getItems().add(DeleteItem);
+            contextMenuSuivi.setOnShowing(event);
+            contextMenuSuivi.setOnHiding(event);
+            suivitable.setOnMouseClicked(handler);
+            suivitable.setContextMenu(contextMenuSuivi);
+            labelclient.setVisible(false);
+            labeldate.setVisible(false);
+            labeltemps.setVisible(false);
+   }
     
 }

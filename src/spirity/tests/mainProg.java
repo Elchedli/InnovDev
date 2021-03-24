@@ -76,6 +76,8 @@ public class mainProg {
                     id = sc.nextInt();
                     messerv.SupprimerMessage(id);
                 break;
+                case 7:
+                    System.out.println("so"+" ".substring(0, " ".length() - 1)+"nothing");
                 default:
             }  
         }
