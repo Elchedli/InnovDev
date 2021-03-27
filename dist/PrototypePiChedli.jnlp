@@ -8,8 +8,9 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="PrototypePiChedli.jar" size="48028" download="eager" />
+    <jar href="PrototypePiChedli.jar" size="78173" download="eager" />
     <jar href="lib\controlsfx-8.40.13.jar" size="1213306" download="eager" />
+    <jar href="lib\fontawesomefx-8.9.jar" size="571068" download="eager" />
     <jar href="lib\itextpdf-5.4.1.jar" size="1898417" download="eager" />
     <jar href="lib\javax.mail.jar" size="659033" download="eager" />
     <jar href="lib\jfoenix-8.0.10.jar" size="2710207" download="eager" />
@@ -18,6 +19,6 @@
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="PrototypePiChedli" >
     <param name="requiredFXVersion" value="8.0+"/>
   </applet-desc>
-  <jfx:javafx-desc  width="800" height="600" main-class="spirity.tests.PrototypePiChedli"  name="PrototypePiChedli" />
+  <jfx:javafx-desc  width="800" height="600" main-class="tests.ChatApp"  name="PrototypePiChedli" />
   <update check="always"/>
 </jnlp>

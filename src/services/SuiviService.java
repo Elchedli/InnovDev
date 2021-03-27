@@ -48,6 +48,19 @@ public class SuiviService implements CRUD{
                 pst.setTime(7, suiv.getTemps_fs());
                 pst.executeUpdate();
                 System.out.println("Suivi crée !");
+                requete = "SELECT nom_destinaire from discussion where nom_source=? AND nom_destinaire=?";
+                 pst = cnx.prepareStatement(requete);
+                pst.setString(1, user.getUsername());
+                pst.setString(2, suiv.getClient());
+                rs = pst.executeQuery();
+                if(!rs.next()){
+                    requete = "insert into discussion values (null,DEFAULT,?,?,DEFAULT)";
+                    pst = cnx.prepareStatement(requete);
+                    pst.setString(1, user.getUsername());
+                    pst.setString(2, suiv.getClient());
+                    pst.executeUpdate();
+                    System.out.println("Dicussion créer");
+                }
             }
         } catch (SQLException ex) {
             String message = ex.getMessage();

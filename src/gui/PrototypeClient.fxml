@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane id="AnchorPane" prefHeight="556.0" prefWidth="1010.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/15.0.1" fx:controller="controller.PrototypeClientController">
+    <children>
+      <Pane layoutX="-1.0" layoutY="-1.0" prefHeight="560.0" prefWidth="74.0" style="-fx-background-color: #1D232A;">
+         <children>
+            <JFXButton fx:id="messbutt" layoutX="4.0" layoutY="172.0" onAction="#PageMess" prefHeight="69.0" prefWidth="67.0" text=" ">
+               <graphic>
+                  <FontAwesomeIconView fill="#e8e8e8" glyphName="COMMENTING_ALT" size="38" textAlignment="CENTER" wrappingWidth="46.28947368421053" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="taskbutt" layoutX="4.0" layoutY="246.0" onAction="#PageTasks" prefHeight="69.0" prefWidth="67.0" text=" ">
+               <graphic>
+                  <FontAwesomeIconView fill="#e8e8e8" glyphName="TASKS" size="38" textAlignment="CENTER" wrappingWidth="46.28947368421053" />
+               </graphic>
+            </JFXButton>
+         </children></Pane>
+      <AnchorPane fx:id="MainPage" layoutX="73.0" prefHeight="556.0" prefWidth="959.0" />
+    </children>
+</AnchorPane>

@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import models.Discussion;
 import models.Message;
+import models.user;
 import utils.DataSource;
 
 /**
@@ -20,13 +21,14 @@ import utils.DataSource;
  */
 public class MessageService implements CRUD{
     Connection cnx = DataSource.getInstance().getCnx();
-     public void AjouterMessage(Message mess){
+     public void AjouterMessage(String mess,int id){
          try {
-            String requete = "INSERT INTO message VALUES (null,?,?,default)";
+            String requete = "INSERT INTO message VALUES (null,?,?,?,default)";
 //            String requete = "INSERT INTO evenement VALUES (null,?,?,?,CONVERT(?, DATE),CONVERT(?, DATE),CONVERT(?, TIME),CONVERT(?, TIME),?,?)";
             PreparedStatement pst = cnx.prepareStatement(requete);
-            pst.setString(1,mess.getContenu_msg());
-            pst.setInt(2,mess.getId_disc());
+            pst.setString(1,mess);
+            pst.setInt(2,id);
+            pst.setString(3,user.getUsername());
             pst.executeUpdate();
             System.out.println("Message ajoutée !");
         } catch (SQLException ex) {
@@ -44,6 +46,10 @@ public class MessageService implements CRUD{
         } catch (SQLException ex) {
             System.out.println("erreur lors de la suppression de la discussion \n " + ex.getMessage());
         }
+    }
+    
+    public void RafraichirMessage(int id){
+        
     }
 
     @Override

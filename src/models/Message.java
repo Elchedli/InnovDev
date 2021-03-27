@@ -12,24 +12,26 @@ import java.sql.Date;
  * @author shidono
  */
 public class Message {
-    private int id_msg;
-    private String contenu_msg;
-    private Date date_msg;
     private int id_disc;
-    
-    public Message(String a,int b){
-        contenu_msg = a;
-        id_disc = b;
-    }
-    
-    public Message(String a,Date date){
-        contenu_msg = a;
-        date_msg = date;
+    private String contenu_msg;
+    private String sender;
+    private Date date_msg;
+
+    public String getSender() {
+        return sender;
     }
 
-    public Message() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Date getDate_msg() {
+        return date_msg;
     }
+    
+    public Message(int id,String contenu,String sender,Date date){
+        id_disc = id;
+        contenu_msg = contenu;
+        this.sender = sender;
+        date_msg = date;
+    }
+    
     public String getContenu_msg() {
         return contenu_msg;
     }
