@@ -5,13 +5,19 @@
  */
 package controller;
 
+import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import static java.lang.Integer.parseInt;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import static java.time.Clock.system;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -30,6 +36,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
+import javafx.stage.Window;
+import javafx.stage.WindowEvent;
 import models.Discussion;
 import models.Message;
 import models.user;
@@ -38,6 +47,7 @@ import services.DiscussionService;
 import services.MessageService;
 import services.NetworkConnection;
 import services.Server;
+import tweaks.outils;
 
 /**
  * FXML Controller class
@@ -46,12 +56,8 @@ import services.Server;
  */
 
 
-public class MessageController implements Initializable {
-    DiscussionService discserv = new DiscussionService();
-    MessageService messerv = new MessageService();
-    private final boolean isServer = user.getType().compareTo("psy") == 0;
+public class MessageController implements Initializable{
     
-    private final NetworkConnection connection = isServer ? createServer(): createCLient();
     @FXML
     private Pane user1;
 
@@ -65,22 +71,45 @@ public class MessageController implements Initializable {
     private Pane chatroom;
     
     @FXML
+    private ScrollPane scrollchatroom;
+    
+    @FXML
     private Label currentuser;
     
-     @FXML
+    @FXML
     private Pane leftpage;
      
-       @FXML
+    @FXML
     private Label discidentity;
+    
+    @FXML
+    private Button closebutt;
+    
+     @FXML
+    private AnchorPane pagemain;
+       
+    DiscussionService discserv = new DiscussionService();
+    MessageService messerv = new MessageService();
+    private boolean exit = true;
+    private final boolean isServer = user.getType().compareTo("psy") == 0;
+    private final NetworkConnection connection = isServer ? createServer(): createCLient();
+//    Stage stage = (Stage) chatroom.getScene().getWindow();
+//    chatroom.sceneProperty().addListener((observableScene, oldScene, newScene) -> {
+//        if (oldScene == null && newScene != null){
+//            bgimage.fitWidthProperty().bind(newScene.widthProperty());     	    	
+//        }
+//    });
+//     
+    
     /**
      * Initializes the controller class.
      */
-     
-     public void ChangerPaneMessage(Discussion disc){
+     public void ChangerPaneMessage(Discussion disc)  {
          discidentity.setText(""+disc.getId_disc());
 //         System.out.println("id de la discussion : "+disc.getId_disc());
          double y = 31;
-        chatroom.getChildren().clear();
+         chatroom.getChildren().clear();
+         chatroom.setPrefHeight(447);
         chatroom.setStyle("-fx-background-color: #E9E9E9;");
         ArrayList<Message> messagess = discserv.AfficherMessageDiscussion(disc.getId_disc());
         if(messagess.isEmpty()){
@@ -97,52 +126,53 @@ public class MessageController implements Initializable {
 //            System.out.println("this is the work");
 //            System.out.println(messagess);
             for (Message mess : messagess) {
-             if(user.getUsername().compareTo(mess.getSender()) == 0){
-                 HBox incoming = new HBox();
-                 Label messagecontent = new Label();
-                 incoming.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
-                 incoming.setLayoutX(20.0);
-                 incoming.setLayoutY(y);
-                 incoming.setPrefHeight(46.0);
-                 incoming.setPrefWidth(300.0);
-                 incoming.getStyleClass().add("incoming-bubble");
-                 incoming.getStylesheets().add("/gui/../design/design.css");
+                if(user.getUsername().compareTo(mess.getSender()) == 0){
+                    HBox incoming = new HBox();
+                    Label messagecontent = new Label();
+                    incoming.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+                    incoming.setLayoutX(20.0);
+                    incoming.setLayoutY(y);
+                    incoming.setPrefHeight(46.0);
+                    incoming.setPrefWidth(300.0);
+                    incoming.getStyleClass().add("incoming-bubble");
+                    incoming.getStylesheets().add("/gui/../design/design.css");
 
-                 messagecontent.setPrefHeight(45.0);
-                 messagecontent.setPrefWidth(300.0);
-                 messagecontent.setText(mess.getContenu_msg());
-                 messagecontent.setTextFill(javafx.scene.paint.Color.WHITE);
-                 messagecontent.setFont(new Font(20.0));
-                 HBox.setMargin(messagecontent, new Insets(0.0, 0.0, 0.0, 10.0));
+                    messagecontent.setPrefHeight(45.0);
+                    messagecontent.setPrefWidth(300.0);
+                    messagecontent.setText(mess.getContenu_msg());
+                    messagecontent.setTextFill(javafx.scene.paint.Color.WHITE);
+                    messagecontent.setFont(new Font(20.0));
+                    HBox.setMargin(messagecontent, new Insets(0.0, 0.0, 0.0, 10.0));
 
-                 incoming.getChildren().add(messagecontent);
-                 chatroom.getChildren().add(incoming);
-             }else{
-                 HBox outgoing = new HBox();
-                 Label messagecontent = new Label();
+                    incoming.getChildren().add(messagecontent);
+                    chatroom.getChildren().add(incoming);
+                }else{
+                    HBox outgoing = new HBox();
+                    Label messagecontent = new Label();
 
-                 outgoing.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
-                 outgoing.setLayoutX(400.0);
-                 outgoing.setLayoutY(y);
-                 outgoing.setPrefHeight(46.0);
-                 outgoing.setPrefWidth(300.0);
-                 outgoing.getStyleClass().add("outgoing-bubble");
-                 outgoing.getStylesheets().add("/gui/../design/design.css");
-                 messagecontent.setPrefHeight(45.0);
-                 messagecontent.setPrefWidth(300.0);
-                 messagecontent.setText(mess.getContenu_msg());
-                 messagecontent.setTextFill(javafx.scene.paint.Color.WHITE);
-                 messagecontent.setFont(new Font(20.0));
-                 HBox.setMargin(messagecontent, new Insets(0.0, 0.0, 0.0, 10.0));
-                 outgoing.getChildren().add(messagecontent);
-                 chatroom.getChildren().add(outgoing);
-             }
-             y+=50;
-            } 
-        }
-        
-        
-     }
+                    outgoing.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+                    outgoing.setLayoutX(400.0);
+                    outgoing.setLayoutY(y);
+                    outgoing.setPrefHeight(46.0);
+                    outgoing.setPrefWidth(300.0);
+                    outgoing.getStyleClass().add("outgoing-bubble");
+                    outgoing.getStylesheets().add("/gui/../design/design.css");
+                    messagecontent.setPrefHeight(45.0);
+                    messagecontent.setPrefWidth(300.0);
+                    messagecontent.setText(mess.getContenu_msg());
+                    messagecontent.setTextFill(javafx.scene.paint.Color.WHITE);
+                    messagecontent.setFont(new Font(20.0));
+                    HBox.setMargin(messagecontent, new Insets(0.0, 0.0, 0.0, 10.0));
+                    outgoing.getChildren().add(messagecontent);
+                    chatroom.getChildren().add(outgoing);
+                }
+                y+=50;
+                if(y>440){
+                    chatroom.setPrefHeight(chatroom.getPrefHeight()+50);
+                }
+            }
+        } 
+    }
     public Pane ajouterPaneContact(Discussion disc,double y){
          Circle circle = new Circle();
          Pane user1 = new Pane();
@@ -244,10 +274,29 @@ public class MessageController implements Initializable {
         HBox.setMargin(messagecontent, new Insets(0.0, 0.0, 0.0, 10.0));
         incoming.getChildren().add(messagecontent);
         chatroom.getChildren().add(incoming);
+        scrollchatroom.setVvalue(1.0);
+        if(chatroom.getChildren().get(chatroom.getChildren().size()-1).getLayoutY()>400){
+            chatroom.setPrefHeight(chatroom.getPrefHeight()+50);
+        }
     }
-     
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Timer timer = outils.setInterval(() -> System.out.println("bonjour"),2000);
+        outils.setTimeout(() -> {
+            chatroom.getScene().getWindow().setOnCloseRequest((WindowEvent ev) -> {
+                try {
+                    connection.closeConnection();
+                } catch (Exception ex) {
+                    System.out.println("nothing to close");
+                }
+                System.out.println("cool");
+                timer.cancel();
+                timer.purge();
+                Platform.exit();
+                ev.consume();
+            });
+        }, 1000);
         Pane contact = (Pane) leftpage.getChildren().get(1);
         leftpage.getChildren().get(1).setVisible(false);
         double y = contact.getLayoutY();
@@ -257,7 +306,14 @@ public class MessageController implements Initializable {
             y+=70;
         }
         mainpage.setVisible(false);
+//        stage.setOnCloseRequest( ev -> {
+//            System.out.println("hello my friend");
+//        });
+        
+//        System.out.println(thisStage);
     }    
+    
+    
     
     public Server createServer(){
         return new Server(1234,data->{
@@ -277,5 +333,10 @@ public class MessageController implements Initializable {
                 ChangerPaneMessage(disc);
             });
         });
+    }
+    
+    public void stop() throws Exception{
+        connection.closeConnection();
+        System.out.println("did it work?");
     }
 }

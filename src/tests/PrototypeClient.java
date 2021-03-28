@@ -15,6 +15,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -28,6 +29,7 @@ public class PrototypeClient extends Application {
         Scene scene = new Scene(root);
 //        scene.getStylesheets().add("design/design.css");
         stage.setScene(scene);
+//        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
     }
 

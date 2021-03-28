@@ -12,9 +12,9 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="556.0" prefWidth="959.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MessageController">
+<AnchorPane id="AnchorPane" prefHeight="559.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MessageController">
    <children>
-      <Pane fx:id="leftpage" prefHeight="562.0" prefWidth="238.0" style="-fx-background-color: #272E36;">
+      <Pane fx:id="leftpage" prefHeight="566.0" prefWidth="238.0" style="-fx-background-color: #272E36;">
          <children>
             <TextField layoutX="27.0" layoutY="23.0" prefHeight="34.0" prefWidth="184.0" promptText="Recherche" style="-fx-background-color: #363D45;" />
             <Pane fx:id="user1" layoutX="6.0" layoutY="82.0" prefHeight="72.0" prefWidth="227.0">
@@ -50,9 +50,9 @@
             <FontAwesomeIconView fill="#8d8484" glyphName="SEND" layoutX="694.0" layoutY="553.0" size="20" />
             <Line endX="620.0" layoutX="101.0" layoutY="526.0" opacity="0.22" startX="-100.0" stroke="#8d7f7f" />
             <Label fx:id="discidentity" layoutX="586.0" layoutY="36.0" opacity="0.0" text="Label" />
-            <ScrollPane fx:id="scrollchatroom" layoutX="-1.0" layoutY="74.0" minHeight="-Infinity" prefHeight="449.0" prefWidth="722.0">
+            <ScrollPane fx:id="scrollchatroom" layoutY="74.0" prefHeight="449.0" prefWidth="725.0">
                <content>
-                  <Pane fx:id="chatroom" minHeight="-Infinity" prefHeight="447.0" prefWidth="720.0" style="-fx-background-color: transparent;" />
+                  <Pane fx:id="chatroom" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="447.0" prefWidth="703.0" />
                </content>
             </ScrollPane>
          </children>
