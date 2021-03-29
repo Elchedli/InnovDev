@@ -16,10 +16,12 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.stage.WindowEvent;
+import models.user;
 
 public class PrototypeController{
 
@@ -36,8 +38,19 @@ public class PrototypeController{
     private JFXButton taskbutt;
     
     @FXML
+    private Label welcome;
+
+    @FXML
+    private JFXButton first;
+
+    @FXML
+    private JFXButton second;
+
+    @FXML
+    private JFXButton third;
+    
+    @FXML
     void PageSuivi(ActionEvent event) throws IOException{
-        
         AnchorPane pane = FXMLLoader.load(getClass().getResource("../gui/Suivi.fxml"));
         MainPage.getStylesheets().add("design/design.css");
         MainPage.getChildren().setAll(pane);
@@ -61,22 +74,14 @@ public class PrototypeController{
     void PageTasks(ActionEvent event) throws IOException{
         AnchorPane pane = FXMLLoader.load(getClass().getResource("../gui/privtasks.fxml"));
 //        MainPage.getStylesheets().add("design/design.css");
+        MainPage.getStylesheets().remove("design/design.css");
         MainPage.getChildren().setAll(pane);
         suivibutt.setStyle("-fx-background-color:#1D232A");
         taskbutt.setStyle("-fx-background-color:#272E36");
         messbutt.setStyle("-fx-background-color:#1D232A");
     }
     public void initialize() throws IOException  {
-        
-//        scene.getWindow().setOnCloseRequest(new EventHandler<WindowEvent>() {
-//            @Override
-//            public void handle(WindowEvent ev) {
-//                System.out.println("finished");
-//                ev.consume();
-//              }
-//            });
-//        System.out.println(t);
-//        System.out.println((Stage) scene.getWindow());
+        welcome.setText("Bonjour "+user.getUsername());
    }
     
 }

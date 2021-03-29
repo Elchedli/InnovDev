@@ -315,15 +315,6 @@ public class SuiviController{
         
         ContextMenu contextMenuSuivi = new ContextMenu();
         MenuItem DeleteItem = new MenuItem("Supprimer Suivi");
-        MenuItem DisplayTasks = new MenuItem("Afficher les taches");
-        
-        
-        DisplayTasks.setOnAction(new EventHandler<ActionEvent>(){
-            @Override
-            public void handle(ActionEvent event){
-                
-            }
-        });
         
         DeleteItem.setOnAction(new EventHandler<ActionEvent>(){
             @Override
@@ -364,7 +355,6 @@ public class SuiviController{
         }  
           
     };
-            contextMenuSuivi.getItems().add(DisplayTasks);
             contextMenuSuivi.getItems().add(DeleteItem);
             contextMenuSuivi.setOnShowing(event);
             contextMenuSuivi.setOnHiding(event);

@@ -13,7 +13,6 @@ public class user {
     static private String username="ahmed";
     static private String password="idk";
     static private String type="psy";
-
     public static String getType() {
         return type;
     }

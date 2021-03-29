@@ -19,7 +19,7 @@ import utils.DataSource;
  *
  * @author shidono
  */
-public class DiscussionService implements CRUD{
+public class DiscussionService{
     Connection cnx = DataSource.getInstance().getCnx();
     public void SupprimerDiscussion(int id){
         try {
@@ -113,20 +113,20 @@ public class DiscussionService implements CRUD{
         }
     }
     
-     
-
-    @Override
-    public void Ajouter() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void Modifier() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void Supprimer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String getmail(int id) {
+        try {
+           String requete = "Select mail from simple where username=(select nom_destinaire from discussion where id_disc=? LIMIT 1) limit 1";
+           PreparedStatement pst = cnx.prepareStatement(requete);
+           pst.setInt(1,id);
+           ResultSet rs = pst.executeQuery();
+           if(rs.next()){
+               System.out.println("i got the mail : "+rs.getString(1));
+               return rs.getString(1);
+           }
+        } catch (SQLException ex) {
+            System.out.println("Erreur lors d'extraction des données \n" + ex.getMessage());
+            return null;
+        }
+        return null;
     }
 }

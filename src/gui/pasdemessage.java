@@ -1,13 +1,14 @@
 package gui;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -27,16 +28,18 @@ public abstract class pasdemessage extends AnchorPane {
     protected final Label label1;
     protected final Line line;
     protected final Line line0;
-    protected final FontAwesomeIconView fontAwesomeIconView;
     protected final JFXTextField discinput;
-    protected final FontAwesomeIconView fontAwesomeIconView0;
-    protected final Pane chatroom;
-    protected final HBox incoming;
-    protected final Label messagecontent;
-    protected final HBox outgoing;
-    protected final Label messagecontent2;
-    protected final Label labelpasdemessage;
+    protected final FontAwesomeIconView fontAwesomeIconView;
     protected final Line line1;
+    protected final Label discidentity;
+    protected final ScrollPane scrollchatroom;
+    protected final Pane chatroom;
+    protected final JFXTextField mail_titre;
+    protected final JFXTextArea mail_contenu;
+    protected final FontAwesomeIconView titre_icon;
+    protected final JFXButton mailbutt;
+    protected final JFXButton jFXButton;
+    protected final FontAwesomeIconView fontAwesomeIconView0;
 
     public pasdemessage() {
 
@@ -52,22 +55,24 @@ public abstract class pasdemessage extends AnchorPane {
         label1 = new Label();
         line = new Line();
         line0 = new Line();
-        fontAwesomeIconView = new FontAwesomeIconView();
         discinput = new JFXTextField();
-        fontAwesomeIconView0 = new FontAwesomeIconView();
-        chatroom = new Pane();
-        incoming = new HBox();
-        messagecontent = new Label();
-        outgoing = new HBox();
-        messagecontent2 = new Label();
-        labelpasdemessage = new Label();
+        fontAwesomeIconView = new FontAwesomeIconView();
         line1 = new Line();
+        discidentity = new Label();
+        scrollchatroom = new ScrollPane();
+        chatroom = new Pane();
+        mail_titre = new JFXTextField();
+        mail_contenu = new JFXTextArea();
+        titre_icon = new FontAwesomeIconView();
+        mailbutt = new JFXButton();
+        jFXButton = new JFXButton();
+        fontAwesomeIconView0 = new FontAwesomeIconView();
 
         setId("AnchorPane");
-        setPrefHeight(556.0);
-        setPrefWidth(959.0);
+        setPrefHeight(559.0);
+        setPrefWidth(960.0);
 
-        leftpage.setPrefHeight(562.0);
+        leftpage.setPrefHeight(566.0);
         leftpage.setPrefWidth(238.0);
         leftpage.setStyle("-fx-background-color: #272E36;");
 
@@ -148,60 +153,11 @@ public abstract class pasdemessage extends AnchorPane {
         line0.setStartY(-81.0);
         line0.setStroke(javafx.scene.paint.Color.valueOf("#8d7f7f"));
 
-        fontAwesomeIconView.setLayoutX(671.0);
-        fontAwesomeIconView.setLayoutY(47.0);
-
         discinput.setLayoutX(3.0);
         discinput.setLayoutY(526.0);
 
-        fontAwesomeIconView0.setLayoutX(694.0);
-        fontAwesomeIconView0.setLayoutY(553.0);
-
-        chatroom.setLayoutX(-1.0);
-        chatroom.setLayoutY(74.0);
-        chatroom.setPrefHeight(450.0);
-        chatroom.setPrefWidth(721.0);
-        chatroom.setStyle("-fx-background-color: #E9E9E9;");
-
-        incoming.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
-        incoming.setLayoutX(20.0);
-        incoming.setLayoutY(31.0);
-        incoming.setOpacity(0.0);
-        incoming.setPrefHeight(46.0);
-        incoming.setPrefWidth(178.0);
-        incoming.getStyleClass().add("incoming-bubble");
-        incoming.getStylesheets().add("/gui/../design/design.css");
-
-        messagecontent.setPrefHeight(45.0);
-        messagecontent.setPrefWidth(146.0);
-        messagecontent.setText("ddd");
-        messagecontent.setTextFill(javafx.scene.paint.Color.WHITE);
-        messagecontent.setFont(new Font(20.0));
-        HBox.setMargin(messagecontent, new Insets(0.0, 0.0, 0.0, 10.0));
-
-        outgoing.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
-        outgoing.setLayoutX(537.0);
-        outgoing.setLayoutY(99.0);
-        outgoing.setOpacity(0.0);
-        outgoing.setPrefHeight(46.0);
-        outgoing.setPrefWidth(178.0);
-        outgoing.getStyleClass().add("outgoing-bubble");
-        outgoing.getStylesheets().add("/gui/../design/design.css");
-
-        messagecontent2.setPrefHeight(45.0);
-        messagecontent2.setPrefWidth(205.0);
-        messagecontent2.setText("ddd");
-        messagecontent2.setTextFill(javafx.scene.paint.Color.WHITE);
-        messagecontent2.setFont(new Font(20.0));
-        HBox.setMargin(messagecontent2, new Insets(0.0, 0.0, 0.0, 10.0));
-
-        labelpasdemessage.setLayoutX(150.0);
-        labelpasdemessage.setLayoutY(178.0);
-        labelpasdemessage.setPrefHeight(58.0);
-        labelpasdemessage.setPrefWidth(457.0);
-        labelpasdemessage.setText("Pas de message dans cette conversation");
-        labelpasdemessage.setTextFill(javafx.scene.paint.Color.valueOf("#a19f9f"));
-        labelpasdemessage.setFont(new Font(24.0));
+        fontAwesomeIconView.setLayoutX(694.0);
+        fontAwesomeIconView.setLayoutY(553.0);
 
         line1.setEndX(620.0);
         line1.setLayoutX(101.0);
@@ -209,6 +165,38 @@ public abstract class pasdemessage extends AnchorPane {
         line1.setOpacity(0.22);
         line1.setStartX(-100.0);
         line1.setStroke(javafx.scene.paint.Color.valueOf("#8d7f7f"));
+
+        discidentity.setLayoutX(586.0);
+        discidentity.setLayoutY(36.0);
+        discidentity.setOpacity(0.0);
+        discidentity.setText("Label");
+
+        scrollchatroom.setLayoutY(74.0);
+        scrollchatroom.setPrefHeight(449.0);
+        scrollchatroom.setPrefWidth(725.0);
+
+        chatroom.setMaxHeight(USE_PREF_SIZE);
+        chatroom.setMinHeight(USE_PREF_SIZE);
+        chatroom.setPrefHeight(447.0);
+        chatroom.setPrefWidth(703.0);
+
+        mail_titre.setLayoutX(204.0);
+        mail_titre.setLayoutY(53.0);
+
+        mail_contenu.setLayoutX(91.0);
+        mail_contenu.setLayoutY(118.0);
+
+        titre_icon.setLayoutX(162.0);
+        titre_icon.setLayoutY(77.0);
+
+        mailbutt.setLayoutX(255.0);
+        mailbutt.setLayoutY(342.0);
+        scrollchatroom.setContent(chatroom);
+
+        jFXButton.setLayoutX(660.0);
+        jFXButton.setLayoutY(9.0);
+
+        jFXButton.setGraphic(fontAwesomeIconView0);
 
         leftpage.getChildren().add(textField);
         user1.getChildren().add(circle);
@@ -221,16 +209,16 @@ public abstract class pasdemessage extends AnchorPane {
         mainpage.getChildren().add(label1);
         mainpage.getChildren().add(line);
         mainpage.getChildren().add(line0);
-        mainpage.getChildren().add(fontAwesomeIconView);
         mainpage.getChildren().add(discinput);
-        mainpage.getChildren().add(fontAwesomeIconView0);
-        incoming.getChildren().add(messagecontent);
-        chatroom.getChildren().add(incoming);
-        outgoing.getChildren().add(messagecontent2);
-        chatroom.getChildren().add(outgoing);
-        chatroom.getChildren().add(labelpasdemessage);
-        mainpage.getChildren().add(chatroom);
+        mainpage.getChildren().add(fontAwesomeIconView);
         mainpage.getChildren().add(line1);
+        mainpage.getChildren().add(discidentity);
+        chatroom.getChildren().add(mail_titre);
+        chatroom.getChildren().add(mail_contenu);
+        chatroom.getChildren().add(titre_icon);
+        chatroom.getChildren().add(mailbutt);
+        mainpage.getChildren().add(scrollchatroom);
+        mainpage.getChildren().add(jFXButton);
         getChildren().add(mainpage);
 
     }

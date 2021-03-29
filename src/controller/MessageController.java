@@ -5,8 +5,11 @@
  */
 package controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
+import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import static java.lang.Integer.parseInt;
 import java.net.URL;
 import java.sql.PreparedStatement;
@@ -24,6 +27,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -42,6 +46,7 @@ import javafx.stage.WindowEvent;
 import models.Discussion;
 import models.Message;
 import models.user;
+import org.controlsfx.control.Notifications;
 import services.Client;
 import services.DiscussionService;
 import services.MessageService;
@@ -87,6 +92,15 @@ public class MessageController implements Initializable{
     
      @FXML
     private AnchorPane pagemain;
+     
+    @FXML
+    private JFXTextField mail_titre;
+
+    @FXML
+    private JFXTextArea mail_contenu;
+    
+    @FXML
+    private FontAwesomeIconView icon_envoyer;
        
     DiscussionService discserv = new DiscussionService();
     MessageService messerv = new MessageService();
@@ -202,24 +216,23 @@ public class MessageController implements Initializable{
         circle.setStrokeType(javafx.scene.shape.StrokeType.INSIDE);
         circle.setStrokeWidth(0.0);
         circle.setVisible(false);
-        EventHandler<ActionEvent> buttonHandler = new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if(user.getType().compareTo("psy") == 0) currentuser.setText(disc.getNom_destinaire());
-                else currentuser.setText(disc.getNom_source());
-                ChangerPaneMessage(disc);
-                mainpage.setVisible(true);
-                try {
-                    connection.startConnection();
-                    System.out.println("started connexion");
-                } catch (Exception ex) {
-                    System.out.println(ex.getMessage());
-                }
+        EventHandler<ActionEvent> buttonHandler = (ActionEvent event) -> {
+            if(user.getType().compareTo("psy") == 0) currentuser.setText(disc.getNom_destinaire());
+            else currentuser.setText(disc.getNom_source());
+            ChangerPaneMessage(disc);
+            mainpage.setVisible(true);
+            discinput.setVisible(true);
+            icon_envoyer.setVisible(true);
+            try {
+                connection.startConnection();
+                System.out.println("started connexion");
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
 //                if(user.connected)
 //                ((Button)event.getTarget()).setStyle("-fx-background-color: black;");
-                event.consume();
-            }
-        };
+event.consume();
+         };
         buttcontact.setLayoutY(1.0);
         buttcontact.setMnemonicParsing(false);
         buttcontact.setPrefHeight(72.0);
@@ -282,7 +295,7 @@ public class MessageController implements Initializable{
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Timer timer = outils.setInterval(() -> System.out.println("bonjour"),2000);
+//        Timer timer = outils.setInterval(() -> System.out.println("bonjour"),2000);
         outils.setTimeout(() -> {
             chatroom.getScene().getWindow().setOnCloseRequest((WindowEvent ev) -> {
                 try {
@@ -291,8 +304,8 @@ public class MessageController implements Initializable{
                     System.out.println("nothing to close");
                 }
                 System.out.println("cool");
-                timer.cancel();
-                timer.purge();
+//                timer.cancel();
+//                timer.purge();
                 Platform.exit();
                 ev.consume();
             });
@@ -312,7 +325,6 @@ public class MessageController implements Initializable{
         
 //        System.out.println(thisStage);
     }    
-    
     
     
     public Server createServer(){
@@ -335,8 +347,53 @@ public class MessageController implements Initializable{
         });
     }
     
-    public void stop() throws Exception{
-        connection.closeConnection();
-        System.out.println("did it work?");
+    
+    EventHandler<ActionEvent> EmailHandler = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(user.getType().compareTo("psy")==0){
+                outils.sendMail(discserv.getmail(Integer.parseInt(discidentity.getText())),mail_titre.getText(),mail_contenu.getText());
+                Notifications notificationBuilder;
+                notificationBuilder = Notifications.create()
+                    .title("Mail envoyer").text("l'utilisateur a recu le mail.").graphic(null).hideAfter(javafx.util.Duration.seconds(5))
+                    .position(Pos.BOTTOM_RIGHT)
+                    .onAction((ActionEvent event1) -> {System.out.println("clicked ON ");});
+                notificationBuilder.show();
+                chatroom.getChildren().clear();
+                discinput.setVisible(true);
+                icon_envoyer.setVisible(true);
+                event.consume();
+            }
+        };
+    };
+    
+    @FXML
+    void MailChanger(ActionEvent event) {
+        chatroom.getChildren().clear();
+        mail_titre = new JFXTextField();
+        mail_contenu = new JFXTextArea();
+        Label text = new Label();
+        JFXButton mailbutt = new JFXButton();
+        
+        mail_titre.setLayoutX(204.0);
+        mail_titre.setLayoutY(53.0);
+        mail_titre.setPrefWidth(200);
+        text.setLayoutX(162.0);
+        text.setLayoutY(65.0);
+        text.setText("Titre : ");
+        mail_contenu.setLayoutX(91.0);
+        mail_contenu.setLayoutY(118.0);
+        mailbutt.setLayoutX(255.0);
+        mailbutt.setLayoutY(342.0);
+        mailbutt.setText("Envoyer");
+        chatroom.getChildren().add(mail_titre);
+        chatroom.getChildren().add(text);
+        chatroom.getChildren().add(mail_contenu);
+        chatroom.getChildren().add(mailbutt);
+        
+        mailbutt.setOnAction(EmailHandler);
+        
+        discinput.setVisible(false);
+        icon_envoyer.setVisible(false);
     }
 }
