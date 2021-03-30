@@ -9,6 +9,7 @@ package controller;
  * @author shidono
  */
 
+import PIClass.userclient;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -21,7 +22,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.stage.WindowEvent;
-import models.user;
 
 public class PrototypeController{
 
@@ -81,7 +81,7 @@ public class PrototypeController{
         messbutt.setStyle("-fx-background-color:#1D232A");
     }
     public void initialize() throws IOException  {
-        welcome.setText("Bonjour "+user.getUsername());
+        welcome.setText("Bonjour "+userclient.getUsername());
    }
     
 }

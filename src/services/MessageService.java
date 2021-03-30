@@ -10,17 +10,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import models.Discussion;
-import models.Message;
-import models.user;
-import utils.DataSource;
+import PIClass.Discussion;
+import PIClass.Message;
+import PIClass.userclient;
+import PIClass.user;
+import PIUtils.MyConnection;
 
 /**
  *
  * @author shidono
  */
-public class MessageService implements CRUD{
-    Connection cnx = DataSource.getInstance().getCnx();
+public class MessageService{
+    Connection cnx = MyConnection.getInstance().getCnx();
      public void AjouterMessage(String mess,int id){
          try {
             String requete = "INSERT INTO message VALUES (null,?,?,?,default)";
@@ -28,7 +29,7 @@ public class MessageService implements CRUD{
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setString(1,mess);
             pst.setInt(2,id);
-            pst.setString(3,user.getUsername());
+            pst.setString(3,userclient.getUsername());
             pst.executeUpdate();
             System.out.println("Message ajoutée !");
         } catch (SQLException ex) {
@@ -50,21 +51,6 @@ public class MessageService implements CRUD{
     
     public void RafraichirMessage(int id){
         
-    }
-
-    @Override
-    public void Ajouter() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void Modifier() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void Supprimer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

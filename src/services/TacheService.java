@@ -10,15 +10,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import models.Tache;
-import utils.DataSource;
+import PIClass.Tache;
+import PIUtils.MyConnection;
 
 /**
  *
  * @author shidono
  */
 public class TacheService{
-    Connection cnx = DataSource.getInstance().getCnx();
+    Connection cnx = MyConnection.getInstance().getCnx();
     public void ajouterTache(Tache task){
       try {
             String requete = "INSERT INTO tache VALUES (null,?,DEFAULT,?,?)";

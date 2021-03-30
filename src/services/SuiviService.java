@@ -12,17 +12,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
-import models.Message;
-import models.Suivi;
-import models.user;
-import utils.DataSource;
+import PIClass.Message;
+import PIClass.Suivi;
+import PIClass.userclient;
+import PIClass.user;
+import PIUtils.MyConnection;
 
 /**
  *
  * @author shidono
  */
-public class SuiviService implements CRUD{
-    Connection cnx = DataSource.getInstance().getCnx();
+public class SuiviService {
+    Connection cnx = MyConnection.getInstance().getCnx();
     public boolean check(Suivi suiv){
         return suiv.getClient() != null && suiv.getDate_ds() != null && suiv.getDate_fs() != null && suiv.getTitre_s() != null && suiv.getTemps_ds() != null && suiv.getTemps_fs() != null;
     }
@@ -39,7 +40,7 @@ public class SuiviService implements CRUD{
             if(result == " " && check(suiv)){
                 requete = "INSERT INTO suivi VALUES (null,?,?,?,?,?,?,?)";
                 pst = cnx.prepareStatement(requete);
-                pst.setString(1, user.getUsername());
+                pst.setString(1, userclient.getUsername());
                 pst.setString(2, suiv.getClient());
                 pst.setString(3,suiv.getTitre_s());
                 pst.setDate(4, suiv.getDate_ds());
@@ -50,13 +51,13 @@ public class SuiviService implements CRUD{
                 System.out.println("Suivi crée !");
                 requete = "SELECT nom_destinaire from discussion where nom_source=? AND nom_destinaire=?";
                  pst = cnx.prepareStatement(requete);
-                pst.setString(1, user.getUsername());
+                pst.setString(1, userclient.getUsername());
                 pst.setString(2, suiv.getClient());
                 rs = pst.executeQuery();
                 if(!rs.next()){
                     requete = "insert into discussion values (null,DEFAULT,?,?,DEFAULT)";
                     pst = cnx.prepareStatement(requete);
-                    pst.setString(1, user.getUsername());
+                    pst.setString(1, userclient.getUsername());
                     pst.setString(2, suiv.getClient());
                     pst.executeUpdate();
                     System.out.println("Dicussion créer");
@@ -116,7 +117,7 @@ public class SuiviService implements CRUD{
         try {
             String requete = "select * from suivi WHERE username=?";
             PreparedStatement pst = cnx.prepareStatement(requete);
-            pst.setString(1,user.getUsername());
+            pst.setString(1,userclient.getUsername());
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 suivliste.add(new Suivi(rs.getInt(1),rs.getString(3),rs.getString(4),rs.getDate(5),rs.getDate(6),rs.getTime(7),rs.getTime(8)));
@@ -126,20 +127,5 @@ public class SuiviService implements CRUD{
             System.out.println("Probleme affichage Suivi \n " +ex+"\n"+ex.getMessage());
             return null;
         }
-    }
-
-    @Override
-    public void Ajouter() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void Modifier() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void Supprimer() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

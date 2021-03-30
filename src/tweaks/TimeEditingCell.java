@@ -22,7 +22,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableCell;
-import models.Suivi;
+import PIClass.Suivi;
 
 /**
  *

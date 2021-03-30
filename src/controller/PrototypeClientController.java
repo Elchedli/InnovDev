@@ -5,6 +5,7 @@
  */
 package controller;
 
+import PIClass.userclient;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
@@ -14,7 +15,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.AnchorPane;
-import models.user;
+import PIClass.user;
 
 /**
  * FXML Controller class
@@ -46,8 +47,8 @@ public class PrototypeClientController{
         messbutt.setStyle("-fx-background-color:#1D232A");
     }
     public void initialize() {
-        user.setUsername("shidono");
-        user.setType("client");
+        userclient.setUsername("shidono");
+        userclient.setType("client");
    }
     
 }

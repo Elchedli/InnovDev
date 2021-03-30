@@ -43,9 +43,10 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.stage.WindowEvent;
-import models.Discussion;
-import models.Message;
-import models.user;
+import PIClass.Discussion;
+import PIClass.Message;
+import PIClass.userclient;
+import PIClass.user;
 import org.controlsfx.control.Notifications;
 import services.Client;
 import services.DiscussionService;
@@ -105,7 +106,7 @@ public class MessageController implements Initializable{
     DiscussionService discserv = new DiscussionService();
     MessageService messerv = new MessageService();
     private boolean exit = true;
-    private final boolean isServer = user.getType().compareTo("psy") == 0;
+    private final boolean isServer = userclient.getType().compareTo("psy") == 0;
     private final NetworkConnection connection = isServer ? createServer(): createCLient();
 //    Stage stage = (Stage) chatroom.getScene().getWindow();
 //    chatroom.sceneProperty().addListener((observableScene, oldScene, newScene) -> {
@@ -140,7 +141,7 @@ public class MessageController implements Initializable{
 //            System.out.println("this is the work");
 //            System.out.println(messagess);
             for (Message mess : messagess) {
-                if(user.getUsername().compareTo(mess.getSender()) == 0){
+                if(userclient.getUsername().compareTo(mess.getSender()) == 0){
                     HBox incoming = new HBox();
                     Label messagecontent = new Label();
                     incoming.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
@@ -197,7 +198,7 @@ public class MessageController implements Initializable{
         labelname.setLayoutY(14.0);
         labelname.setPrefHeight(27.0);
         labelname.setPrefWidth(133.0);
-        if(user.getType().compareTo("psy") == 0) labelname.setText(disc.getNom_destinaire());
+        if(userclient.getType().compareTo("psy") == 0) labelname.setText(disc.getNom_destinaire());
         else labelname.setText(disc.getNom_source());
         labelname.setTextFill(javafx.scene.paint.Color.WHITE);
         labelname.setFont(new Font("Arial Black", 18.0));
@@ -217,7 +218,7 @@ public class MessageController implements Initializable{
         circle.setStrokeWidth(0.0);
         circle.setVisible(false);
         EventHandler<ActionEvent> buttonHandler = (ActionEvent event) -> {
-            if(user.getType().compareTo("psy") == 0) currentuser.setText(disc.getNom_destinaire());
+            if(userclient.getType().compareTo("psy") == 0) currentuser.setText(disc.getNom_destinaire());
             else currentuser.setText(disc.getNom_source());
             ChangerPaneMessage(disc);
             mainpage.setVisible(true);
@@ -351,7 +352,7 @@ event.consume();
     EventHandler<ActionEvent> EmailHandler = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(user.getType().compareTo("psy")==0){
+                if(userclient.getType().compareTo("psy")==0){
                 outils.sendMail(discserv.getmail(Integer.parseInt(discidentity.getText())),mail_titre.getText(),mail_contenu.getText());
                 Notifications notificationBuilder;
                 notificationBuilder = Notifications.create()
