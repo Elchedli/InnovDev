@@ -5,6 +5,7 @@
  */
 package pidev;
 
+import PIUtils.MyConnection;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -38,6 +39,7 @@ public class MainGui extends Application
      */
     public static void main(String[] args)
     {
+        
         launch(args);
     }
     

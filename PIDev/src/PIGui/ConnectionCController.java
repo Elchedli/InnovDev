@@ -57,6 +57,7 @@ public class ConnectionCController implements Initializable {
                         sU.userInfos = u;
                         userclient.setUsername(u.getUsername());
                         userclient.setType("coach");
+                        userclient.getrequest();
 			FXMLLoader loader1= new FXMLLoader(getClass().getResource("ProfilCoach.fxml"));              
 			Parent root1= loader1.load();
 			btnLogin.getScene().setRoot(root1);

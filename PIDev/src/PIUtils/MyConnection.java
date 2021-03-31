@@ -5,7 +5,7 @@
  */
 package PIUtils;
 
-import java.sql.Connection;
+import java.sql.*;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -26,7 +26,8 @@ public class MyConnection {
     public String url = "jdbc:mysql://127.0.0.1:3306/spirity";
     public String login="root";
     public String pwd="";
-    public Connection cn;
+    public static Connection cn;
+    public static MyConnection cno;
     
     public MyConnection() {
         
@@ -41,9 +42,11 @@ public class MyConnection {
     
     public static MyConnection getInstance ()
     {
-        if (data==null)
-           data = new MyConnection();
-        return data ;
+       if (cno == null)
+            {
+            cno = new MyConnection();
+            }
+            return cno;
     }
     
      public Connection getCnx() {
@@ -58,6 +61,9 @@ public class MyConnection {
     }
     public void setCn(Connection cnx) {
         this.cn = cn;
+    }
+    public static MyConnection getConn() {
+        return cno;
     }
     
    

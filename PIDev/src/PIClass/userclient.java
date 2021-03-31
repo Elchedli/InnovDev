@@ -5,14 +5,22 @@
  */
 package PIClass;
 
+import PIUtils.MyConnection;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author HP
  */
 public class userclient {
+    Connection cnx = MyConnection.getInstance().getCnx();
     static private String username = "";
     static private String type="";
     static private String language="fr";
+    static private int id=9999999;
     public static String getUsername() {
         return username;
     }
@@ -37,4 +45,13 @@ public class userclient {
         userclient.username = username;
     }
     
+    
+
+    public static int getId() {
+        return id;
+    }
+
+    public static void setId() {
+        id = this.getrequest();
+    }
 }
