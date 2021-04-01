@@ -224,7 +224,7 @@ public class servicesimple implements Iservice <simple>{
      public int check_user(simple t) 
     {   
         
-      MyConnection mc = cnn.getInstance();
+      Connection mc = cnn.getCnx();
         try{    
         PreparedStatement posted = mc.prepareStatement("SELECT * FROM simple where username= ? and password=? ;");
         posted.setString(1,t.getUsername());

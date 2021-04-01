@@ -96,6 +96,8 @@ public class PostController implements Initializable {
     private TextField tf_search;
     @FXML
     private Button btn_search;
+    @FXML
+    private ListView<String> Col_username;
     
     private void handleButtonAction(ActionEvent event) {
         
@@ -165,16 +167,45 @@ public class PostController implements Initializable {
         }
         }
     }
+    public void displayAllUsername()
+    {
+        Col_username.getItems().clear();
+        ServicesPublication ps= new ServicesPublication();
+        Publication p = new Publication();
+        ArrayList<Publication> l = ps.select_all(p);
+        System.out.println(l.toString());
+        for(int i = 0;i<=l.size()-1;i++)
+        {
+            int id = l.get(i).getUser_id();
+            String username = ps.getUsername(id);
+            Col_username.getItems().add(username);
+        }
+    }
+    public void displayAllUsername(ArrayList<Publication> l)
+    {
+        Col_username.getItems().clear();
+        ServicesPublication ps= new ServicesPublication();
+        Publication p = new Publication();
+        for(int i = 0;i<=l.size()-1;i++)
+        {
+            int id = l.get(i).getId();
+            String username = ps.getUsername(id);
+            Col_username.getItems().add(username);
+        }
+    }
+
     
     
         @FXML
     private void Display() {
+        Col_username.getItems();
         ServicesPublication ps= new ServicesPublication();
         Publication p = new Publication();
-        //Col_username.setCellValueFactory(new PropertyValueFactory<>("text"));
+        
         Col_Texte.setCellValueFactory(new PropertyValueFactory<>("text"));
         Col_likes.setCellValueFactory(new PropertyValueFactory<>("nb_react"));
         Col_date.setCellValueFactory(new PropertyValueFactory<>("date"));
+        displayAllUsername(ps.select_all(p));
         tableView_Publication.setItems(getPubs(ps.select_all(p)));
     }
 
@@ -192,6 +223,7 @@ public class PostController implements Initializable {
     STAG.add_relation(pub_editable);
     }
     notif("Text","Text changé avec succée !");
+    Col_username.getItems().clear();
     Display();
 }
 public void Display_link()
@@ -269,6 +301,7 @@ public int notif_choix()
 
 public ArrayList<Publication> Search_by_tag()
     {
+        Col_username.getItems().clear();
         ServicesTags STAG = new ServicesTags();
         ArrayList<Publication> listPub = new ArrayList<>();
         if(tf_search.getText().isEmpty() == false)
@@ -315,8 +348,13 @@ public ArrayList<Publication> Search_by_tag()
         @FXML
         public void search()
         {
-        ObservableList<Publication> listPub = getPubs(Search_by_tag());
+        Col_username.getItems().clear();
+        ArrayList<Publication> l = Search_by_tag();
+        ObservableList<Publication> listPub = getPubs(l);
+  
+        Col_username.getItems().clear();
         tableView_Publication.setItems(listPub);
+        displayAllUsername(l);
         }
 
 
@@ -324,14 +362,10 @@ public ArrayList<Publication> Search_by_tag()
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ServicesPublication sp = new ServicesPublication();
-        System.out.println(sp.change_username("Anas", "coach"));
-        
-        ServicesTags STAG = new ServicesTags();
-        System.out.println(STAG.check_tag(new Tag(60,"A")));
         
         
         tf_id.setText("1");
+        Col_username.getItems().clear();
         Display();
         tableView_Publication.setEditable(true);
         Col_Texte.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -389,9 +423,11 @@ public ArrayList<Publication> Search_by_tag()
                 System.out.println(pub.toString());
                 spub.drop_track(pub);
                 spub.delete(pub);
+                tableView_Links.getItems().clear();
+                Col_username.getItems().clear();
                 Display();
                 notif("Publication","Suppression avec succée !");
-                 tableView_Links.getItems().clear();
+
                
             }
         }
@@ -452,9 +488,13 @@ public ArrayList<Publication> Search_by_tag()
             }
         });
             contextMenuPub.getItems().add(LikeItem);
-            contextMenuPub.getItems().add(DeleteItem);
+            
             contextMenuPhoto.getItems().add(DisplayPhotos);
+            if(userclient.getType() != "simple")
+            {
+            contextMenuPub.getItems().add(DeleteItem);
             contextMenuPhoto.getItems().add(DeletePhoto);
+            }
             
             contextMenuPub.setOnShowing(event);
             contextMenuPub.setOnHiding(event);
@@ -511,10 +551,10 @@ public ArrayList<Publication> Search_by_tag()
     @FXML
         public void refresh()
         {
-            if(tf_search.getText().isEmpty() == true)
-            {
+                
                 Display();  
-            }
+                Col_username.getItems().clear();
+            
         }
         public String test() throws IOException
         {

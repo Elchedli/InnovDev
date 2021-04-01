@@ -67,7 +67,6 @@ import org.controlsfx.control.PropertySheet.Item;
 public class EditPublicationController implements Initializable {
     MyConnection cnx = new MyConnection();
     Publication p;
-    String username;
 
     
     public void set_p(Publication pub)
@@ -181,18 +180,16 @@ public class EditPublicationController implements Initializable {
         
     @FXML
     public void Display() {
-       lv_username.getItems().clear();
+
         ServicesPublication ps= new ServicesPublication();
         //Col_username.setCellValueFactory(new PropertyValueFactory<>(String.valueOf(username)));
         Col_Texte.setCellValueFactory(new PropertyValueFactory<>("text"));
         Col_likes.setCellValueFactory(new PropertyValueFactory<>("nb_react"));
         Col_date.setCellValueFactory(new PropertyValueFactory<>("date"));
         
-       
+
         tableView_Publication.setItems(getPubs(ps.return_Pub(p.getId())));
-        lv_username.getItems().add(username);
         System.out.println(getPubs(ps.return_Pub(p.getId())));
-        System.out.println(username);
     }
 
     @FXML
@@ -545,4 +542,7 @@ public ArrayList<Publication> Search_by_tag()
         } 
         return null;
         }
+        
+       
+    
 }

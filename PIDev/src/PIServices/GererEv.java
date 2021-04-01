@@ -41,6 +41,7 @@ catch (SQLException ex) {
 
 //    @Override
     public void ajouter(Ev sp) {
+            System.out.println(sp);
             try {
             String requete = "INSERT INTO evenement VALUES (null,?,?,?,?,?,?,?,?,?,null)";
             PreparedStatement pst = cnx.prepareStatement(requete);

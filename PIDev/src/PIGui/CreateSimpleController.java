@@ -91,7 +91,7 @@ public class CreateSimpleController implements Initializable {
 
             JOptionPane.showMessageDialog(null,"Welcome ♥");
 
-            FXMLLoader loader= new FXMLLoader(getClass().getResource("profil.fxml"));
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("Acceuil.fxml"));
             Parent root= loader.load();
             tfUsername.getScene().setRoot(root);
 

@@ -37,6 +37,10 @@ public class ProfilPsyController implements Initializable {
     private Label lbDate;
     @FXML
     private Button btnDelete;
+    @FXML
+    private Button post;
+    @FXML
+    private Button Autres;
 
     /**
      * Initializes the controller class.
@@ -121,5 +125,16 @@ public class ProfilPsyController implements Initializable {
         Parent root1= loader1.load();
         btnSignOut.getScene().setRoot(root1);
     }
-    
+
+    @FXML
+    private void post(ActionEvent event) throws IOException 
+    {
+        FXMLLoader loader1= new FXMLLoader(getClass().getResource("FrontEnd_Publication.fxml"));
+        Parent root1= loader1.load();
+        btnSignOut.getScene().setRoot(root1);
+    }
+
+    @FXML
+    private void Autres(ActionEvent event) {
+    }
 }

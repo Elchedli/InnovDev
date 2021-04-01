@@ -46,13 +46,14 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Button fx:id="btnDelete" layoutX="516.0" layoutY="229.0" mnemonicParsing="false" onAction="#delete" prefHeight="27.0" prefWidth="58.0" text="Delete account">
+            <Button fx:id="btnDelete" layoutX="516.0" layoutY="229.0" mnemonicParsing="false" onAction="#delete" prefHeight="27.0" prefWidth="58.0" text="Delete account" visible="false">
                <font>
                   <Font name="Bell MT" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="articles" layoutX="29.0" layoutY="230.0" mnemonicParsing="false" onAction="#articles" prefHeight="25.0" prefWidth="86.0" text="Articles" />
-            <Button layoutX="25.0" layoutY="256.0" mnemonicParsing="false" onAction="#Reclamation" prefHeight="25.0" prefWidth="95.0" text="Reclamations" />
+            <Button fx:id="articles" layoutX="14.0" layoutY="230.0" mnemonicParsing="false" onAction="#articles" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: #25FDE9;" text="Articles" />
+            <Button layoutX="14.0" layoutY="256.0" mnemonicParsing="false" onAction="#Reclamation" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: #25FDE9;" text="Reclamations" />
+            <Button fx:id="post" layoutX="14.0" layoutY="295.0" mnemonicParsing="false" onAction="#post" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: #25FDE9;" text="Publication" />
          </children>
       </AnchorPane>
    </children>

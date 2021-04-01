@@ -22,13 +22,11 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 public class serviceadmin implements Iservice <admin>
 {
     
-    Connection cnx = MyConnection.getInstance().getCnx();
+    MyConnection cnx = new MyConnection();
 	private static serviceadmin instance;
         private Statement st;
         private ResultSet rs;
         public admin userInfos;
-
-    MyConnection cnn= new MyConnection();
     private final Connection cn;   
     
     public serviceadmin() {
@@ -114,9 +112,9 @@ public class serviceadmin implements Iservice <admin>
     public int check_user(admin t) 
     {   
         
-      MyConnection mc = cnn.getInstance();
+      Connection cn = cnx.getInstance().getCnx();
         try{    
-        PreparedStatement posted = mc.prepareStatement("SELECT * FROM admin where username= ? and password=? ;");
+        PreparedStatement posted = cn.prepareStatement("SELECT * FROM admin where username= ? and password=? ;");
         posted.setString(1,t.getUsername());
         posted.setString(2,t.getPassword());
         ResultSet result = posted.executeQuery();
@@ -133,6 +131,7 @@ public class serviceadmin implements Iservice <admin>
     }
     
     public admin login(String inputUsername, String inputPassword) {
+        Connection cn = cnx.getInstance().getCnx();
 		admin account = new admin();
 		account.setId_user(-1);
 
@@ -140,7 +139,7 @@ public class serviceadmin implements Iservice <admin>
 		
         try {
             String requete = "SELECT password FROM admin where username=?";
-            PreparedStatement pst = cnx.prepareStatement(requete);
+            PreparedStatement pst = cn.prepareStatement(requete);
 			pst.setString(1, inputUsername);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
@@ -150,7 +149,7 @@ public class serviceadmin implements Iservice <admin>
 			if(BCrypt.checkpw(inputPassword, hashedPassword)) {
 				System.out.println("It matches");
 				requete = "SELECT * FROM admin where username=?";
-				pst = cnx.prepareStatement(requete);
+				pst = cn.prepareStatement(requete);
 				pst.setString(1, inputUsername);
 				rs = pst.executeQuery();
 				while (rs.next()) {

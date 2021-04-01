@@ -46,14 +46,15 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Button fx:id="btnDelete" layoutX="524.0" layoutY="200.0" mnemonicParsing="false" onAction="#delete" prefHeight="27.0" prefWidth="42.0" text="Delete account">
+            <Button fx:id="btnDelete" layoutX="524.0" layoutY="200.0" mnemonicParsing="false" onAction="#delete" prefHeight="27.0" prefWidth="42.0" text="Delete account" visible="false">
                <font>
                   <Font name="Bell MT" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="event" layoutX="21.0" layoutY="188.0" mnemonicParsing="false" onAction="#event" prefHeight="25.0" prefWidth="85.0" text="Events" />
-            <Button layoutX="21.0" layoutY="215.0" mnemonicParsing="false" onAction="#articles" prefHeight="25.0" prefWidth="85.0" text="Articles" />
-            <Button layoutX="23.0" layoutY="240.0" mnemonicParsing="false" onAction="#Reclamation" prefHeight="25.0" prefWidth="95.0" text="Reclamations" />
+            <Button fx:id="event" layoutX="14.0" layoutY="188.0" mnemonicParsing="false" onAction="#event" prefHeight="25.0" prefWidth="111.0" style="-fx-background-color: #25FDE9;" text="Events" />
+            <Button layoutX="14.0" layoutY="215.0" mnemonicParsing="false" onAction="#articles" prefHeight="25.0" prefWidth="111.0" style="-fx-background-color: #25FDE9;" text="Articles" />
+            <Button layoutX="14.0" layoutY="276.0" mnemonicParsing="false" onAction="#Reclamation" prefHeight="25.0" prefWidth="111.0" style="-fx-background-color: #25FDE9;" text="Reclamations" />
+            <Button fx:id="Post" layoutX="14.0" layoutY="303.0" mnemonicParsing="false" onAction="#Post" prefHeight="25.0" prefWidth="111.0" style="-fx-background-color: #25FDE9;" text="Publication" />
          </children>
       </AnchorPane>
    </children>

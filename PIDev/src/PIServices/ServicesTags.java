@@ -23,7 +23,7 @@ public class ServicesTags implements IservicesA{
         public boolean check_tag(Tag t)
     {
         System.out.println(t.toString());
-      MyConnection cn = cnx.getInstance().getConn();
+      Connection cn = cnx.getCnx();
         try{    
         PreparedStatement posted = cn.prepareStatement("SELECT * FROM tag where tag=?;");
         posted.setString(1,t.getName());
@@ -67,7 +67,7 @@ public class ServicesTags implements IservicesA{
  public int fetchId(Tag t)
 {
          try{
-        MyConnection cn = cnx.getInstance().getConn();
+        Connection cn = cnx.getCnx();
         PreparedStatement posted = cn.prepareStatement("SELECT * From tag where tag=?;");
         posted.setString(1,t.getName());
         ResultSet result = posted.executeQuery();
@@ -86,7 +86,7 @@ return -1;
  public String fetchName(Tag t)
  {
      try{
-        MyConnection cn = cnx.getInstance().getConn();
+        Connection cn = cnx.getCnx();
         PreparedStatement posted = cn.prepareStatement("SELECT * From tag where id_tag=?;");
         posted.setInt(1,t.getId());
         ResultSet result = posted.executeQuery();
@@ -105,7 +105,7 @@ return -1;
        public boolean add_relation(Publication p)
     {
               int id_pub =p.getId();
-              MyConnection cn = cnx.getInstance().getConn();
+              Connection cn = cnx.getCnx();
               ArrayList<String> tags = Check_hashtags(p.getText());
         try{
         
@@ -146,7 +146,7 @@ return -1;
        public boolean delete_relation(Publication p)
     {
               int id_pub =p.getId();
-              MyConnection cn = cnx.getInstance().getConn();
+              Connection cn = cnx.getCnx();
         try{
 
                      PreparedStatement posted = cn.prepareStatement("DELETE FROM `tag_publication` WHERE `tag_publication`.`id_pub` =?");
@@ -169,7 +169,7 @@ return -1;
     public ArrayList select_all(Object t) {
         Tag ta = (Tag) t;
                 try{
-        MyConnection cn = cnx.getInstance().getConn();
+        Connection cn = cnx.getCnx();
         PreparedStatement posted = cn.prepareStatement("SELECT * From tag;");
         ResultSet result = posted.executeQuery();
         ArrayList<String> array= new ArrayList<String>();
@@ -195,7 +195,7 @@ return -1;
     @Override
     public void update(Object t) {
         Tag ta = (Tag) t;
-        MyConnection cn = cnx.getInstance().getConn();
+        Connection cn = cnx.getCnx();
         try{    
         
         PreparedStatement posted = cn.prepareStatement("UPDATE `tag` SET `tag` =? where id_tag =?");
@@ -215,7 +215,7 @@ return -1;
     public void insert(Object t) {
         Tag ta = (Tag) t;
 try{    
-        MyConnection cn = cnx.getInstance().getConn();
+        Connection cn = cnx.getCnx();
         if(!check_tag(ta))
         {   
         PreparedStatement posted = cn.prepareStatement("INSERT INTO `tag` (`tag`) VALUES (?);");
@@ -233,7 +233,7 @@ try{
     public void delete(Object t) {
         Tag ta = (Tag) t;
        try{    
-        MyConnection cn = cnx.getInstance().getConn();
+        Connection cn = cnx.getCnx();
         if(check_tag(ta))
         {   
         PreparedStatement posted = cn.prepareStatement("DELETE FROM `tag` WHERE `id_tag` =?;");
@@ -252,7 +252,7 @@ try{
     public ArrayList get_pubs_from_tag(int id_tag)
     {
                 try{
-        MyConnection cn = cnx.getInstance().getConn();
+        Connection cn = cnx.getCnx();
         PreparedStatement posted = cn.prepareStatement("SELECT * from tag_publication where id_tag=?;");
         posted.setInt(1, id_tag);
         ResultSet result = posted.executeQuery();

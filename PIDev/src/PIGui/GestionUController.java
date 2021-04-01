@@ -106,6 +106,8 @@ public class GestionUController implements Initializable {
     private Button logout;
     @FXML
     private Button btnReclamation;
+    @FXML
+    private Button posts;
     /**
      * Initializes the controller class.
      */
@@ -326,7 +328,23 @@ public class GestionUController implements Initializable {
         Parent root1= loader1.load();
         imprS.getScene().setRoot(root1);
     }
-    
+
+    @FXML
+    private void Posts(ActionEvent event) throws IOException 
+    {
+        FXMLLoader loader1= new FXMLLoader(getClass().getResource("FrontEnd_Publication.fxml"));
+        Parent root1= loader1.load();
+        imprS.getScene().setRoot(root1);
+    }
+
+    @FXML
+    private void go_event(ActionEvent event) throws IOException 
+    {
+        FXMLLoader loader1= new FXMLLoader(getClass().getResource("UserIn_Admin.fxml"));
+        Parent root1= loader1.load();
+        imprS.getScene().setRoot(root1);
+    }
+   
     
     
 }

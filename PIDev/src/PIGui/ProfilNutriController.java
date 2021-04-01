@@ -39,6 +39,8 @@ public class ProfilNutriController implements Initializable {
     private Button btnDelete;
     @FXML
     private Button articles;
+    @FXML
+    private Button post;
 
     /**
      * Initializes the controller class.
@@ -110,6 +112,13 @@ public class ProfilNutriController implements Initializable {
     @FXML
     private void Reclamation(ActionEvent event) throws IOException {
         FXMLLoader loader1= new FXMLLoader(getClass().getResource("AddRec.fxml"));
+        Parent root1= loader1.load();
+        btnSignOut.getScene().setRoot(root1);
+    }
+
+    @FXML
+    private void post(ActionEvent event) throws IOException {
+        FXMLLoader loader1= new FXMLLoader(getClass().getResource("FrontEnd_Publication.fxml"));
         Parent root1= loader1.load();
         btnSignOut.getScene().setRoot(root1);
     }

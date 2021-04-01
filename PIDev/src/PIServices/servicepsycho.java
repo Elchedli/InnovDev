@@ -226,7 +226,7 @@ public class servicepsycho implements Iservice <psycho>
     public int check_user(psycho t) 
     {   
         
-      MyConnection mc = cnn.getInstance();
+      Connection mc = cnn.getCnx();
         try{    
         PreparedStatement posted = mc.prepareStatement("SELECT * FROM psycho where username= ? and password=? ;");
         posted.setString(1,t.getUsername());

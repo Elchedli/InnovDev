@@ -7,6 +7,7 @@ package PIGui;
 
 import PIClass.psycho;
 import PIClass.userclient;
+import PIServices.ServicesPublication;
 import PIServices.servicepsycho;
 import java.io.IOException;
 import java.net.URL;
@@ -17,6 +18,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
@@ -51,12 +53,23 @@ public class ConnectionPController implements Initializable {
     @FXML
     private void loginP(ActionEvent event) throws IOException 
     {
+        if ( TextUsername.getText().isEmpty() | TextPassword.getText().isEmpty())
+        {
+            Alert al = new Alert(Alert.AlertType.ERROR);
+            al.setHeaderText(null);
+            al.setContentText("Veuillez remplir les champs vides ! ");
+            al.showAndWait();
+        }
+        else
+        {
         servicepsycho sU = servicepsycho.getInstance();
 		psycho u = sU.login(TextUsername.getText(), TextPassword.getText());
 		if (u.getId_user() > -1) {
-                        sU.userInfos = u;
+                        sU.userInfos = u;                        
                         userclient.setUsername(u.getUsername());
                         userclient.setType("psy");
+                        ServicesPublication sp = new ServicesPublication();
+                        userclient.setId(sp.getrequest());
 			FXMLLoader loader1= new FXMLLoader(getClass().getResource("ProfilPsy.fxml"));              
 			Parent root1= loader1.load();
 			btnLogin.getScene().setRoot(root1);
@@ -75,6 +88,7 @@ public class ConnectionPController implements Initializable {
                n.darkStyle();
                n.show();
 		}
+        }
     }
 
     @FXML

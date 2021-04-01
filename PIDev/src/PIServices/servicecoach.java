@@ -227,7 +227,7 @@ public class servicecoach implements Iservice <coach>
     public int check_user(coach t) 
     {   
         
-      MyConnection mc = cnn.getInstance();
+      Connection mc = cnn.getCnx();
         try{    
         PreparedStatement posted = mc.prepareStatement("SELECT * FROM coach where username= ? and password=? ;");
         posted.setString(1,t.getUsername());

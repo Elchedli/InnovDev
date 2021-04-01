@@ -6,6 +6,8 @@
 package PIGui;
 
 import PIClass.admin;
+import PIClass.userclient;
+import PIServices.ServicesPublication;
 import PIServices.serviceadmin;
 import java.io.IOException;
 import java.net.URL;
@@ -60,10 +62,23 @@ public class ConnectionAController implements Initializable {
     @FXML
     private void login(ActionEvent event) throws IOException 
     {
-        serviceadmin sA = serviceadmin.getInstance();
+        if ( tfUsername.getText().isEmpty() | tfPassword.getText().isEmpty())
+        {
+            Alert al = new Alert(Alert.AlertType.ERROR);
+            al.setHeaderText(null);
+            al.setContentText("Veuillez remplir les champs vides ! ");
+            al.showAndWait();
+        }
+        else
+        {
+            serviceadmin sA = serviceadmin.getInstance();
 		admin u = sA.login(tfUsername.getText(), tfPassword.getText());
 		if (u.getId_user() > -1) {
                         sA.userInfos = u;
+                        userclient.setUsername(u.getUsername());
+                        userclient.setType("admin");
+                        ServicesPublication sp = new ServicesPublication();
+                        userclient.setId(sp.getrequest());
 			FXMLLoader loader1= new FXMLLoader(getClass().getResource("GestionU.fxml"));              
 			Parent root1= loader1.load();
 			btnLogin.getScene().setRoot(root1);
@@ -81,6 +96,8 @@ public class ConnectionAController implements Initializable {
                n.darkStyle();
                n.show();
 		}
+        }
+        
     }
     
 }

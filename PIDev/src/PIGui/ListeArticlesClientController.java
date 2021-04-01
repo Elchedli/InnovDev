@@ -91,7 +91,7 @@ public class ListeArticlesClientController implements Initializable {
     FilteredList<Article> filter = new FilteredList<>(ArtList, e -> true);
     SortedList<Article> sort = new SortedList<>(filter);
 
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("PageArticle.fxml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("PageArticleClient.fxml"));
 //    PageArticleController dpc =  loader.getController();
 //    PageArticleController pac = new PageArticleController();
 
@@ -108,8 +108,7 @@ public class ListeArticlesClientController implements Initializable {
             Object item = coltabab.getSelectionModel().getSelectedItem();
             Article art = (Article) item;
             stage.setScene(new Scene(root));
-
-            PageArticleController dpc = loader.getController();
+            PageArticleClientController dpc = loader.getController();
             dpc.setLab_aut(art.getAuteur_art());
             dpc.setLab_tit(art.getTitre_art());
             dpc.setLab_desc(art.getDescription_art());
@@ -237,11 +236,13 @@ public class ListeArticlesClientController implements Initializable {
         ColAut.setCellValueFactory(new PropertyValueFactory<>("auteur_art"));
         ColDate.setCellValueFactory(new PropertyValueFactory<>("date_art"));
         ColDesc.setCellValueFactory(new PropertyValueFactory<>("description_art"));
-        ColVue.setCellValueFactory(new PropertyValueFactory<>("vues"));
+        ColVue.setCellValueFactory(new PropertyValueFactory<>("likes"));
         ColCat.setCellValueFactory(new PropertyValueFactory<>("nomcat"));
-        Colimg.setCellValueFactory(new PropertyValueFactory<>("img"));
+        Colimg.setCellValueFactory(new PropertyValueFactory<>("photo"));
 
         ServiceArticle srec = new ServiceArticle();
+        ArtList.removeAll();
+        ArtList.clear();
         srec.afficher().forEach(e -> {
             ArtList.add(e);
         });
@@ -285,9 +286,9 @@ public class ListeArticlesClientController implements Initializable {
             ColAut.setCellValueFactory(new PropertyValueFactory<>("auteur_art"));
             ColDate.setCellValueFactory(new PropertyValueFactory<>("date_art"));
             ColDesc.setCellValueFactory(new PropertyValueFactory<>("description_art"));
-            ColVue.setCellValueFactory(new PropertyValueFactory<>("vues"));
+            ColVue.setCellValueFactory(new PropertyValueFactory<>("likes"));
             ColCat.setCellValueFactory(new PropertyValueFactory<>("nomcat"));
-            Colimg.setCellValueFactory(new PropertyValueFactory<>("img"));
+            Colimg.setCellValueFactory(new PropertyValueFactory<>("photo"));
             
 
             ServiceArticle srec = new ServiceArticle();

@@ -91,7 +91,7 @@ public class CreatePsyController implements Initializable {
 
            JOptionPane.showMessageDialog(null,"Welcome sir ♥");
 
-           FXMLLoader loader= new FXMLLoader(getClass().getResource("profilPsy.fxml"));
+           FXMLLoader loader= new FXMLLoader(getClass().getResource("Acceuil.fxml"));
            Parent root= loader.load();
            tfUsername.getScene().setRoot(root);
 

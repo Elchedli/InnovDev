@@ -96,9 +96,10 @@ public class AjouterEventController implements Initializable {
 
     @FXML
     private void Ajouter(ActionEvent event) {
-      GererEv e=new GererEv();      
-    if (text_nom.getText().isEmpty() || emplacement.getText().isEmpty() || controleComboBox(type)|| age_min.getText().isEmpty() || age_max.getText().isEmpty())
+      GererEv e=new GererEv();
+    if (text_nom.getText().isEmpty() || emplacement.getText().isEmpty() || controleComboBox(type) || age_min.getText().isEmpty() || age_max.getText().isEmpty())
    {
+                    System.out.println("test");
                      Alert alert = new Alert(Alert.AlertType.ERROR);
                      alert.setHeaderText("Veuillez remplir tous les champs");
                      alert.showAndWait();}
@@ -179,7 +180,7 @@ public class AjouterEventController implements Initializable {
            return true;
         }
      public boolean controleComboBox(ComboBox<String> combo) {
-        if (combo.getValue() == null) {
+        if (combo.getValue().isEmpty()) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText("Veuillez chosir un Type");
         alert.showAndWait();

@@ -49,6 +49,7 @@ import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 import PIClass.Photo;
+import PIClass.userclient;
 import PIGui.EditPublicationController;
 import PIGui.PhotoDisplayController;
 
@@ -59,9 +60,10 @@ import PIGui.PhotoDisplayController;
  * @author HP I5
  */
 public class FrontEnd_PublicationController implements Initializable {
-    
-    
-    //String
+
+    public int getID_user() {
+        return ID_user;
+    }
     
     
     
@@ -238,7 +240,7 @@ public class FrontEnd_PublicationController implements Initializable {
             //stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
             con.set_p(pub);
-            con.username = "Dr. Anas";
+            //con.username = "Dr. Anas";
             con.Display();
         }
         catch(Exception e)
@@ -268,6 +270,7 @@ public class FrontEnd_PublicationController implements Initializable {
             {
                 spub.drop_track(pub);
                 spub.delete(pub);
+                    
                 display();
                 notif("Publication","Suppression avec succée !");
             }
@@ -277,7 +280,7 @@ public class FrontEnd_PublicationController implements Initializable {
             @Override
             public void handle(ActionEvent event)
             {
-                spub.like_post(pub,1);
+                spub.like_post(pub,userclient.getId());
                 display();
                 notif("Publication","Like à jour !");
 
@@ -293,7 +296,8 @@ public class FrontEnd_PublicationController implements Initializable {
         });
        // System.out.println(pub.getText().length());
         l.setPrefSize(100, 160);
-        l.getItems().add("Username "+"a dit :");
+        l.getItems().add(spub.getUsername(pubs.get(i).getUser_id())+" a dit :");
+        
         l.getItems().add(t);
         l.getItems().add("Like: "+pubs.get(i).getNb_react());
         l.getItems().add("Date: "+pubs.get(i).getDate());
@@ -301,7 +305,7 @@ public class FrontEnd_PublicationController implements Initializable {
         l.getItems().add(btn_com);
         l.getItems().add(btn_ph);
         
-        if(pub.getUser_id() == ID_user)
+        if(userclient.getType() == "psycho" || userclient.getType() == "nutri" || userclient.getType() == "coach" || userclient.getId() == pubs.get(i).getUser_id())
         {
         l.getItems().add(supp);
         l.getItems().add(btn_edit);
@@ -356,7 +360,14 @@ public class FrontEnd_PublicationController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        System.out.println(userclient.getType());
+        if(userclient.getType() == "simple" || userclient.getType() == "admin")
+        {
+            ta_postFE.setDisable(true);
+            btn_postFE.setDisable(true);
+            tf_ph.setDisable(true);
+           
+        }
         display();
     }
     

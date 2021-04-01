@@ -1,94 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane id="AnchorPane" prefHeight="608.0" prefWidth="784.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PIGui.AccEvController">
+<AnchorPane id="AnchorPane" prefHeight="608.0" prefWidth="784.0" style="-fx-background-color: Transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PIGui.AccEvController">
    <children>
-      <Pane layoutX="-2.0" layoutY="-2.0" prefHeight="739.0" prefWidth="223.0" style="-fx-background-color: FC9488;">
+      <AnchorPane fx:id="holderPane" layoutX="-22.0" layoutY="-102.0" prefHeight="781.0" prefWidth="784.0" style="-fx-background-color: transparent;">
          <children>
-            <AnchorPane layoutX="-18.0" layoutY="97.0" prefHeight="642.0" prefWidth="202.0" style="-fx-background-color: FC9488;">
+            <AnchorPane layoutX="190.0" layoutY="130.0" prefHeight="537.0" prefWidth="429.0" style="-fx-background-color: linear-gradient(to right top, #5dc0aa, #7bc9bc, #99d1cb, #b7d9d7, #d4e1e1); -fx-background-radius: 1em;">
                <children>
-                  <Separator layoutX="15.0" layoutY="321.0" prefHeight="31.0" prefWidth="223.0" />
-                  <Separator layoutX="1.0" layoutY="404.0" prefHeight="31.0" prefWidth="238.0" />
-                  <Button fx:id="Add" layoutX="68.0" layoutY="111.0" mnemonicParsing="false" onAction="#Add_event" prefHeight="25.0" prefWidth="156.0" style="-fx-background-color: FC9488;" text="Add Event">
+                  <ImageView fitHeight="127.0" fitWidth="102.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/logo%20(1).png" />
+                     </image>
+                  </ImageView>
+                  <Button fx:id="Add" layoutX="149.0" layoutY="129.0" mnemonicParsing="false" onAction="#Add_event" prefHeight="51.0" prefWidth="161.0" style="-fx-background-color: #00a1a1; -fx-background-radius: 1em;" text="Add Event" textFill="WHITE">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="edit" layoutX="68.0" layoutY="171.0" mnemonicParsing="false" onAction="#edit_event" prefHeight="25.0" prefWidth="156.0" style="-fx-background-color: FC9488;" text="Edit Event">
+                  <FontAwesomeIconView fill="#f2f0f0" glyphName="PLUS_SQUARE_ALT" layoutX="161.0" layoutY="166.0" size="30" text="" />
+                  <Button fx:id="edit" layoutX="149.0" layoutY="198.0" mnemonicParsing="false" onAction="#edit_event" prefHeight="51.0" prefWidth="161.0" style="-fx-background-color: #00a1a1; -fx-background-radius: 1em;" text="Edit Event" textFill="WHITE">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="acivités" layoutX="82.0" layoutY="359.0" mnemonicParsing="false" onAction="#activités" prefHeight="25.0" prefWidth="156.0" style="-fx-background-color: FC9488;" text="Activités">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="invitations" layoutX="82.0" layoutY="437.0" mnemonicParsing="false" onAction="#invitations" prefHeight="25.0" prefWidth="156.0" style="-fx-background-color: FC9488;" text="Invitations">
-                     <font>
-                        <Font name="System Bold" size="24.0" />
-                     </font>
-                  </Button>
-                  <Text layoutX="82.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Evenements">
+                  <Button fx:id="retour" layoutX="297.0" layoutY="46.0" mnemonicParsing="false" onAction="#retour" opacity="0.0" prefHeight="91.0" prefWidth="91.0" text="Button" />
+                  <Text layoutX="161.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Evenements">
                      <font>
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Text>
-                  <ImageView fx:id="imgv1" fitHeight="40.0" fitWidth="40.0" layoutX="28.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/Sans%20edit.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imgv4" fitHeight="40.0" fitWidth="40.0" layoutX="42.0" layoutY="352.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/act.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imgv5" fitHeight="40.0" fitWidth="40.0" layoutX="42.0" layoutY="443.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/images.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imgv2" fitHeight="32.0" fitWidth="40.0" layoutX="48.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/add.png" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imgv3" fitHeight="32.0" fitWidth="40.0" layoutX="53.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../icons/Sans%20edit.png" />
-                     </image>
-                  </ImageView>
-                  <Button fx:id="option" layoutX="72.0" layoutY="222.0" mnemonicParsing="false" onAction="#options" prefHeight="25.0" prefWidth="156.0" style="-fx-background-color: FC9488;" text="Options">
+                  <FontAwesomeIconView fx:id="btnactualiser" fill="#f8f7f7" glyphName="REFRESH" layoutX="164.0" layoutY="232.0" size="20" text="" wrappingWidth="41.571427166461945" />
+                  <Button fx:id="Statistic" layoutX="149.0" layoutY="269.0" mnemonicParsing="false" onAction="#Statistic" prefHeight="51.0" prefWidth="161.0" style="-fx-background-color: #00a1a1; -fx-background-radius: 1em;" text="Statistic" textFill="WHITE">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="Statistic" layoutX="68.0" layoutY="261.0" mnemonicParsing="false" onAction="#Statistic" prefHeight="25.0" prefWidth="156.0" style="-fx-background-color: FC9488;" text="Statistic">
+                  <Button fx:id="option" layoutX="149.0" layoutY="336.0" mnemonicParsing="false" onAction="#options" prefHeight="51.0" prefWidth="161.0" style="-fx-background-color: #00a1a1; -fx-background-radius: 1em;" text="Options" textFill="WHITE">
                      <font>
-                        <Font size="14.0" />
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="invitations" layoutX="149.0" layoutY="472.0" mnemonicParsing="false" onAction="#invitations" prefHeight="51.0" prefWidth="161.0" style="-fx-background-color: #00a1a1; -fx-background-radius: 1em;" text="Invitations" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="acivités" layoutX="151.0" layoutY="402.0" mnemonicParsing="false" onAction="#activités" prefHeight="51.0" prefWidth="156.0" style="-fx-background-color: #00a1a1; -fx-background-radius: 1em;" text="Activités" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
                </children>
             </AnchorPane>
          </children>
-      </Pane>
-      <AnchorPane fx:id="holderPane" layoutX="242.0" layoutY="-4.0" prefHeight="737.0" prefWidth="723.0">
-         <children>
-            <ImageView fx:id="back" fitHeight="91.0" fitWidth="136.0" layoutX="554.0" layoutY="34.0" onDragDetected="#back" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../icons/back.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="retour" layoutX="554.0" layoutY="34.0" mnemonicParsing="false" onAction="#retour" opacity="0.0" prefHeight="91.0" prefWidth="91.0" text="Button" />
-         </children></AnchorPane>
+      </AnchorPane>
+      <FontAwesomeIconView fx:id="btnback" fill="#fcf9f9" glyphName="ARROW_CIRCLE_LEFT" layoutX="78.0" layoutY="532.0" size="30" text="" />
    </children>
 </AnchorPane>

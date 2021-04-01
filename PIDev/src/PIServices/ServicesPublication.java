@@ -23,14 +23,14 @@ import PIServices.ServicesPhoto;
 public class ServicesPublication implements IservicesA{
 MyConnection cnx = new MyConnection();
 public static final int USER_ID= 1;
-public String getusername(int id)
+public String getusernamePsy(int id)
 {
  try{
         Connection cn = cnx.getInstance().getCnx();
-        PreparedStatement posted = cn.prepareStatement("SELECT * FROM `simple` where id_user= ?");
+        PreparedStatement posted = cn.prepareStatement("SELECT * FROM `psycho` where id_user= ?");
         posted.setInt(1,id);
         ResultSet result = posted.executeQuery();
-        while(result.next())
+        if(result.first())
         {
                 return result.getString("username");
         }
@@ -42,10 +42,95 @@ public String getusername(int id)
         }
            return null;
 }
+public String getusernameNutri(int id)
+{
+ try{
+        Connection cn = cnx.getInstance().getCnx();
+        PreparedStatement posted = cn.prepareStatement("SELECT * FROM `nutri` where id_user=?");
+        posted.setInt(1,id);
+        ResultSet result = posted.executeQuery();
+        if(result.first())
+        {
+              System.out.println("Username du nutritionist"+result.getString("username"));
+                return result.getString("username");
+              
+        }
+           }
+           
+        catch(SQLException e)
+        {
+            System.out.println(e);
+        }
+           return null;
+}
+public String getusernameCoach(int id)
+{
+ try{
+        Connection cn = cnx.getInstance().getCnx();
+        PreparedStatement posted = cn.prepareStatement("SELECT * FROM `coach` where id_user= ?");
+        posted.setInt(1,id);
+        ResultSet result = posted.executeQuery();
+        if(result.first())
+        {
+                return result.getString("username");
+        }
+           }
+           
+        catch(SQLException e)
+        {
+            System.out.println(e);
+        }
+           return null;
+}
+public String getusernameAdmin(int id)
+{
+ try{
+        Connection cn = cnx.getInstance().getCnx();
+        PreparedStatement posted = cn.prepareStatement("SELECT * FROM `admin` where id_user= ?");
+        posted.setInt(1,id);
+        ResultSet result = posted.executeQuery();
+       if(result.first())
+        {
+                return result.getString("username");
+        }
+           }
+           
+        catch(SQLException e)
+        {
+            System.out.println(e);
+        }
+           return null;
+}
+
+public String getUsername(int id)
+{
+   String usercoach = getusernameCoach(id);
+   String userpsy = getusernamePsy(id);
+   String usernutri = getusernameNutri(id);
+   String useradmin = getusernameAdmin(id);
+    System.out.println(usercoach);
+    System.out.println(userpsy);
+    System.out.println(usernutri);
+    System.out.println(useradmin);
+   if(useradmin != null)
+       return useradmin;
+    if(usercoach != null)
+       return usercoach;
+    if(userpsy != null)
+       return userpsy;
+    if(usernutri != null)
+       return usernutri;
+   else return "-1";
+   
+}
+
+
+
+
 public int getId(String username)
 {
  try{
-        MyConnection cn = cnx.getInstance().getConn();
+        Connection cn = cnx.getInstance().getCnx();
         PreparedStatement posted = cn.prepareStatement("SELECT * FROM `simple` where username= ?");
         posted.setString(1,username);
         ResultSet result = posted.executeQuery();
@@ -66,7 +151,7 @@ public int getId(String username)
     @Override
     public ArrayList select_all(Object t) {
            try{
-        MyConnection cn = cnx.getInstance().getConn();
+        Connection cn = cnx.getInstance().getCnx();
         PreparedStatement posted = cn.prepareStatement("SELECT * From publication;");
         ResultSet result = posted.executeQuery();
         ArrayList array= new ArrayList<Publication>();
@@ -115,8 +200,9 @@ public int getId(String username)
            Publication p = (Publication) t;
                    try{    
         Connection cn = cnx.getInstance().getCnx();
-        PreparedStatement posted = cn.prepareStatement("INSERT INTO `publication` (`id_pub`, `id_user`, `nb_reaction`, `texte`) VALUES (NULL,1,0,?);",Statement.RETURN_GENERATED_KEYS);
-        posted.setString(1,p.getText());
+        PreparedStatement posted = cn.prepareStatement("INSERT INTO `publication` (`id_pub`, `id_user`, `nb_reaction`, `texte`) VALUES (NULL,?,0,?);",Statement.RETURN_GENERATED_KEYS);
+        posted.setInt(1,userclient.getId());
+        posted.setString(2,p.getText());
         int affected_row = posted.executeUpdate();
         if(affected_row == 0)
         {
@@ -404,29 +490,37 @@ public int getId(String username)
                 }
 
    public int getrequest(){
+       Connection cn = cnx.getInstance().getCnx();
         try {
             String envoi ="";
+            System.out.println(userclient.getType());
             switch(userclient.getType()) {
                 case "simple":
                     System.out.println("i am mr simple");
-                    envoi = "select id_user from simple WHERE username = (select id_user from simple where username = ?)";
+                    envoi = "select id_user from simple WHERE username = ?";
                   break;
                 case "psy":
                     System.out.println("i am mr psy");
-                  envoi = "select id_user from psycho WHERE username = (select id_user from psycho where username = ?)";
+                  envoi = "select id_user from psycho WHERE username = ?";
                   break;
                   case "nutri":
                       System.out.println("i am mr nutri");
-                      envoi = "select id_user from nutri WHERE username = (select id_user from nutri where username = ?)";
+                      envoi = "select id_user from nutri WHERE username = ?";
                   break;
                   case "coach":
                       System.out.println("i am mr coach");
-                      envoi = "select id_user from coach WHERE username = (select id_user from coach where username = ?)";
+                      envoi = "select id_user from coach WHERE username = ?";
+                  break;
+                  case "admin":
+                      System.out.println("i am mr coach");
+                      envoi = "select id_user from admin WHERE username = ?";
                   break;
             }
-            PreparedStatement st = cnx.prepareStatement(envoi);
+            PreparedStatement st = cn.prepareStatement(envoi);
             st.setString(1,userclient.getUsername());
+            System.out.println("ching kong");
             ResultSet rs = st.executeQuery();
+            
 //            System.out.println(rs1.next());
             if(rs.next()) {
                 return rs.getInt(1);

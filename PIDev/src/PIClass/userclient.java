@@ -44,14 +44,12 @@ public class userclient {
     public static void setUsername(String username) {
         userclient.username = username;
     }
-    
-    
 
     public static int getId() {
         return id;
     }
 
-    public static void setId() {
-        id = this.getrequest();
+    public static void setId(int id) {
+        userclient.id = id;
     }
 }

@@ -9,36 +9,36 @@
 <?import javafx.scene.text.Font?>
 <?import org.controlsfx.control.Rating?>
 
-<AnchorPane id="AnchorPane" prefHeight="571.0" prefWidth="727.0" style="-fx-background-color: linear-gradient(to right top, #233380, #005da8, #0087c8, #00b1e0, #3bdaf2);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PIGui.PageArticleController">
+<AnchorPane id="AnchorPane" prefHeight="571.0" prefWidth="727.0" style="-fx-background-color: linear-gradient(to right top, #e9deeb, #d9dafa, #b1dcff, #77e1ff, #43e3e3) linear-gradient(to right top, #e9deeb, #d9dafa, #b1dcff, #77e1ff, #43e3e3);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PIGui.PageArticleController">
    <children>
       <AnchorPane layoutX="28.0" layoutY="17.0" prefHeight="538.0" prefWidth="685.0" style="-fx-background-color: linear-gradient(to right top, #f4f4f4, #f4f4f4, #f4f4f4, #f4f4f4, #f4f4f4);">
          <children>
-            <JFXButton buttonType="RAISED" layoutX="21.0" layoutY="494.0" onAction="#tes" prefHeight="30.0" prefWidth="116.0" style="-fx-background-radius: 1em; -fx-background-color: linear-gradient(to right top, #233380, #233380, #233380, #233380, #233380);" text="Listes des Articles" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="21.0" layoutY="494.0" onAction="#tes" prefHeight="30.0" prefWidth="116.0" style="-fx-background-radius: 1em; -fx-background-color: #00a1a1 #00a1a1 #00a1a1 #00a1a1;" text="Listes des Articles" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="150.0" layoutY="494.0" onAction="#backtomenu" prefHeight="30.0" prefWidth="49.0" style="-fx-background-color: linear-gradient(to right top, #233380, #233380, #233380, #233380, #233380); -fx-background-radius: 1em;" text="Menu" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="150.0" layoutY="494.0" onAction="#backtomenu" prefHeight="30.0" prefWidth="49.0" style="-fx-background-color: #00a1a1 #00a1a1 #00a1a1 #00a1a1; -fx-background-radius: 1em;" text="Menu" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </JFXButton>
-            <JFXButton buttonType="RAISED" layoutX="295.0" layoutY="494.0" onAction="#CreatePDF" prefHeight="30.0" prefWidth="82.0" style="-fx-background-color: linear-gradient(to right top, #233380, #233380, #233380, #233380, #233380); -fx-background-radius: 1em;" text="Save to PDF" textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="295.0" layoutY="494.0" onAction="#CreatePDF" prefHeight="30.0" prefWidth="82.0" style="-fx-background-color: #00a1a1 #00a1a1 #00a1a1 #00a1a1; -fx-background-radius: 1em;" text="Save to PDF" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="11.0" />
                </font>
             </JFXButton>
-            <Label layoutX="218.0" layoutY="17.0" text="Titre Article  : " textAlignment="CENTER">
+            <Label layoutX="174.0" layoutY="17.0" text="Titre Article  : " textAlignment="CENTER">
                <font>
                   <Font name="Old English Text MT" size="25.0" />
                </font>
             </Label>
-            <Label fx:id="lab_tit" layoutX="377.0" layoutY="17.0" prefHeight="30.0" prefWidth="298.0" text="Label">
+            <Label fx:id="lab_tit" layoutX="329.0" layoutY="17.0" prefHeight="30.0" prefWidth="348.0" text="Label">
                <font>
                   <Font name="Old English Text MT" size="25.0" />
                </font>
             </Label>
-            <Label layoutX="29.0" layoutY="76.0" text="Catégorie : " textFill="#da0000">
+            <Label layoutX="29.0" layoutY="76.0" text="Catégorie : " textFill="#2a8da1">
                <font>
                   <Font name="OCR A Extended" size="15.0" />
                </font>
@@ -48,7 +48,7 @@
                   <Font name="OCR A Extended" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="526.0" layoutY="487.0" text="Date de pblication" textFill="#da0000">
+            <Label layoutX="526.0" layoutY="487.0" text="Date de pblication" textFill="#2a8da1">
                <font>
                   <Font name="OCR A Extended" size="12.0" />
                </font>
@@ -58,7 +58,7 @@
                   <Font name="OCR A Extended" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="29.0" layoutY="109.0" text="Auteur : " textFill="#da0000">
+            <Label layoutX="29.0" layoutY="109.0" text="Auteur : " textFill="#2a8da1">
                <font>
                   <Font name="OCR A Extended" size="15.0" />
                </font>
@@ -68,7 +68,7 @@
                   <Font name="OCR A Extended" size="15.0" />
                </font>
             </Label>
-            <Label layoutX="28.0" layoutY="150.0" text="Description : " textFill="#da0000">
+            <Label layoutX="28.0" layoutY="150.0" text="Description : " textFill="#2a8da1">
                <font>
                   <Font name="OCR A Extended" size="15.0" />
                </font>
@@ -83,7 +83,7 @@
                   <Font name="OCR A Extended" size="12.0" />
                </font>
             </Label>
-            <Label layoutX="28.0" layoutY="279.0" text="Likes☺ " textFill="#da0000">
+            <Label layoutX="28.0" layoutY="279.0" text="Likes☺ " textFill="#2a8da1">
                <font>
                   <Font name="OCR A Extended" size="12.0" />
                </font>
@@ -93,7 +93,7 @@
                   <DropShadow color="#bcb694" spread="0.74" />
                </effect>
             </Rating>
-            <JFXButton buttonType="RAISED" layoutX="478.0" layoutY="405.0" onAction="#Rating" style="-fx-background-color: linear-gradient(to right top, #233380, #233380, #233380, #233380, #233380); -fx-background-radius: 1em;" text="Submit " textFill="WHITE">
+            <JFXButton buttonType="RAISED" layoutX="478.0" layoutY="405.0" onAction="#Rating" style="-fx-background-color: #00a1a1 #00a1a1 #00a1a1 #00a1a1; -fx-background-radius: 1em;" text="Submit " textFill="WHITE">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
@@ -103,7 +103,7 @@
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label layoutX="25.0" layoutY="223.0" text="Lien image : " textFill="#da0000">
+            <Label layoutX="25.0" layoutY="223.0" text="Lien image : " textFill="#2a8da1">
                <font>
                   <Font name="OCR A Extended" size="15.0" />
                </font>

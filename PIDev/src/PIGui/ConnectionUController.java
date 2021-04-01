@@ -6,6 +6,8 @@
 package PIGui;
 
 import PIClass.simple;
+import PIClass.userclient;
+import PIServices.ServicesPublication;
 import PIServices.servicesimple;
 import java.io.IOException;
 import java.net.URL;
@@ -54,6 +56,11 @@ public class ConnectionUController implements Initializable {
 		simple u = sU.login(TextUsername.getText(), TextPassword.getText());
 		if (u.getId_user() > -1) {
                         sU.userInfos = u;
+                        System.out.println(u.getUsername());
+                        userclient.setUsername(u.getUsername());
+                        userclient.setType("simple");
+                        ServicesPublication sp = new ServicesPublication();
+                        userclient.setId(sp.getrequest());
 			FXMLLoader loader1= new FXMLLoader(getClass().getResource("Profil.fxml"));              
 			Parent root1= loader1.load();
 			btnLogin.getScene().setRoot(root1);

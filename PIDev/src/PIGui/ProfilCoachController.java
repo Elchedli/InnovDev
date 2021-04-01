@@ -45,6 +45,8 @@ public class ProfilCoachController implements Initializable {
     coach u = new coach();
     @FXML
     private Button event;
+    @FXML
+    private Button Post;
     public void setCoach(coach u) {
 		this.u = u;
 	}
@@ -120,6 +122,13 @@ public class ProfilCoachController implements Initializable {
     private void Reclamation(ActionEvent event) throws IOException 
     {
         FXMLLoader loader1= new FXMLLoader(getClass().getResource("AddRec.fxml"));
+        Parent root1= loader1.load();
+        btnSignOut.getScene().setRoot(root1);
+    }
+    @FXML
+    private void Post(ActionEvent event) throws IOException 
+    {
+        FXMLLoader loader1= new FXMLLoader(getClass().getResource("FrontEnd_Publication.fxml"));
         Parent root1= loader1.load();
         btnSignOut.getScene().setRoot(root1);
     }

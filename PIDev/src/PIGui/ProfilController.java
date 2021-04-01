@@ -48,6 +48,8 @@ public class ProfilController implements Initializable {
     private Button btnReclamation;
     @FXML
     private Button article;
+    @FXML
+    private Button post;
 
     /**
      * Initializes the controller class.
@@ -145,6 +147,17 @@ public class ProfilController implements Initializable {
     @FXML
     void SuiviClient(ActionEvent event) {
 
+    }
+
+    @FXML
+    private void post(ActionEvent event) throws IOException {
+        FXMLLoader loader2= new FXMLLoader(getClass().getResource("FrontEnd_Publication.fxml"));
+        Parent root0= loader2.load();
+        btnSignOut.getScene().setRoot(root0);
+    }
+
+    @FXML
+    private void autres(ActionEvent event) {
     }
     
 }

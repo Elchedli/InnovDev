@@ -226,7 +226,7 @@ public class servicenutri implements Iservice <nutri>
     public int check_user(nutri t) 
     {   
         
-      MyConnection mc = cnn.getInstance();
+      Connection mc = cnn.getCnx();
         try{    
         PreparedStatement posted = mc.prepareStatement("SELECT * FROM nutri where username= ? and password=? ;");
         posted.setString(1,t.getUsername());

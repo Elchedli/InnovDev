@@ -44,13 +44,15 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <Button fx:id="btnDelete" layoutX="507.0" layoutY="254.0" mnemonicParsing="false" onAction="#delete" prefHeight="27.0" prefWidth="60.0" text="Delete account">
+      <Button fx:id="btnDelete" layoutX="507.0" layoutY="254.0" mnemonicParsing="false" onAction="#delete" prefHeight="27.0" prefWidth="60.0" text="Delete account" visible="false">
          <font>
             <Font name="Bell MT" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="14.0" layoutY="229.0" mnemonicParsing="false" onAction="#articles" prefHeight="25.0" prefWidth="108.0" text="Articles" />
-      <Button layoutX="14.0" layoutY="255.0" mnemonicParsing="false" onAction="#SuiviPsy" prefHeight="25.0" prefWidth="108.0" text="Suivis" />
-      <Button layoutX="14.0" layoutY="288.0" mnemonicParsing="false" onAction="#reclamation" prefHeight="25.0" prefWidth="108.0" text="Reclamation" />
+      <Button layoutX="14.0" layoutY="229.0" mnemonicParsing="false" onAction="#articles" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: #25FDE9;" text="Articles" />
+      <Button layoutX="14.0" layoutY="255.0" mnemonicParsing="false" onAction="#SuiviPsy" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: #25FDE9;" text="Suivis" />
+      <Button layoutX="14.0" layoutY="288.0" mnemonicParsing="false" onAction="#reclamation" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: #25FDE9;" text="Reclamation" />
+      <Button fx:id="post" layoutX="14.0" layoutY="318.0" mnemonicParsing="false" onAction="#post" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: #25FDE9;" text="Post" />
+      <Button fx:id="Autres" layoutX="14.0" layoutY="344.0" mnemonicParsing="false" onAction="#Autres" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: #25FDE9;" text="Autres" />
    </children>
 </AnchorPane>
