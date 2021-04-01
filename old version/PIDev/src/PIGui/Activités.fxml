@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="734.0" prefWidth="819.0" style="-fx-background-color: Transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PIGui.ActivitésController">
+   <children>
+      <AnchorPane layoutX="23.0" layoutY="33.0" prefHeight="672.0" prefWidth="604.0" style="-fx-background-color: linear-gradient(to right top, #5dc0aa, #7bc9bc, #99d1cb, #b7d9d7, #d4e1e1); -fx-background-radius: 1em;">
+         <children>
+            <ImageView fitHeight="132.0" fitWidth="123.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/logo%20(1).png" />
+               </image>
+            </ImageView>
+            <Button fx:id="back" layoutX="56.0" layoutY="617.0" mnemonicParsing="false" onAction="#back" prefHeight="41.0" prefWidth="134.0" style="-fx-background-color: #00a1a1; -fx-background-radius: 1em;" text="Back" textFill="#fffefe">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <FontAwesomeIconView fx:id="btnback" fill="#fcf9f9" glyphName="ARROW_CIRCLE_LEFT" layoutX="61.0" layoutY="649.0" size="30" text="" wrappingWidth="41.571430125273764" />
+            <Pane layoutX="62.0" layoutY="169.0" prefHeight="41.0" prefWidth="161.0" style="-fx-background-color: #00a1a1; -fx-background-radius: 1em;">
+               <children>
+                  <FontAwesomeIconView fill="#f2f0f0" glyphName="PLUS_SQUARE_ALT" layoutX="14.0" layoutY="33.0" size="30" text="" />
+                  <Text fill="#fffefe" layoutX="47.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Activité :" wrappingWidth="120.27034918963909">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <AnchorPane fx:id="zone_aj" layoutX="243.0" layoutY="169.0" prefHeight="172.0" prefWidth="264.0" style="-fx-background-color: linear-gradient(to right top, #e9deeb, #d9dafa, #b1dcff, #77e1ff, #43e3e3); -fx-background-radius: 12; -fx-effect: dropshadow(two-pass-box, black,15,0.0,0.5,3);">
+               <children>
+                  <TextField fx:id="text_nom" layoutX="24.0" layoutY="36.0" onKeyPressed="#Control" onKeyReleased="#Control" onKeyTyped="#Control" prefHeight="25.0" prefWidth="216.0" promptText="Nom :" />
+                  <Label fx:id="nom" layoutX="6.0" layoutY="104.0" prefHeight="18.0" prefWidth="96.0" />
+                  <TextField fx:id="text_nom1" layoutX="25.0" layoutY="78.0" onKeyPressed="#Control" onKeyReleased="#Control" onKeyTyped="#Control" prefHeight="26.0" prefWidth="216.0" promptText="Type:" />
+                  <Button fx:id="valider" layoutX="188.0" layoutY="122.0" mnemonicParsing="false" onAction="#valider" text="Valider" />
+               </children>
+            </AnchorPane>
+            <Pane layoutX="56.0" layoutY="389.0" prefHeight="41.0" prefWidth="167.0" style="-fx-background-color: #00a1a1; -fx-background-radius: 1em;">
+               <children>
+                  <Text fill="#fffdfd" layoutX="45.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Edit Activité :" textAlignment="CENTER" wrappingWidth="107.34765625">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <FontAwesomeIconView fx:id="btnactualiser" fill="#f8f7f7" glyphName="REFRESH" layoutX="20.0" layoutY="27.0" size="20" text="" wrappingWidth="41.571427166461945" />
+               </children>
+            </Pane>
+            <TextField fx:id="cherch" layoutX="275.0" layoutY="411.0" onAction="#cherchetab" onKeyPressed="#cherchetab" prefHeight="33.0" prefWidth="185.0" promptText="chercher.." />
+            <TableView fx:id="tabid" layoutX="243.0" layoutY="441.0" prefHeight="142.0" prefWidth="296.0">
+               <columns>
+                  <TableColumn fx:id="colnom" onEditCommit="#modifNom" prefWidth="129.0" text="Nom" />
+                  <TableColumn fx:id="coltype" onEditCommit="#modifType" prefWidth="165.0" text="Type" />
+               </columns>
+            </TableView>
+            <ImageView fx:id="imgv5" fitHeight="33.0" fitWidth="32.0" layoutX="243.0" layoutY="411.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/téléchargement%20(1).png" />
+               </image>
+            </ImageView>
+            <Label layoutX="302.0" layoutY="41.0" text="Activité">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -17,6 +17,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Window;
 
 /**
  * FXML Controller class
@@ -42,6 +44,8 @@ public class ProfilPsyController implements Initializable {
     @FXML
     private Button Autres;
 
+    @FXML
+    private AnchorPane anchormain;
     /**
      * Initializes the controller class.
      */
@@ -134,7 +138,16 @@ public class ProfilPsyController implements Initializable {
         btnSignOut.getScene().setRoot(root1);
     }
 
+    public void changeStageSize(Window stage, int width, int height) {
+        stage.setWidth(width);
+        stage.setHeight(height);
+    }
+    
     @FXML
-    private void Autres(ActionEvent event) {
+    private void Autres(ActionEvent event) throws IOException {
+        FXMLLoader loader1= new FXMLLoader(getClass().getResource("../gui/Prototype.fxml"));
+        Parent root1= loader1.load();
+        changeStageSize(btnSignOut.getScene().getWindow(), 1060, 603);
+        btnSignOut.getScene().setRoot(root1);
     }
 }

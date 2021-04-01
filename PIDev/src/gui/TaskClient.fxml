@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="556.0" prefWidth="959.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TaskClientController">
+   <children>
+       <TableView fx:id="suivitable" layoutX="54.0" layoutY="24.0" prefHeight="483.0" prefWidth="423.0">
+        <columns>
+          <TableColumn fx:id="table_titre" prefWidth="126.0" text="titre" />
+            <TableColumn fx:id="table_datedeb" prefWidth="147.0" text="Date debut" />
+            <TableColumn fx:id="table_datefin" prefWidth="147.0" text="Date fin" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tachetable" layoutX="495.0" layoutY="24.0" prefHeight="483.0" prefWidth="417.0">
+         <columns>
+            <TableColumn fx:id="tabletache_desc" prefWidth="126.0" text="Description" />
+            <TableColumn fx:id="tabletache_difficultee" prefWidth="147.0" text="Difficultée" />
+            <TableColumn fx:id="tabletache_accompli" prefWidth="147.0" text="Accompli" />
+         </columns>
+      </TableView>
+   </children>
+</AnchorPane>

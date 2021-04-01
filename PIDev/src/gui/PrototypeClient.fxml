@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.Label?>
+
+<AnchorPane id="AnchorPane" prefHeight="556.0" prefWidth="1010.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PrototypeClientController">
+    <children>
+      <Pane layoutX="-1.0" layoutY="-1.0" prefHeight="568.0" prefWidth="74.0" style="-fx-background-color: linear-gradient(to right top, #5dc0aa, #7bc9bc, #99d1cb, #b7d9d7, #d4e1e1);">
+         <children>
+            <JFXButton fx:id="messbutt" layoutX="4.0" layoutY="172.0" onAction="#PageMess" prefHeight="69.0" prefWidth="67.0" text=" ">
+               <graphic>
+                  <FontAwesomeIconView fill="#e8e8e8" glyphName="COMMENTING_ALT" size="38" textAlignment="CENTER" wrappingWidth="46.28947368421053" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="taskbutt" layoutX="4.0" layoutY="246.0" onAction="#PageTasks" prefHeight="69.0" prefWidth="67.0" text=" ">
+               <graphic>
+                  <FontAwesomeIconView fill="#e8e8e8" glyphName="TASKS" size="38" textAlignment="CENTER" wrappingWidth="46.28947368421053" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="languagebutt" layoutX="5.0" layoutY="497.0" onAction="#ChangeLanguage" prefHeight="69.0" prefWidth="67.0" text=" ">
+               <graphic>
+                  <Label fx:id="labelangue" prefHeight="26.0" prefWidth="31.0" text="EN" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Bold" size="22.0" />
+                     </font>
+                  </Label>
+               </graphic>
+            </JFXButton>
+         </children></Pane>
+      <AnchorPane fx:id="MainPage" layoutX="73.0" prefHeight="556.0" prefWidth="959.0" />
+    </children>
+</AnchorPane>

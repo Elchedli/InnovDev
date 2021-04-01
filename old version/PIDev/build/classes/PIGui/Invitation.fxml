@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane id="AnchorPane" prefHeight="432.0" prefWidth="646.0" style="-fx-background-color: Transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PIGui.InvitationController">
+   <children>
+      <AnchorPane layoutX="13.0" prefHeight="430.0" prefWidth="620.0" style="-fx-background-color: linear-gradient(to right top, #5dc0aa, #7bc9bc, #99d1cb, #b7d9d7, #d4e1e1); -fx-background-radius: 1em;">
+         <children>
+            <ImageView fitHeight="105.0" fitWidth="96.0" layoutX="523.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../icons/logo%20(1).png" />
+               </image>
+            </ImageView>
+            <Button fx:id="back" layoutX="61.0" layoutY="377.0" mnemonicParsing="false" onAction="#back" prefHeight="41.0" prefWidth="127.0" style="-fx-background-color: #00a1a1; -fx-background-radius: 1em;" text="Back" textFill="#fcfcfc">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Pane layoutX="48.0" layoutY="66.0" prefHeight="41.0" prefWidth="196.0" style="-fx-background-color: #00a1a1; -fx-background-radius: 1em;">
+               <children>
+                  <FontAwesomeIconView fill="#f2f0f0" glyphName="PLUS_SQUARE_ALT" layoutX="14.0" layoutY="33.0" size="30" text="" />
+                  <Text fill="#fffefe" layoutX="45.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Envoyer Invitation :" wrappingWidth="149.00000125169754">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+            <Pane layoutX="48.0" layoutY="204.0" prefHeight="41.0" prefWidth="196.0" style="-fx-background-color: #00a1a1; -fx-background-radius: 1em;">
+               <children>
+                  <Text fill="#fffefe" layoutX="45.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Supprimer Invitation :" wrappingWidth="149.00000125169754">
+                     <font>
+                        <Font name="Arial Bold" size="14.0" />
+                     </font>
+                  </Text>
+                  <ImageView fitHeight="24.0" fitWidth="26.0" layoutX="14.0" layoutY="9.0">
+                     <image>
+                        <Image url="@../icons/9308.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+            <Button fx:id="envoyer" layoutX="432.0" layoutY="132.0" mnemonicParsing="false" onAction="#envoyer" prefHeight="31.0" prefWidth="83.0" style="-fx-background-color: linear-gradient(to right top, #e9deeb, #d9dafa, #b1dcff, #77e1ff, #43e3e3);" text="Envoyer">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="valider" layoutX="426.0" layoutY="283.0" mnemonicParsing="false" onAction="#valider" prefHeight="31.0" prefWidth="96.0" style="-fx-background-color: linear-gradient(to right top, #e9deeb, #d9dafa, #b1dcff, #77e1ff, #43e3e3);" text="Valider">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <FontAwesomeIconView fx:id="btnback" fill="#fcf9f9" glyphName="ARROW_CIRCLE_LEFT" layoutX="75.0" layoutY="408.0" size="30" text="" />
+            <Label layoutX="244.0" text="Invitations">
+               <font>
+                  <Font name="System Bold" size="32.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <TextField fx:id="nom" layoutX="275.0" layoutY="101.0" promptText="Nom user.." />
+      <TextField fx:id="nom2" layoutX="275.0" layoutY="159.0" promptText="Nom event.." />
+      <TextField fx:id="nom1" layoutX="261.0" layoutY="260.0" promptText="Nom user.." />
+      <TextField fx:id="nom21" layoutX="261.0" layoutY="312.0" promptText="Nom event.." />
+   </children>
+</AnchorPane>

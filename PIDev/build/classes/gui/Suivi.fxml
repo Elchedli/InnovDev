@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXTimePicker?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="556.0" prefWidth="959.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SuiviController">
+    <children>
+      <TableView fx:id="suivitable" layoutX="285.0" layoutY="68.0" prefHeight="455.0" prefWidth="656.0">
+        <columns>
+          <TableColumn fx:id="id_table" prefWidth="56.0" text="id" />
+            <TableColumn fx:id="client_table" onEditCommit="#changeCellClient" prefWidth="84.0" text="Client" />
+          <TableColumn fx:id="titre_table" onEditCommit="#changeCellTitre" prefWidth="136.0" text="titre" />
+            <TableColumn fx:id="datedeb_table" onEditCommit="#changeCellDateDeb" prefWidth="86.0" text="Date debut" />
+            <TableColumn fx:id="datefin_table" onEditCommit="#changeCellDateFin" prefWidth="89.0" text="Date fin" />
+            <TableColumn fx:id="tempsdeb_table" onEditCommit="#changeCellTempsDeb" prefWidth="102.0" text="Temps debut" />
+            <TableColumn fx:id="tempsfin_table" maxWidth="4000.0" onEditCommit="#changeCellTempsFin" prefWidth="102.0" text="Temps fin" />
+        </columns>
+      </TableView>
+      <ComboBox fx:id="trie" layoutX="668.0" layoutY="26.0" onAction="#TrieMethode" prefHeight="25.0" prefWidth="168.0" />
+      <JFXToggleButton fx:id="ReverseSuivi" layoutX="861.0" layoutY="9.0" onAction="#reverseSuivi" prefHeight="29.0" prefWidth="39.0" text=" " />
+      <JFXTimePicker fx:id="temp_deb" defaultColor="#0a0a0a" layoutX="45.0" layoutY="309.0" prefHeight="28.0" prefWidth="226.0" promptText="Temps debut" />
+      <JFXTimePicker fx:id="temps_fin" defaultColor="BLACK" layoutX="46.0" layoutY="371.0" prefHeight="28.0" prefWidth="223.0" promptText="Temps fin" />
+      <Label fx:id="labelclient" layoutX="47.0" layoutY="136.0" text="Client n'est pas existant" textFill="#e80303" />
+      <Label fx:id="labeldate" layoutX="46.0" layoutY="232.0" text="Date debut plus grande" textFill="#e80b0b" />
+      <Label fx:id="labeltemps" layoutX="44.0" layoutY="346.0" text="Temps début plus grand" textFill="#f80202" />
+      <JFXTextField fx:id="client" focusColor="#f2a100" layoutX="48.0" layoutY="104.0" prefHeight="25.0" prefWidth="198.0" promptText="Client" unFocusColor="BLACK" />
+      <JFXTextField fx:id="titre" focusColor="#f2a100" layoutX="48.0" layoutY="153.0" prefHeight="25.0" prefWidth="193.0" promptText="Titre" unFocusColor="BLACK" />
+      <JFXTextField fx:id="tabrecherche" layoutX="305.0" layoutY="26.0" onKeyPressed="#rechercheSuivi" prefHeight="25.0" prefWidth="331.0" />
+      <JFXDatePicker fx:id="date_fin" defaultColor="BLACK" layoutX="45.0" layoutY="256.0" prefHeight="28.0" prefWidth="224.0" promptText="Date fin" />
+      <JFXDatePicker fx:id="date_deb" defaultColor="BLACK" layoutX="45.0" layoutY="194.0" prefHeight="28.0" prefWidth="226.0" promptText="Date debut" />
+      <JFXButton fx:id="addbutt" layoutX="35.0" layoutY="435.0" onAction="#AjouterSuiv" prefHeight="25.0" prefWidth="244.0" text="Ajouter" />
+      <FontAwesomeIconView glyphName="USER" layoutX="13.0" layoutY="129.0" size="22" />
+      <FontAwesomeIconView glyphName="STICKY_NOTE" layoutX="15.0" layoutY="177.0" size="22" />
+    </children>
+</AnchorPane>

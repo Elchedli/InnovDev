@@ -21,6 +21,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Window;
 import javafx.util.Duration;
 import javax.swing.JOptionPane;
 
@@ -51,6 +53,8 @@ public class ProfilController implements Initializable {
     @FXML
     private Button post;
 
+    @FXML
+    private AnchorPane anchormain;
     /**
      * Initializes the controller class.
      */
@@ -155,9 +159,20 @@ public class ProfilController implements Initializable {
         Parent root0= loader2.load();
         btnSignOut.getScene().setRoot(root0);
     }
+    
+    public void changeStageSize(Window stage, int width, int height) {
+        stage.setWidth(width);
+        stage.setHeight(height);
+    }
 
     @FXML
-    private void autres(ActionEvent event) {
+    private void autres(ActionEvent event) throws IOException {
+//        anchormain.setPrefWidth(1032);
+//        anchormain.setPrefHeight(461);
+        FXMLLoader loader2= new FXMLLoader(getClass().getResource("../gui/PrototypeClient.fxml"));
+        Parent root0= loader2.load();
+        changeStageSize(btnSignOut.getScene().getWindow(), 1060, 603);
+        btnSignOut.getScene().setRoot(root0);
     }
     
 }
