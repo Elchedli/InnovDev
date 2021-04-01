@@ -52,7 +52,16 @@ public class ConnectionUController implements Initializable {
     @FXML
     private void loginU(ActionEvent event) throws IOException 
     {
-        servicesimple sU = servicesimple.getInstance();
+        if ( TextUsername.getText().isEmpty() | TextPassword.getText().isEmpty())
+        {
+            Alert al = new Alert(Alert.AlertType.ERROR);
+            al.setHeaderText(null);
+            al.setContentText("Veuillez remplir les champs vides ! ");
+            al.showAndWait();
+        }
+        else
+        {
+	    servicesimple sU = servicesimple.getInstance();
 		simple u = sU.login(TextUsername.getText(), TextPassword.getText());
 		if (u.getId_user() > -1) {
                         sU.userInfos = u;
@@ -78,6 +87,7 @@ public class ConnectionUController implements Initializable {
                n.darkStyle();
                n.show();
 		}
+	}
     }
 
     @FXML
