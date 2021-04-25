@@ -345,6 +345,12 @@ public class GestionUController implements Initializable {
         imprS.getScene().setRoot(root1);
     }
    
+    @FXML
+    private void reccat(ActionEvent event) throws IOException{
+        FXMLLoader loader1= new FXMLLoader(getClass().getResource("AddCat.fxml"));
+        Parent root1= loader1.load();
+        imprS.getScene().setRoot(root1);
+    }
     
     
 }

@@ -6,9 +6,10 @@
 package PIGui;
 
 import PIClass.Reclamation;
-import PIClass.userclient;
-import PIServices.ServiceBadWords;
 import PIServices.ServiceReclamation;
+import PIUtils.MyConnection;
+import PIServices.ServiceBadWords;
+import PIServices.ServiceCategories;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
@@ -50,7 +51,7 @@ public class AddRecController implements Initializable {
     @FXML
     private Button sub;
     @FXML
-    private ComboBox<String> area_recBox;
+    private ComboBox<String> cat_recBox;
     @FXML
     private TextField textobj;
     @FXML
@@ -67,8 +68,12 @@ public class AddRecController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //Combobox
-        area_recBox.setValue("Select the area of the problem");
-        area_recBox.setItems(area_recList);
+       cat_recBox.setValue("Select the area of the problem");
+        ServiceCategories scat = new ServiceCategories();
+        scat.afficher().forEach(e -> {
+           cat_recBox.getItems().add(e.getNom_cat());
+        });
+
         //Bad Words
         ServiceBadWords.loadConfigs(); 
     }
@@ -83,7 +88,7 @@ public class AddRecController implements Initializable {
     
     @FXML
     private void AddRec(ActionEvent event) throws IOException {
-         if(textobj.getText().isEmpty() | textsuj.getText().isEmpty() | area_recBox.getValue()==null){
+         if(textobj.getText().isEmpty() | textsuj.getText().isEmpty() | cat_recBox.getValue()==null){
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setHeaderText(null);
             a.setContentText("Please fill in the empty fields");
@@ -105,7 +110,7 @@ public class AddRecController implements Initializable {
        notificationBuilder.show();}
               else{
         ServiceReclamation srec = new ServiceReclamation();
-        srec.envoyer(new Reclamation( userclient.getUsername(), textobj.getText(), (String) area_recBox.getValue(), textsuj.getText()));
+        srec.ajout(new Reclamation((String)cat_recBox.getValue(),"Salma",textobj.getText(),textsuj.getText()));
         Notifications notificationBuilder = Notifications.create()
             .title("Succes").text("Your report has been added !!").graphic(null).hideAfter(javafx.util.Duration.seconds(5))
                .position(Pos.CENTER_LEFT)

@@ -53,6 +53,23 @@ public class Commentaire {
         this.id_com = id_com;
         this.suj_com = suj_com;
     }
+
+    public Commentaire(String username, int idpub, String text) {
+        this.username = username;
+        this.id_pub = idpub;
+        this.suj_com = text;
+    }
+     public Commentaire(String sujet,Timestamp datea, int nbrec) {
+        this.suj_com = sujet;
+        this.date_com = datea;
+        this.nb_reaction = nbrec;
+    }
+     public Commentaire(int id_com,String sujet,Timestamp date,int nb){
+         this.id_com = id_com;
+         this.suj_com = sujet;
+        this.date_com = date;
+        this.nb_reaction = nb;
+     }
     
     public int getId_com() {
         return id_com;

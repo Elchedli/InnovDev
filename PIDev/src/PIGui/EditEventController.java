@@ -354,10 +354,10 @@ java.sql.Connection cnx = MyConnection.getInstance().getCnx();
     
      try {
        Document doc = new Document();
-       PdfWriter.getInstance(doc,new FileOutputStream("C:\\Users\\HP\\Desktop\\Esprit\\3eme\\2. PIDev\\PIDev\\src\\Evenement.pdf"));
+       PdfWriter.getInstance(doc,new FileOutputStream("src\\pdf\\Evenement.pdf"));
        doc.open();
        
-      Image img = Image.getInstance("C:\\Users\\HP\\Desktop\\Esprit\\3eme\\2. PIDev\\PIDev\\src\\img\\img.jpg");
+      Image img = Image.getInstance("src\\img\\img.jpg");
        img.scaleAbsoluteHeight(60);
        img.scaleAbsoluteWidth(100);
        img.setAlignment(Image.ALIGN_RIGHT);
@@ -413,7 +413,7 @@ java.sql.Connection cnx = MyConnection.getInstance().getCnx();
           doc.add(tabpdf);
           JOptionPane.showMessageDialog(null, "Success !!");
           doc.close();
-          Desktop.getDesktop().open(new File("C:\\Users\\HP\\Desktop\\Esprit\\3eme\\2. PIDev\\PIDev\\src\\pdf\\Evenement.pdf"));
+          Desktop.getDesktop().open(new File("src\\pdf\\Evenement.pdf"));
        }
  
         catch (DocumentException | HeadlessException | IOException e) {

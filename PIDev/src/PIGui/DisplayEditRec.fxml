@@ -13,7 +13,7 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to right top, #e9deeb, #d9dafa, #b1dcff, #77e1ff, #43e3e3) linear-gradient(to right top, #e9deeb, #d9dafa, #b1dcff, #77e1ff, #43e3e3);" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PIGui.DisplayEditRecController">
    <children>
-      <Label layoutX="28.0" layoutY="75.0" text="Search Box :" textAlignment="CENTER" textFill="#267ed7">
+      <Label layoutX="28.0" layoutY="75.0" text="Recherche :" textAlignment="CENTER" textFill="#267ed7">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
@@ -21,27 +21,27 @@
       <TextField fx:id="search" layoutX="138.0" layoutY="73.0" onKeyReleased="#Search" onKeyTyped="#LettersOnly" prefHeight="25.0" prefWidth="214.0" promptText="Search here." />
       <TableView fx:id="table" layoutX="8.0" layoutY="127.0" prefHeight="247.0" prefWidth="584.0">
          <columns>
-            <TableColumn fx:id="username" prefWidth="123.0" text="Username" />
+            <TableColumn fx:id="username" prefWidth="123.0" text="User" />
             <TableColumn fx:id="rec" prefWidth="39.0" text="Rec" visible="false" />
-            <TableColumn fx:id="obj" prefWidth="74.0" text="Object" />
-            <TableColumn fx:id="area" prefWidth="79.0" text="Area" />
-            <TableColumn fx:id="suj" minWidth="2.0" prefWidth="127.0" text="Subject" />
-            <TableColumn fx:id="etat" minWidth="0.0" onEditCommit="#EditStatusRec" prefWidth="79.0" text="Status" />
+            <TableColumn fx:id="obj" prefWidth="74.0" text="Objet" />
+            <TableColumn fx:id="cat" prefWidth="79.0" text="Catégories" />
+            <TableColumn fx:id="suj" minWidth="2.0" prefWidth="127.0" text="Description" />
+            <TableColumn fx:id="etat" minWidth="0.0" onEditCommit="#EditStatusRec" prefWidth="79.0" text="Etat" />
             <TableColumn fx:id="date" minWidth="0.0" prefWidth="101.0" sortType="DESCENDING" text="Date" />
          </columns>
       </TableView>
       <AnchorPane layoutX="-8.0" layoutY="439.0" prefHeight="12.0" prefWidth="609.0" style="-fx-background-color: #75aaff;" />
-      <Label layoutX="246.0" layoutY="27.0" prefHeight="30.0" prefWidth="111.0" text="All reports" textAlignment="CENTER">
+      <Label layoutX="190.0" layoutY="31.0" prefHeight="30.0" prefWidth="214.0" text="Liste des réclamations" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="home" layoutX="3.0" layoutY="2.0" mnemonicParsing="false" onAction="#Menu" style="-fx-background-color: #00a1a1 #00a1a1; -fx-background-radius: 1em;" text="Home" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="home" layoutX="3.0" layoutY="2.0" mnemonicParsing="false" onAction="#Menu" style="-fx-background-color: #00a1a1 #00a1a1; -fx-background-radius: 1em;" text="Menu" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button fx:id="pdf" defaultButton="true" layoutX="259.0" layoutY="394.0" mnemonicParsing="false" onAction="#CreatePDF" style="-fx-background-color: #00a1a1 #00a1a1; -fx-background-radius: 1em;" text="Save to PDF" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="pdf" defaultButton="true" layoutX="167.0" layoutY="396.0" mnemonicParsing="false" onAction="#CreatePDF" style="-fx-background-color: #00a1a1 #00a1a1; -fx-background-radius: 1em;" text="PDF" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -56,5 +56,10 @@
             <Image url="@../icons/logo%20(1).png" />
          </image>
       </ImageView>
+      <Button fx:id="stat" defaultButton="true" layoutX="381.0" layoutY="396.0" mnemonicParsing="false" onAction="#CreateStat" style="-fx-background-color: #00a1a1 #00a1a1; -fx-background-radius: 1em;" text="Stat" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

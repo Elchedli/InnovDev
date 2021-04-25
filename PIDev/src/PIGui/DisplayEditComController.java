@@ -63,40 +63,32 @@ public class DisplayEditComController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Tableview Dynamic Display
-        user.setCellValueFactory(new PropertyValueFactory<Commentaire, Integer>("id_user"));      
+        user.setCellValueFactory(new PropertyValueFactory<Commentaire, Integer>("id_com"));      
         com.setCellValueFactory(new PropertyValueFactory<Commentaire, String>("suj_com"));   
         react.setCellValueFactory(new PropertyValueFactory<Commentaire, Integer>("nb_reaction"));
         date.setCellValueFactory(new PropertyValueFactory<Commentaire, Timestamp>("date_com"));
         ServiceCommentaire scom = new ServiceCommentaire();
         scom.afficher().forEach(e->{dataList.add(e);});
         table.setItems(dataList);  
-        
         //Edit Table
         table.setEditable(true);
-        com.setCellFactory(TextFieldTableCell.forTableColumn());
         ContextMenu cm = new ContextMenu();
-        MenuItem Delete = new MenuItem("Delete");
-        MenuItem Like = new MenuItem("Like");
+        MenuItem Delete = new MenuItem("Supprimer");
+        MenuItem Like = new MenuItem("J'aime");
         Delete.setOnAction(new EventHandler <ActionEvent>(){
             @Override
-            public void handle(ActionEvent event)
-            {
-          Object p = table.getSelectionModel().getSelectedItem();
-          Commentaire com = (Commentaire) p;
-          ServiceCommentaire  scom = new ServiceCommentaire();
-          System.out.println(com.toString());
-          scom.supprimer(com);
-          Notifications notificationBuilder = Notifications.create()
-            .title("Succes").text("Your comment has been deleted !!").graphic(null).hideAfter(javafx.util.Duration.seconds(5))
-               .position(Pos.CENTER_LEFT)
-               .onAction(new EventHandler<ActionEvent>(){
-                   public void handle(ActionEvent event)
-                   {
-                       System.out.println("clicked ON ");
-               }});
-       notificationBuilder.darkStyle();
-       notificationBuilder.show();
-       RefreshCom();
+            public void handle(ActionEvent event){
+                    Object p = table.getSelectionModel().getSelectedItem();
+                    Commentaire com = (Commentaire) p;
+                    ServiceCommentaire  scom = new ServiceCommentaire();
+                    System.out.println(com.toString());
+                    System.out.println(com.getId_com());
+                    scom.supprimer(com);
+                    Notifications notificationBuilder = Notifications.create()
+                    .title("Succes").text("Your comment has been deleted !!").graphic(null).hideAfter(javafx.util.Duration.seconds(5))
+                    .position(Pos.CENTER_LEFT).darkStyle();
+                    notificationBuilder.show();
+                    RefreshCom();
             }
         });
         Like.setOnAction(new EventHandler <ActionEvent>(){
@@ -132,7 +124,7 @@ public class DisplayEditComController implements Initializable {
     
     @FXML
     private void Menu(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Profil.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddCom.fxml"));
         Parent root = loader.load(); 
         home.getScene().setRoot(root);
         JOptionPane.showMessageDialog(null, "Welcome HOOOME !!");
@@ -148,7 +140,7 @@ public class DisplayEditComController implements Initializable {
     
     private void RefreshCom() {
         ServiceCommentaire scom = new ServiceCommentaire();
-        user.setCellValueFactory(new PropertyValueFactory<Commentaire, Integer>("id_user"));      
+        user.setCellValueFactory(new PropertyValueFactory<Commentaire, Integer>("id_com"));      
         com.setCellValueFactory(new PropertyValueFactory<Commentaire, String>("suj_com"));   
         react.setCellValueFactory(new PropertyValueFactory<Commentaire, Integer>("nb_reaction"));
         date.setCellValueFactory(new PropertyValueFactory<Commentaire, Timestamp>("date_com"));

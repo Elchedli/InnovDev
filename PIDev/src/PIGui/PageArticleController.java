@@ -151,7 +151,7 @@ public class PageArticleController implements Initializable {
         try {
 
             Document doc = new Document();
-            PdfWriter.getInstance(doc, new FileOutputStream("C:\\Users\\HP\\Desktop\\Esprit\\3eme\\2. PIDev\\PIDev\\src\\com\\spirity\\pdf\\Article.pdf"));
+            PdfWriter.getInstance(doc, new FileOutputStream("src\\pdf\\Article.pdf"));
             doc.open();
 //       
 ////       Image img = Image.getInstance("C:\\Users\\ASuS\\Documents\\NetBeansProjects\\PI_Salma\\PI\\src\\com\\spirity\\img\\spirity.png");
@@ -242,7 +242,7 @@ public class PageArticleController implements Initializable {
             doc.add(tabpdf);
             JOptionPane.showMessageDialog(null, "Success !!");
             doc.close(); //com.spirity.pdf C:\Users\ASUS\Documents\NetBeansProjects\PII\src\com\spirity\pdf
-            Desktop.getDesktop().open(new File("C:\\Users\\HP\\Desktop\\Esprit\\3eme\\2. PIDev\\PIDev\\src\\com\\spirity\\pdf\\Article.pdf"));
+            Desktop.getDesktop().open(new File("src\\pdf\\Article.pdf"));
 
         } catch (DocumentException | HeadlessException | IOException e) {
             System.out.println("ERROR PDF");

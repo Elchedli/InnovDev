@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package PIGui;
-
 import PIServices.GererEv;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
@@ -32,7 +31,6 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-
 import PIClass.Ev;
 import PIUtils.MyConnection;
 

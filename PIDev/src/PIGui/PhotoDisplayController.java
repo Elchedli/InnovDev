@@ -377,7 +377,7 @@ public class PhotoDisplayController implements Initializable {
         ByteArrayOutputStream out = QRCode.from(list_pics.get(pic_index)).to(ImageType.JPG).stream();
         
         //String path = "C:\\xampp\\htdocs\\Photos\\QR:"+ list_pics.get(pic_index);
-        File f = new File("C:\\Users\\HP\\Desktop\\imgQR.jpg");
+        File f = new File("src\\pdf\\imgQR.jpg");
         FileOutputStream fos = new FileOutputStream(f);
         
         fos.write(out.toByteArray());
@@ -386,7 +386,7 @@ public class PhotoDisplayController implements Initializable {
         desktop.open(f);
         notif("QR","Image saved in Desktop");
         
-        return "C:\\Users\\HP\\Desktop\\imgQR.jpg";
+        return "src\\img\\imgQR.jpg";
         
     }
     public void notif(String title, String text)

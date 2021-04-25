@@ -10,7 +10,6 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
-import com.itextpdf.text.Font.FontFamily;
 import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
@@ -21,6 +20,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import PIClass.Reclamation;
 import PIServices.ServiceReclamation;
 import PIUtils.MyConnection;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.awt.Desktop;
 import java.awt.HeadlessException;
 import java.io.File;
@@ -60,7 +60,6 @@ import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import org.controlsfx.control.Notifications;
 
-
 /**
  * FXML Controller class
  *
@@ -69,36 +68,37 @@ import org.controlsfx.control.Notifications;
 public class DisplayEditRecController implements Initializable {
 
     @FXML
-    private Button pdf;
-    @FXML
-    private Button xbtn;
-    @FXML
-    private Button home;
-    @FXML
     private TextField search;
     @FXML
     private TableView<Reclamation> table;
+    @FXML
+    private TableColumn<Reclamation, String> username;
     @FXML
     private TableColumn<Reclamation, Integer> rec;
     @FXML
     private TableColumn<Reclamation, String> obj;
     @FXML
-    private TableColumn<Reclamation, String> area;
+    private TableColumn<Reclamation, String> cat;
     @FXML
     private TableColumn<Reclamation, String> suj;
     @FXML
     private TableColumn<Reclamation, String> etat;
     @FXML
     private TableColumn<Reclamation, Timestamp> date;
-
+    @FXML
+    private Button home;
+    @FXML
+    private Button pdf;
+    @FXML
+    private FontAwesomeIconView btnchercher;
+    @FXML
+    private Button stat;
     private ObservableList<Reclamation> dataList = FXCollections.observableArrayList();
     private FilteredList <Reclamation> filter = new FilteredList <> (dataList, e -> true);
     private SortedList <Reclamation> sort = new SortedList<>(filter);
     
     private Connection cnx = MyConnection.getInstance().getCnx();
-    @FXML
-    private TableColumn<Reclamation, String> username;
-    
+
     /**
      * Initializes the controller class.
      */
@@ -108,7 +108,7 @@ public class DisplayEditRecController implements Initializable {
         rec.setCellValueFactory(new PropertyValueFactory<Reclamation, Integer>("id_rec"));
         username.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("username"));
         obj.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("obj_rec"));        
-        area.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("area_rec"));        
+        cat.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("nom_cat"));        
         suj.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("suj_rec"));
         etat.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("etat_rec"));        
         date.setCellValueFactory(new PropertyValueFactory<Reclamation, Timestamp>("date_rec"));
@@ -120,7 +120,7 @@ public class DisplayEditRecController implements Initializable {
         table.setEditable(true);
         etat.setCellFactory(TextFieldTableCell.forTableColumn());
         ContextMenu cm = new ContextMenu();
-        MenuItem Delete = new MenuItem("Delete");
+        MenuItem Delete = new MenuItem("Supprimer");
         Delete.setOnAction(new EventHandler <ActionEvent>(){
             @Override
             public void handle(ActionEvent event)
@@ -132,7 +132,7 @@ public class DisplayEditRecController implements Initializable {
           srec.suppetat(rec);
           
           Notifications notificationBuilder = Notifications.create()
-            .title("Succes").text("Deleted successfully !!").graphic(null).hideAfter(javafx.util.Duration.seconds(5))
+            .title("Succès").text("Supprimée avec succès !!").graphic(null).hideAfter(javafx.util.Duration.seconds(5))
                .position(Pos.CENTER_LEFT)
                .onAction(new EventHandler<ActionEvent>(){
                    public void handle(ActionEvent event)
@@ -159,7 +159,7 @@ public class DisplayEditRecController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GestionU.fxml"));
         Parent root = loader.load(); 
         home.getScene().setRoot(root);
-        JOptionPane.showMessageDialog(null, "Welcome HOOOME !!");  
+        JOptionPane.showMessageDialog(null, "Bienvenue !!");  
     }
     
     
@@ -176,7 +176,7 @@ public class DisplayEditRecController implements Initializable {
         rec.setCellValueFactory(new PropertyValueFactory<Reclamation, Integer>("id_rec"));
         username.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("username"));
         obj.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("obj_rec"));        
-        area.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("area_rec"));        
+        cat.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("nom_cat"));        
         suj.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("suj_rec"));
         etat.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("etat_rec"));        
         date.setCellValueFactory(new PropertyValueFactory<Reclamation, Timestamp>("date_rec"));
@@ -193,7 +193,7 @@ public class DisplayEditRecController implements Initializable {
 					return true;
 				}
                 String lowerCaseFilter = newValue.toLowerCase();
-                if (Reclamation.getArea_rec().toLowerCase().contains(lowerCaseFilter) ) {
+                if (Reclamation.getNom_cat().toLowerCase().contains(lowerCaseFilter) ) {
 					return true;}
                 else  
 				    	 return false;
@@ -210,17 +210,17 @@ public class DisplayEditRecController implements Initializable {
         if(edittedCell.getNewValue().toString().isEmpty()){
             Alert a = new Alert(Alert.AlertType.ERROR);
             a.setHeaderText(null);
-            a.setContentText("Please fill in the empty field");
+            a.setContentText("Veuillez remplir les champs vides !!");
             a.showAndWait();
         }
         else {
         Reclamation re = table.getSelectionModel().getSelectedItem();
         re.setEtat_rec(edittedCell.getNewValue().toString());
         ServiceReclamation srec = new ServiceReclamation();
-        srec.modifier(re);
-        JOptionPane.showMessageDialog(null, "Success !!");}  
+        srec.etatRec(re);
+        JOptionPane.showMessageDialog(null, "Succès !!");}  
         Notifications notificationBuilder = Notifications.create()
-            .title("Succes").text("Updated successfully !!").graphic(null).hideAfter(javafx.util.Duration.seconds(5))
+            .title("Succès").text("Modifiée avec succès !!").graphic(null).hideAfter(javafx.util.Duration.seconds(5))
                .position(Pos.CENTER_LEFT)
                .onAction(new EventHandler<ActionEvent>(){
                    public void handle(ActionEvent event)
@@ -252,18 +252,18 @@ public class DisplayEditRecController implements Initializable {
     private void CreatePDF(ActionEvent event) throws SQLException {
        try {
        Document doc = new Document();
-       PdfWriter.getInstance(doc,new FileOutputStream("C:\\Users\\HP\\Desktop\\Esprit\\3eme\\2. PIDev\\PIDev\\src\\com\\spirity\\pdf\\Reclamation.pdf"));
+       PdfWriter.getInstance(doc,new FileOutputStream("src\\pdf\\ReclamationsAdmin.pdf"));
        doc.open();
        
-       Image img = Image.getInstance("C:\\Users\\HP\\Desktop\\Esprit\\3eme\\2. PIDev\\PIDev\\src\\com\\spirity\\img\\spirity.png");
+       Image img = Image.getInstance("src\\img\\logo.png");
        img.scaleAbsoluteHeight(60);
        img.scaleAbsoluteWidth(100);
        img.setAlignment(Image.ALIGN_RIGHT);
        doc.add(img);
        
        doc.add(new Paragraph(" "));
-       Font font = new Font(FontFamily.TIMES_ROMAN, 28, Font.UNDERLINE, BaseColor.BLACK);
-       Paragraph p = new Paragraph("List of Reports for Spirity", font);
+       Font font = new Font(Font.FontFamily.TIMES_ROMAN, 28, Font.UNDERLINE, BaseColor.BLACK);
+       Paragraph p = new Paragraph("Liste des réclamations pour Spirity", font);
        p.setAlignment(Element.ALIGN_CENTER);
        doc.add(p);
        doc.add(new Paragraph(" "));
@@ -273,27 +273,22 @@ public class DisplayEditRecController implements Initializable {
        tabpdf.setWidthPercentage(100);
        
        PdfPCell cell;
-       cell = new PdfPCell(new Phrase("Object", FontFactory.getFont("Times New Roman", 11)));
+       cell = new PdfPCell(new Phrase("Objet", FontFactory.getFont("Times New Roman", 11)));
        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
        cell.setBackgroundColor(BaseColor.WHITE);
        tabpdf.addCell(cell);
        
-       cell = new PdfPCell(new Phrase("Username", FontFactory.getFont("Times New Roman", 11)));
+       cell = new PdfPCell(new Phrase("Catégories", FontFactory.getFont("Times New Roman", 11)));
        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
        cell.setBackgroundColor(BaseColor.WHITE);
        tabpdf.addCell(cell);
        
-       cell = new PdfPCell(new Phrase("Area", FontFactory.getFont("Times New Roman", 11)));
+       cell = new PdfPCell(new Phrase("Description", FontFactory.getFont("Times New Roman", 11)));
        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
        cell.setBackgroundColor(BaseColor.WHITE);
        tabpdf.addCell(cell);
        
-       cell = new PdfPCell(new Phrase("Subject", FontFactory.getFont("Times New Roman", 11)));
-       cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-       cell.setBackgroundColor(BaseColor.WHITE);
-       tabpdf.addCell(cell);
-       
-       cell = new PdfPCell(new Phrase("Status", FontFactory.getFont("Times New Roman", 11)));
+       cell = new PdfPCell(new Phrase("Etat", FontFactory.getFont("Times New Roman", 11)));
        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
        cell.setBackgroundColor(BaseColor.WHITE);
        tabpdf.addCell(cell);
@@ -304,19 +299,14 @@ public class DisplayEditRecController implements Initializable {
        tabpdf.addCell(cell);
        
        Statement st = cnx.createStatement();
-       ResultSet rs=st.executeQuery("SELECT obj_rec, username, area_rec, suj_rec, etat_rec, date_rec FROM Reclamation");
+       ResultSet rs=st.executeQuery("select r.obj_rec,r.suj_rec,r.etat_rec,r.date_rec,cat.nom_cat from reclamation r, categories cat where (r.id_cat= cat.id_cat)");
        while(rs.next()){
            cell = new PdfPCell(new Phrase(rs.getString("obj_rec"), FontFactory.getFont("Times New Roman", 11)));
            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
            cell.setBackgroundColor(BaseColor.WHITE);
            tabpdf.addCell(cell);
            
-           cell = new PdfPCell(new Phrase(rs.getString("username"), FontFactory.getFont("Times New Roman", 11)));
-           cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-           cell.setBackgroundColor(BaseColor.WHITE);
-           tabpdf.addCell(cell);
-           
-           cell = new PdfPCell(new Phrase(rs.getString("area_rec"), FontFactory.getFont("Times New Roman", 11)));
+           cell = new PdfPCell(new Phrase(rs.getString("nom_cat"), FontFactory.getFont("Times New Roman", 11)));
            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
            cell.setBackgroundColor(BaseColor.WHITE);
            tabpdf.addCell(cell);
@@ -338,12 +328,12 @@ public class DisplayEditRecController implements Initializable {
        }
        
        doc.add(tabpdf);
-       JOptionPane.showMessageDialog(null, "Success !!");
+       JOptionPane.showMessageDialog(null, "Succès !!");
        doc.close();
-       Desktop.getDesktop().open(new File("C:\\Users\\HP\\Desktop\\Esprit\\3eme\\2. PIDev\\PIDev\\src\\com\\spirity\\pdf\\Reclamation.pdf"));
+       Desktop.getDesktop().open(new File("src\\pdf\\ReclamationsAdmin.pdf"));
        
        Notifications notificationBuilder = Notifications.create()
-            .title("Succes").text("Your document has been saved as PDF !!").graphic(null).hideAfter(javafx.util.Duration.seconds(5))
+            .title("Succès").text("Validée !!").graphic(null).hideAfter(javafx.util.Duration.seconds(5))
                .position(Pos.CENTER_LEFT)
                .onAction(new EventHandler<ActionEvent>(){
                    public void handle(ActionEvent event)
@@ -353,7 +343,7 @@ public class DisplayEditRecController implements Initializable {
        notificationBuilder.darkStyle();
        notificationBuilder.show();
         } catch (DocumentException | HeadlessException | IOException e) {
-            System.out.println("ERROR PDF");
+            System.out.println("Erreur PDF");
             System.out.println(Arrays.toString(e.getStackTrace()));
             System.out.println(e.getMessage());
         }
@@ -364,17 +354,25 @@ public class DisplayEditRecController implements Initializable {
         if (search.getText().matches(".*[0-9].*")|| search.getText().matches(".*[%-@-_].*")) {
             Alert a2 = new Alert(Alert.AlertType.ERROR);
             a2.setHeaderText(null);
-            a2.setContentText("Please enter letters only");
+            a2.setContentText("Veuillez saisir uniquement des lettres !");
             a2.showAndWait();
         }
     }
     
     @FXML
+    private void CreateStat(ActionEvent event) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("StatRec.fxml"));
+        Parent root = loader.load(); 
+        home.getScene().setRoot(root);
+        
+    }
+    
+    
+    @FXML
     private void Exit(ActionEvent event) {
         Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
         stage.close();
-        JOptionPane.showMessageDialog(null, "Are you sure ? :(");  
-    }
+        }
     
 }
    

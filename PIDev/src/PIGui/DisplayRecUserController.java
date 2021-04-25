@@ -28,12 +28,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -73,7 +73,7 @@ public class DisplayRecUserController implements Initializable {
     @FXML
     private TableColumn<Reclamation, String> obj;
     @FXML
-    private TableColumn<Reclamation, String> area;
+    private TableColumn<Reclamation, String> cat;
     @FXML
     private TableColumn<Reclamation, String> suj;
     @FXML
@@ -99,63 +99,38 @@ public class DisplayRecUserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         //Tableview Dynamic Display 
-        
-        rec.setCellValueFactory(new PropertyValueFactory<>("id_rec"));
-        obj.setCellValueFactory(new PropertyValueFactory<>("obj_rec"));        
-        area.setCellValueFactory(new PropertyValueFactory<>("area_rec"));        
-        suj.setCellValueFactory(new PropertyValueFactory<>("suj_rec"));
-        etat.setCellValueFactory(new PropertyValueFactory<>("etat_rec"));        
-        date.setCellValueFactory(new PropertyValueFactory<>("date_rec"));
-        ServiceReclamation srec = new ServiceReclamation();
-        srec.afficherIdUser().forEach(e->{
-            System.out.println("user reports : "+e);
-        });
-        System.out.println("did it detect it");
-        srec.afficherIdUser().forEach(e->{dataList.add(e);});
-        System.out.println(dataList);
-//        [take id_user connected (ServiceReclamation)
-        table.setItems(dataList);
-        //Message Welcome
-        JOptionPane.showMessageDialog(null,"Welcome !!");
-    }    
-
-    public ObservableList<Reclamation> getRec(List<Reclamation> l){
-        ObservableList<Reclamation> data = FXCollections.observableArrayList();
-        for (int i =0; i<=l.size()-1; i++){
-            data.add(l.get(i));
-        }
-        return data;
-    }
-    
-    private void RefreshRec() {
-        ServiceReclamation srec = new ServiceReclamation();
         rec.setCellValueFactory(new PropertyValueFactory<Reclamation, Integer>("id_rec"));
         obj.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("obj_rec"));        
-        area.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("area_rec"));        
+        cat.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("nom_cat"));        
         suj.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("suj_rec"));
         etat.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("etat_rec"));        
         date.setCellValueFactory(new PropertyValueFactory<Reclamation, Timestamp>("date_rec"));
-        table.setItems(getRec(srec.afficher()));
-    }
-    
+        ServiceReclamation srec = new ServiceReclamation();
+        srec.afficherRecUser().forEach(e->{dataList.add(e);});
+        table.setItems(dataList); 
+        
+        //Message Welcome
+        JOptionPane.showMessageDialog(null,"Bienvenue !!");
+    }    
+
     @FXML
     private void Menu(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("AddRec.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../PIGui/AddRec.fxml"));
         Parent root = loader.load(); 
         home.getScene().setRoot(root);
-        JOptionPane.showMessageDialog(null, "Welcome HOOOME !!");
+        JOptionPane.showMessageDialog(null, "Bienvenue !!");
     }
     
     @FXML
     private void DisplayRec() {
         rec.setCellValueFactory(new PropertyValueFactory<Reclamation, Integer>("id_rec"));
         obj.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("obj_rec"));        
-        area.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("area_rec"));        
+        cat.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("nom_cat"));        
         suj.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("suj_rec"));
         etat.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("etat_rec"));        
         date.setCellValueFactory(new PropertyValueFactory<Reclamation, Timestamp>("date_rec"));
         ServiceReclamation srec = new ServiceReclamation();
-        srec.afficherIdUser().forEach(e->{dataList.add(e);});
+        srec.afficherRecUser().forEach(e->{dataList.add(e);});
         table.setItems(dataList);  
     }
     
@@ -169,7 +144,7 @@ public class DisplayRecUserController implements Initializable {
 					return true;
 				}
                 String lowerCaseFilter = newValue.toLowerCase();
-                if (Reclamation.getArea_rec().toLowerCase().contains(lowerCaseFilter) ) {
+                if (Reclamation.getNom_cat().toLowerCase().contains(lowerCaseFilter) ) {
 					return true;}
                 else  
 				    	 return false;
@@ -185,10 +160,10 @@ public class DisplayRecUserController implements Initializable {
     private void CreatePDF(ActionEvent event) throws SQLException {
         try {
        Document doc = new Document();
-       PdfWriter.getInstance(doc,new FileOutputStream("C:\\Users\\HP\\Desktop\\Esprit\\3eme\\2. PIDev\\PIDev\\src\\com\\spirity\\pdf\\ReclamationsUser.pdf"));
+       PdfWriter.getInstance(doc,new FileOutputStream("src\\pdf\\ReclamationsUser.pdf"));
        doc.open();
        
-       Image img = Image.getInstance("C:\\Users\\HP\\Desktop\\Esprit\\3eme\\2. PIDev\\PIDev\\src\\com\\spirity\\spirity\\img\\spirity.png");
+       Image img = Image.getInstance("src\\img\\logo.png");
        img.scaleAbsoluteHeight(60);
        img.scaleAbsoluteWidth(100);
        img.setAlignment(Image.ALIGN_RIGHT);
@@ -196,7 +171,7 @@ public class DisplayRecUserController implements Initializable {
        
        doc.add(new Paragraph(" "));
        Font font = new Font(Font.FontFamily.TIMES_ROMAN, 28, Font.UNDERLINE, BaseColor.BLACK);
-       Paragraph p = new Paragraph("Your list of Reports", font);
+       Paragraph p = new Paragraph("Liste des réclamations", font);
        p.setAlignment(Element.ALIGN_CENTER);
        doc.add(p);
        doc.add(new Paragraph(" "));
@@ -206,22 +181,22 @@ public class DisplayRecUserController implements Initializable {
        tabpdf.setWidthPercentage(100);
        
        PdfPCell cell;
-       cell = new PdfPCell(new Phrase("Object", FontFactory.getFont("Times New Roman", 11)));
+       cell = new PdfPCell(new Phrase("Objet", FontFactory.getFont("Times New Roman", 11)));
        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
        cell.setBackgroundColor(BaseColor.WHITE);
        tabpdf.addCell(cell);
        
-       cell = new PdfPCell(new Phrase("Area", FontFactory.getFont("Times New Roman", 11)));
+       cell = new PdfPCell(new Phrase("Catégories", FontFactory.getFont("Times New Roman", 11)));
        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
        cell.setBackgroundColor(BaseColor.WHITE);
        tabpdf.addCell(cell);
        
-       cell = new PdfPCell(new Phrase("Subject", FontFactory.getFont("Times New Roman", 11)));
+       cell = new PdfPCell(new Phrase("Description", FontFactory.getFont("Times New Roman", 11)));
        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
        cell.setBackgroundColor(BaseColor.WHITE);
        tabpdf.addCell(cell);
        
-       cell = new PdfPCell(new Phrase("Status", FontFactory.getFont("Times New Roman", 11)));
+       cell = new PdfPCell(new Phrase("Etat", FontFactory.getFont("Times New Roman", 11)));
        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
        cell.setBackgroundColor(BaseColor.WHITE);
        tabpdf.addCell(cell);
@@ -230,16 +205,17 @@ public class DisplayRecUserController implements Initializable {
        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
        cell.setBackgroundColor(BaseColor.WHITE);
        tabpdf.addCell(cell);
-       
-       Statement st = cnx.createStatement();
-       ResultSet rs=st.executeQuery("SELECT obj_rec, area_rec, suj_rec, etat_rec, date_rec FROM Reclamation");
+        String request = ("select r.obj_rec,r.suj_rec,r.etat_rec,r.date_rec,cat.nom_cat from reclamation r, categories cat where (r.id_cat= cat.id_cat) and username = ?");
+        PreparedStatement st = cnx.prepareStatement(request);
+        st.setString(1,userclient.getUsername());
+        ResultSet rs = st.executeQuery();
        while(rs.next()){
            cell = new PdfPCell(new Phrase(rs.getString("obj_rec"), FontFactory.getFont("Times New Roman", 11)));
            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
            cell.setBackgroundColor(BaseColor.WHITE);
            tabpdf.addCell(cell);
            
-           cell = new PdfPCell(new Phrase(rs.getString("area_rec"), FontFactory.getFont("Times New Roman", 11)));
+           cell = new PdfPCell(new Phrase(rs.getString("nom_cat"), FontFactory.getFont("Times New Roman", 11)));
            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
            cell.setBackgroundColor(BaseColor.WHITE);
            tabpdf.addCell(cell);
@@ -261,12 +237,12 @@ public class DisplayRecUserController implements Initializable {
        }
        
        doc.add(tabpdf);
-       JOptionPane.showMessageDialog(null, "Success !!");
+       JOptionPane.showMessageDialog(null, "Succès !!");
        doc.close();
-       Desktop.getDesktop().open(new File("C:\\Users\\HP\\Desktop\\Esprit\\3eme\\2. PIDev\\PIDev\\src\\com\\spirity\\pdf\\ReclamationsUser.pdf"));
+       Desktop.getDesktop().open(new File("src\\pdf\\ReclamationsUser.pdf"));
        
        Notifications notificationBuilder = Notifications.create()
-            .title("Succes").text("Your document has been saved as PDF !!").graphic(null).hideAfter(javafx.util.Duration.seconds(5))
+            .title("Succès").text("Validée !!").graphic(null).hideAfter(javafx.util.Duration.seconds(5))
                .position(Pos.CENTER_LEFT)
                .onAction(new EventHandler<ActionEvent>(){
                    public void handle(ActionEvent event)
@@ -276,7 +252,7 @@ public class DisplayRecUserController implements Initializable {
        notificationBuilder.darkStyle();
        notificationBuilder.show();
         } catch (DocumentException | HeadlessException | IOException e) {
-            System.out.println("ERROR PDF");
+            System.out.println("Erreur PDF");
             System.out.println(Arrays.toString(e.getStackTrace()));
             System.out.println(e.getMessage());
         }
@@ -287,7 +263,7 @@ public class DisplayRecUserController implements Initializable {
         if (search.getText().matches(".*[0-9].*")|| search.getText().matches(".*[%-@-_].*")) {
             Alert a2 = new Alert(Alert.AlertType.ERROR);
             a2.setHeaderText(null);
-            a2.setContentText("Please enter letters only");
+            a2.setContentText("Veuillez saisir uniquement des lettres !");
             a2.showAndWait();
         }
     }
@@ -295,8 +271,7 @@ public class DisplayRecUserController implements Initializable {
     @FXML
     private void Exit(ActionEvent event) {
         Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
-        stage.close();
-        JOptionPane.showMessageDialog(null, "Are you sure ? :(");  
+        stage.close(); 
     }
 
 }

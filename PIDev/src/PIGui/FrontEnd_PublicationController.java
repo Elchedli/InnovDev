@@ -5,6 +5,7 @@
  */
 package PIGui;
 
+import PIClass.Commentaire;
 import PIServices.ServicesPhoto;
 import PIServices.ServicesPublication;
 import PIServices.ServicesTags;
@@ -52,6 +53,9 @@ import PIClass.Photo;
 import PIClass.userclient;
 import PIGui.EditPublicationController;
 import PIGui.PhotoDisplayController;
+import PIServices.ServiceCommentaire;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -219,7 +223,7 @@ public class FrontEnd_PublicationController implements Initializable {
         
                 double h =(pub.getText().length())*10 + btn.getHeight() + btn_ph.getHeight() +15;
         
-                btn_edit.setOnAction(new EventHandler<ActionEvent>(){
+           btn_edit.setOnAction(new EventHandler<ActionEvent>(){
             @Override
             public void handle(ActionEvent event)
             {
@@ -291,6 +295,22 @@ public class FrontEnd_PublicationController implements Initializable {
             @Override
             public void handle(ActionEvent event)
             {
+                userclient.setIdpub(pub.getId());
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("AddCom.fxml"));
+                Parent comm_view;
+                try {
+                    comm_view = loader.load();
+                    Scene commview = new Scene(comm_view);
+                    Stage stage = new Stage();
+                    stage.setScene(commview);
+                    stage.setResizable(false);
+                    stage.setTitle("Photo");
+                   // stage.initStyle(StageStyle.UNDECORATED);
+                    stage.show();
+                } catch (IOException ex) {
+                    Logger.getLogger(FrontEnd_PublicationController.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 
             }
         });

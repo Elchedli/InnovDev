@@ -6,6 +6,7 @@
 package PIServices;
 
 import PIClass.Commentaire;
+import PIClass.userclient;
 import PIServices.IservicesSalma;
 import PIUtils.MyConnection;
 import java.sql.Connection;
@@ -26,12 +27,11 @@ public class ServiceCommentaire implements IservicesSalma <Commentaire> {
     @Override
     public void envoyer(Commentaire p) {
        try {
-            String envoi = "INSERT INTO Commentaire (id_user, username, id_pub, suj_com) VALUES (?,?,?,?)";
+            String envoi = "INSERT INTO Commentaire (id_user, id_pub, suj_com) VALUES ((select id_user from simple where username=?),?,?)";
             PreparedStatement st1 = cnx.prepareStatement(envoi);
-            st1.setInt(1, p.getId_user());
-            st1.setString(2, p.getUsername());
-            st1.setInt(3, p.getId_pub());
-            st1.setString(4, p.getSuj_com());
+            st1.setString(1,userclient.getUsername());
+            st1.setInt(2, p.getId_pub());
+            st1.setString(3, p.getSuj_com());
             st1.executeUpdate();
             System.out.println("Commentaire envoyé");
         } catch (SQLException ex) {
@@ -69,15 +69,17 @@ public class ServiceCommentaire implements IservicesSalma <Commentaire> {
     public List <Commentaire> afficher() {
         List <Commentaire> l4 = new ArrayList<>();
         try {
-            String aff = "SELECT * FROM Commentaire";
+            String aff = "SELECT * FROM Commentaire where id_pub = ?";
             PreparedStatement st4 = cnx.prepareStatement(aff);
+            st4.setInt(1,userclient.getIdpub());
             ResultSet rs1 = st4.executeQuery();
             while (rs1.next()) {
-                l4.add(new Commentaire(rs1.getInt("id_com"),rs1.getInt("id_user"),rs1.getString("username"), rs1.getInt("id_pub"),rs1.getInt("nb_reaction"),rs1.getString("suj_com"), rs1.getTimestamp("date_com"))); }
+                l4.add(new Commentaire(rs1.getInt("id_com"),rs1.getString("suj_com"),rs1.getTimestamp("date_com"),rs1.getInt("nb_reaction"))); 
+            }
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
-        return l4;
+       return l4;
     }
     
     public List <Commentaire> tri_Date_Desc(){ 
@@ -107,7 +109,7 @@ public class ServiceCommentaire implements IservicesSalma <Commentaire> {
    
     public void like(Commentaire p){
         try {
-         String modreac = "UPDATE Commentaire SET nb_reaction = nb_reaction +1 WHERE id_com = ?";
+         String modreac = "UPDATE Commentaire SET nb_reaction = !nb_reaction WHERE id_com = ?";
             PreparedStatement st3 = cnx.prepareStatement(modreac);
             st3.setInt(1, p.getId_com());
             st3.executeUpdate();
@@ -122,6 +124,7 @@ public class ServiceCommentaire implements IservicesSalma <Commentaire> {
         try {
             String supp = "DELETE FROM Commentaire WHERE id_com = ?";
             PreparedStatement pst = cnx.prepareStatement(supp);
+            System.out.println(p.getDate_com());
             pst.setInt(1, p.getId_com());
             pst.executeUpdate();
             System.out.println("Commentaire supprimé");

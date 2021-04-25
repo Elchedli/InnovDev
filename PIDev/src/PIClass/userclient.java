@@ -20,7 +20,18 @@ public class userclient {
     static private String username = "";
     static private String type="";
     static private String language="fr";
+    static private int idpub=0;
     static private int id=9999999;
+
+    public static int getIdpub() {
+        return idpub;
+    }
+
+    public static void setIdpub(int idpub) {
+        userclient.idpub = idpub;
+    }
+    
+    
     public static String getUsername() {
         return username;
     }

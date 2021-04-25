@@ -59,9 +59,8 @@ public class MailRecController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) 
-    {
-        ServiceBadWords.loadConfigs();
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
     }    
 
     @FXML
@@ -80,37 +79,17 @@ public class MailRecController implements Initializable {
             ops.setContentText("Please fill in the empty fields");
             ops.showAndWait();
         }
-        else if (!myad.getText().matches("^[a-zA-Z]+[a-zA-Z0-9\\._-]*[a-zA-Z0-9]@[a-zA-Z]+"
-                        + "[a-zA-Z0-9\\._-]*[a-zA-Z0-9]+\\.[a-zA-Z]{2,4}$") && !destad.getText().matches("^[a-zA-Z]+[a-zA-Z0-9\\._-]*[a-zA-Z0-9]@[a-zA-Z]+"
-                        + "[a-zA-Z0-9\\._-]*[a-zA-Z0-9]+\\.[a-zA-Z]{2,4}$") )
-        {
-            Alert a2 = new Alert(Alert.AlertType.ERROR);
-            a2.setHeaderText(null);
-            a2.setContentText("Veuillez une adresse mail valide ! ");
-            a2.showAndWait();
-        }
         else {
-        
-            ArrayList<String> badWordsList = ServiceBadWords.badWordsFound(msg.getText());
-              if (badWordsList.size()>0)
-              {
-           Notifications notificationBuilder = Notifications.create()
-            .title("No way !").text("Inappropriate word(s) has been detected, please rewrite it").graphic(null).hideAfter(javafx.util.Duration.seconds(5))
-               .position(Pos.CENTER_LEFT)
-               .onAction(new EventHandler<ActionEvent>(){
-                   public void handle(ActionEvent event)
-                   {
-                       System.out.println("clicked ON ");
-               }});
-       notificationBuilder.darkStyle();
-       notificationBuilder.show();}
+           // ArrayList<String> badWordsList = ServiceBadWords.badWordsFound(obj.getText());
             
-            
+             //if (badWordsList.size()>0){
+           //JOptionPane.showMessageDialog(null,"Inappropriate word(s) detected");
+       /*}else*/ {
             String destination = destad.getText();
-            String myaddress = myad.getText();
-            String host = "smtp.gmail.com";
-            final String username = myad.getText();
-            final String passwd = password.getText();
+        String myaddress = myad.getText();
+        String host = "smtp.gmail.com";
+        final String username = myad.getText();
+        final String passwd = password.getText();
         
         
         //Mail server
@@ -154,6 +133,7 @@ public class MailRecController implements Initializable {
             e.printStackTrace();
         }
         }
+    }
     }
     
     @FXML

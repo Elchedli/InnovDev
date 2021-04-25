@@ -14,48 +14,46 @@
    <children>
       <AnchorPane layoutY="37.0" prefHeight="47.0" prefWidth="600.0" style="-fx-background-color: C0C0C0;">
          <children>
-            <Label layoutX="217.0" layoutY="9.0" text="Report a Problem" textAlignment="CENTER">
+            <Label layoutX="217.0" layoutY="9.0" text="Tâche réclamation" textAlignment="CENTER">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <Label layoutX="53.0" layoutY="94.0" text="How can we help ?">
+      <Label layoutX="53.0" layoutY="94.0" text="Objet">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="textobj" layoutX="53.0" layoutY="126.0" prefHeight="25.0" prefWidth="374.0" promptText="Tap the object of your claim." />
-      <Label layoutX="53.0" layoutY="159.0" text="Details :">
+      <TextField fx:id="textobj" layoutX="53.0" layoutY="126.0" prefHeight="25.0" prefWidth="374.0" promptText="Objet..." />
+      <Label layoutX="53.0" layoutY="159.0" text="Détails :">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <ComboBox fx:id="area_recBox" layoutX="125.0" layoutY="157.0" prefHeight="25.0" prefWidth="302.0" promptText="Select the area of the problem." />
-      <TextArea fx:id="textsuj" layoutX="53.0" layoutY="191.0" prefHeight="134.0" prefWidth="374.0" promptText="What went wrong ?" />
-      <Button fx:id="sub" defaultButton="true" layoutX="520.0" layoutY="340.0" mnemonicParsing="false" onAction="#AddRec" style="-fx-background-color: #00a1a1 #00a1a1; -fx-background-radius: 1em;" text="Submit" textFill="#fcfcfc">
+      <ComboBox fx:id="cat_recBox" layoutX="125.0" layoutY="157.0" prefHeight="25.0" prefWidth="122.0" promptText="Catégories" />
+      <TextArea fx:id="textsuj" layoutX="53.0" layoutY="191.0" prefHeight="134.0" prefWidth="374.0" promptText="Description..." />
+      <Button fx:id="sub" defaultButton="true" layoutX="525.0" layoutY="338.0" mnemonicParsing="false" onAction="#AddRec" style="-fx-background-color: #00a1a1 #00a1a1; -fx-background-radius: 1em;" text="OK" textFill="#fcfcfc">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>
-      <Label layoutX="48.0" layoutY="361.0" prefHeight="17.0" prefWidth="374.0" text="Let us know if you have ideas that can help make our products better. " textFill="#c90000" />
-      <Label layoutX="48.0" layoutY="344.0" prefHeight="17.0" prefWidth="457.0" text="If you need help solving a specific problem, please include as much info as possible." textFill="#c90000" />
+      <Label layoutX="48.0" layoutY="344.0" prefHeight="17.0" prefWidth="464.0" text="Si vous avez besoin d'aide pour résoudre un problème spécifique, veuillez inclure" textFill="#c90000" />
       <Button layoutX="574.0" layoutY="2.0" mnemonicParsing="false" onAction="#Exit" prefHeight="8.0" prefWidth="24.0" style="-fx-background-color: #00a1a1 #00a1a1;" text="X" textAlignment="CENTER" textFill="WHITE" fx:id="xbtn">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </Button>
-      <Button fx:id="home" layoutX="2.0" layoutY="2.0" mnemonicParsing="false" onAction="#Menu" style="-fx-background-color: #00a1a1 #00a1a1; -fx-background-radius: 1em;" text="Home" textAlignment="CENTER" textFill="WHITE">
+      <Button fx:id="home" layoutX="2.0" layoutY="2.0" mnemonicParsing="false" onAction="#Menu" style="-fx-background-color: #00a1a1 #00a1a1; -fx-background-radius: 1em;" text="Menu" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Label layoutX="48.0" layoutY="378.0" text="If you want you can email us too." textFill="#c90000" />
-      <Button fx:id="email" defaultButton="true" layoutX="517.0" layoutY="374.0" mnemonicParsing="false" onAction="#MailingRec" style="-fx-background-color: #00a1a1 #00a1a1; -fx-background-radius: 1em;" text="Email us" textFill="WHITE">
+      <Button fx:id="email" defaultButton="true" layoutX="517.0" layoutY="374.0" mnemonicParsing="false" onAction="#MailingRec" style="-fx-background-color: #00a1a1 #00a1a1; -fx-background-radius: 1em;" text="Email" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>
-      <Button fx:id="display" defaultButton="true" layoutX="358.0" layoutY="94.0" mnemonicParsing="false" onAction="#ViewRec" style="-fx-background-color: #00a1a1 #00a1a1; -fx-background-radius: 1em;" text="My Claims" textFill="WHITE">
+      <Button fx:id="display" defaultButton="true" layoutX="360.0" layoutY="92.0" mnemonicParsing="false" onAction="#ViewRec" style="-fx-background-color: #00a1a1 #00a1a1; -fx-background-radius: 1em;" text="Votre liste" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>
@@ -64,5 +62,6 @@
             <Image url="@../icons/logo%20(1).png" />
          </image>
       </ImageView>
+      <Label layoutX="48.0" layoutY="360.0" prefHeight="17.0" prefWidth="464.0" text="autant d'informations que possible." textFill="#c90000" />
    </children>
 </AnchorPane>

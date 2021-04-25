@@ -6,6 +6,7 @@
 package PIGui;
 
 import PIClass.Commentaire;
+import PIClass.userclient;
 import PIServices.ServiceBadWords;
 import PIServices.ServiceCommentaire;
 import java.io.IOException;
@@ -90,7 +91,7 @@ public class AddComController implements Initializable {
        notificationBuilder.show();}
               else{
         ServiceCommentaire scom = new ServiceCommentaire();
-        scom.envoyer(new Commentaire(4,"JM",4,sujcom.getText()));
+        scom.envoyer(new Commentaire(userclient.getUsername(),userclient.getIdpub(),sujcom.getText()));
         Notifications notificationBuilder = Notifications.create()
             .title("Succes").text("Your comment has been added !!").graphic(null).hideAfter(javafx.util.Duration.seconds(5))
                .position(Pos.CENTER_LEFT)
@@ -108,6 +109,14 @@ public class AddComController implements Initializable {
         Stage stage = (Stage) ((Button)event.getSource()).getScene().getWindow();
         stage.close();
         JOptionPane.showMessageDialog(null, "Are you sure ? :(");
+    }
+    
+    
+    @FXML
+    private void affichercomm(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("DisplayEditCom.fxml"));
+        Parent root = loader.load(); 
+        home.getScene().setRoot(root);
     }
     
 }

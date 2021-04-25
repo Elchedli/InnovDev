@@ -23,7 +23,7 @@ public class MyConnection {
     /*public static PreparedStatement prepareStatement(String requete) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }*/
-    public String url = "jdbc:mysql://127.0.0.1:3306/groupe2";
+    public String url = "jdbc:mysql://127.0.0.1:3306/spirity";
     public String login="root";
     public String pwd="";
     public static Connection cn;
