@@ -134,7 +134,7 @@ public class AjoutArticleController implements Initializable {
             BufferedImage bufferedImage = ImageIO.read(selectedFile);
             WritableImage image = SwingFXUtils.toFXImage(bufferedImage, null);
             //this.image.setText(selectedFile.getName());
-            this.image.setText(selectedFile.toURI().toURL().toString());
+            this.image.setText(selectedFile.toURI().toURL().toString().replaceAll("file:C:/projects/webacc/public/uploads", ""));
             imview.setImage(image);
         }
 

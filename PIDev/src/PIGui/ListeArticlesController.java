@@ -96,15 +96,13 @@ ObservableList<Article> ArtList = FXCollections.observableArrayList();
             dpc.setLab_desc(art.getDescription_art());
             dpc.setLab_cat(art.getNomcat());
             dpc.load_pic(art.getPhoto());
-            
             java.sql.Date d = art.getDate_art();
             String str1 = d.toString();
             dpc.setLab_date(str1);
-            
             String str = Integer.toString(art.getLikes());
             dpc.setLab_like(str);
+            System.out.println("photo est : "+art.getPhoto());
             dpc.setLab_img(art.getPhoto());
-
             stage.show();
             MainGui.stg.close();
         } catch (Exception e) {
