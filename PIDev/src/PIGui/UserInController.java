@@ -58,6 +58,7 @@ import PIClass.Ev;
 import PIServices.ServiceParticipation;
 
 import PIUtils.MyConnection;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -113,6 +114,10 @@ public class UserInController implements Initializable {
  ObservableList<Ev> activs = FXCollections.observableArrayList();
     FilteredList <Ev> filter = new FilteredList <> (activs, e -> true);
     SortedList <Ev> sort = new SortedList<> (filter);
+    @FXML
+    private TableColumn<?, ?> colemplacement1;
+    @FXML
+    private FontAwesomeIconView btnback;
 
     /**
      * Initializes the controller class.
@@ -201,7 +206,6 @@ FXMLLoader loader = new FXMLLoader(getClass().getResource("Act.fxml"));
     }
 
   
-    @FXML
     void ParticiperAjout(ActionEvent event) {
         Ev TacheSelected = tabid.getSelectionModel().getSelectedItem();
         servparticipe.AjouterParticipation(TacheSelected);

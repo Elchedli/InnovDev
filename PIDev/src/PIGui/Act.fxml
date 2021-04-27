@@ -13,7 +13,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="471.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PIGui.ActController">
    <children>
-      <AnchorPane layoutX="14.0" layoutY="15.0" prefHeight="441.0" prefWidth="265.0" style="-fx-background-color: linear-gradient(to right top, #5dc0aa, #7bc9bc, #99d1cb, #b7d9d7, #d4e1e1); -fx-background-radius: 1em;">
+      <AnchorPane layoutX="14.0" layoutY="15.0" prefHeight="441.0" prefWidth="239.0" style="-fx-background-color: linear-gradient(to right top, #5dc0aa, #7bc9bc, #99d1cb, #b7d9d7, #d4e1e1); -fx-background-radius: 1em;">
          <children>
             <ImageView fitHeight="132.0" fitWidth="123.0" layoutX="82.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -28,10 +28,11 @@
             <FontAwesomeIconView fx:id="btnback" fill="#fcf9f9" glyphName="ARROW_CIRCLE_LEFT" layoutX="69.0" layoutY="251.0" size="30" text="" />
          </children>
       </AnchorPane>
-      <TableView fx:id="tabid" layoutX="279.0" layoutY="132.0" prefHeight="278.0" prefWidth="296.0">
+      <TableView fx:id="tabid" layoutX="252.0" layoutY="132.0" prefHeight="278.0" prefWidth="323.0">
          <columns>
-            <TableColumn fx:id="colnom" prefWidth="143.0" text="Nom" />
-            <TableColumn fx:id="coltype" prefWidth="151.0" text="Type" />
+            <TableColumn fx:id="colnom" prefWidth="89.0" text="Nom" />
+            <TableColumn fx:id="coltype" prefWidth="91.0" text="Type" />
+            <TableColumn fx:id="image" prefWidth="142.0" text="image" />
          </columns>
       </TableView>
       <TextField fx:id="cherch" layoutX="333.0" layoutY="84.0" onAction="#cherchetab" onKeyPressed="#cherchetab" prefHeight="31.0" prefWidth="165.0" promptText="Chercher..." />

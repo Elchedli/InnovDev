@@ -29,8 +29,7 @@
       </TableView>
       <AnchorPane layoutX="22.0" layoutY="15.0" prefHeight="530.0" prefWidth="288.0" style="-fx-background-color: linear-gradient(to right top, #5dc0aa, #7bc9bc, #99d1cb, #b7d9d7, #d4e1e1); -fx-background-radius: 1em;">
          <children>
-            <FontAwesomeIconView fill="#f2f0f0" glyphName="PLUS_SQUARE_ALT" layoutX="51.0" layoutY="198.0" size="30" text="" />
-            <FontAwesomeIconView fx:id="btnactualiser" fill="#f8f7f7" glyphName="REFRESH" layoutX="88.0" layoutY="193.0" size="20" text="" wrappingWidth="41.571427166461945" />
+            <FontAwesomeIconView fx:id="btnactualiser" fill="#f8f7f7" glyphName="REFRESH" layoutX="14.0" layoutY="75.0" size="20" text="" wrappingWidth="41.571427166461945" />
             <ImageView fitHeight="132.0" fitWidth="123.0" layoutX="82.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/logo%20(1).png" />
@@ -41,13 +40,13 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button fx:id="Trier" layoutX="63.0" layoutY="232.0" mnemonicParsing="false" onAction="#Trier" prefHeight="33.0" prefWidth="148.0" style="-fx-background-color: linear-gradient(to right top, #00a1a1, #00a1a1, #00a1a1, #00a1a1, #00a1a1); -fx-background-radius: 1em;" text="Trier" textFill="WHITE">
+            <Button fx:id="Trier" layoutX="68.0" layoutY="232.0" mnemonicParsing="false" onAction="#Trier" prefHeight="33.0" prefWidth="148.0" style="-fx-background-color: linear-gradient(to right top, #00a1a1, #00a1a1, #00a1a1, #00a1a1, #00a1a1); -fx-background-radius: 1em;" text="Trier" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <TextField fx:id="nom1" layoutX="94.0" layoutY="343.0" prefHeight="25.0" prefWidth="96.0" />
-            <Button fx:id="afficherParActiv" layoutX="51.0" layoutY="300.0" mnemonicParsing="false" onAction="#afficherParActiv" prefHeight="30.0" prefWidth="172.0" style="-fx-background-color: linear-gradient(to right top, #00a1a1, #00a1a1, #00a1a1, #00a1a1, #00a1a1); -fx-background-radius: 1em;" text="Affiche par activité" textFill="WHITE">
+            <TextField fx:id="nom1" layoutX="88.0" layoutY="304.0" prefHeight="25.0" prefWidth="96.0" />
+            <Button fx:id="afficherParActiv" layoutX="50.0" layoutY="339.0" mnemonicParsing="false" onAction="#afficherParActiv" prefHeight="30.0" prefWidth="172.0" style="-fx-background-color: linear-gradient(to right top, #00a1a1, #00a1a1, #00a1a1, #00a1a1, #00a1a1); -fx-background-radius: 1em;" text="Affiche par activité" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

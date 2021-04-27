@@ -41,6 +41,8 @@ public class ActController implements Initializable {
     private TableColumn<Act, String> colnom;
     @FXML
     private TableColumn<Act, String> coltype;
+     @FXML
+    private TableColumn<Act, String> image;
     @FXML
     private TextField cherch;
     @FXML
@@ -57,6 +59,7 @@ public class ActController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
          colnom.setCellValueFactory(new PropertyValueFactory<Act,String>("Nom_act"));     
         coltype.setCellValueFactory(new PropertyValueFactory<Act,String>("type_act"));
+          image.setCellValueFactory(new PropertyValueFactory<Act,String>("image"));
          Activite t = new Activite();
          t.afficher().forEach(e->activs.add(e));
          tabid.setItems(activs);

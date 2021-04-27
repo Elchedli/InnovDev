@@ -15,6 +15,7 @@ public class Act {
     private int id_act;
     private String nom_act;
     private String type_act;
+      private String image;
       public Act( String nom_act) {
        
         this.nom_act= nom_act;}
@@ -23,16 +24,24 @@ public class Act {
           
       }
       
-    public Act( int id_act,String nom_act, String type_act) {
+    public Act( int id_act,String nom_act, String type_act,String image) {
        this.id_act= id_act;
         this.nom_act= nom_act;
         this.type_act= type_act;
+        this.image=image;
          
     }
 
     public Act(String nom_act, String type_act) {
         this.nom_act = nom_act;
         this.type_act = type_act;
+    }
+
+    public Act(String text, String text0, String text1) {
+
+        this.nom_act= text;
+        this.type_act= text0;
+        this.image=text1;
     }
 
     public int getId_act() {
@@ -61,10 +70,20 @@ public class Act {
         this.type_act = type_act;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
-        return "activite{" + "id=" + id_act+ ", nom_act=" + nom_act+ ", type_act=" + type_act + '}';
+        return "Act{" + "id_act=" + id_act + ", nom_act=" + nom_act + ", type_act=" + type_act + ", image=" + image + '}';
     }
+
+    
 }
 
 

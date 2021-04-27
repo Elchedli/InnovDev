@@ -354,17 +354,17 @@ java.sql.Connection cnx = MyConnection.getInstance().getCnx();
     
      try {
        Document doc = new Document();
-       PdfWriter.getInstance(doc,new FileOutputStream("src\\pdf\\Evenement.pdf"));
+       PdfWriter.getInstance(doc,new FileOutputStream("src/pdf/Evenement.pdf"));
        doc.open();
        
-      Image img = Image.getInstance("src\\img\\img.jpg");
+      Image img = Image.getInstance("src/img/img.jpg");
        img.scaleAbsoluteHeight(60);
        img.scaleAbsoluteWidth(100);
        img.setAlignment(Image.ALIGN_RIGHT);
        doc.open();
        doc.add(img);
     
-       doc.add(new Paragraph(" "));
+//       doc.add(new Paragraph(" "));
        Font font = new Font(Font.FontFamily.TIMES_ROMAN, 28, Font.UNDERLINE, BaseColor.BLACK);
        Paragraph p = new Paragraph("Nos evenements ", font);
        p.setAlignment(Element.ALIGN_CENTER);
@@ -395,7 +395,7 @@ java.sql.Connection cnx = MyConnection.getInstance().getCnx();
        PreparedStatement pst = cnx.prepareStatement(requete);
        ResultSet rs = pst.executeQuery();
        while (rs.next()) {
-           cell = new PdfPCell(new Phrase("titre_ev", FontFactory.getFont("Times New Roman", 11)));
+           cell = new PdfPCell(new Phrase(rs.getString("titre_ev"), FontFactory.getFont("Times New Roman", 11)));
            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
            cell.setBackgroundColor(BaseColor.WHITE);
            tabpdf.addCell(cell);
@@ -413,7 +413,7 @@ java.sql.Connection cnx = MyConnection.getInstance().getCnx();
           doc.add(tabpdf);
           JOptionPane.showMessageDialog(null, "Success !!");
           doc.close();
-          Desktop.getDesktop().open(new File("src\\pdf\\Evenement.pdf"));
+          Desktop.getDesktop().open(new File("src/pdf/Evenement.pdf"));
        }
  
         catch (DocumentException | HeadlessException | IOException e) {

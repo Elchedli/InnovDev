@@ -37,6 +37,13 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javax.swing.JOptionPane;
 import PIClass.Ev;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.image.WritableImage;
+import javafx.stage.FileChooser;
+import javax.imageio.ImageIO;
 import org.controlsfx.control.Notifications;
 
 /**
@@ -77,9 +84,13 @@ public class AjouterEventController implements Initializable {
     @FXML
     private ComboBox<String> type;
     @FXML
-    private ImageView imgview1;
+    private TextField text_nom1;
     @FXML
-    private ImageView imgview;
+    private Button upload;
+    @FXML
+    private ImageView imview;
+    @FXML
+    private FontAwesomeIconView btnback;
 
     /**
      * Initializes the controller class.
@@ -106,7 +117,7 @@ public class AjouterEventController implements Initializable {
 // else if(validateDatePickerdeb(date_deb)||validateDatePickerfin(date_fin)||validateTimePickerdeb(temps_deb) || validateTimePickerfin(temps_fin)||controleTextFieldNonNumerique(text_nom)||controleTextFieldNonNumerique(emplacement)|| 
 //                         controleTextFieldNumerique(age_min)||controleTextFieldNumerique(age_max));
      else {
-   Ev test = new Ev(text_nom.getText(),type.getValue(),emplacement.getText(),Date.valueOf(date_deb.getValue()),Date.valueOf(date_fin.getValue()),Time.valueOf(temps_deb.getValue()),Time.valueOf(temps_fin.getValue()),Integer.parseInt(age_min.getText()),Integer.parseInt(age_min.getText()));
+   Ev test = new Ev(text_nom.getText(),type.getValue(),emplacement.getText(),Date.valueOf(date_deb.getValue()),Date.valueOf(date_fin.getValue()),Time.valueOf(temps_deb.getValue()),Time.valueOf(temps_fin.getValue()),Integer.parseInt(age_min.getText()),Integer.parseInt(age_min.getText()),text_nom1.getText());
        e.ajouter(test);
     JOptionPane.showMessageDialog(null,"event ajouté");}
     //API Notification lors de l'ajout d'un evenement
@@ -205,5 +216,29 @@ public class AjouterEventController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-  
+
+    @FXML
+    private void upload(ActionEvent event) throws IOException {
+        
+         FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Pick a banner file!");
+        fileChooser.setInitialDirectory(new File("\\"));
+        Stage stage = new Stage();
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("JPEG", "*.jpeg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png")  
+            );
+        File file = fileChooser.showOpenDialog(stage);
+        try {
+                BufferedImage bufferedImage = ImageIO.read(file);
+               WritableImage image = SwingFXUtils.toFXImage(bufferedImage, null);
+            text_nom1.setText(file.toURI().toURL().toString().replaceAll("file:/C:/xampp/htdocs/piWeb/pi/public/upload/", ""));
+
+                imview.setImage(image);
+            } catch (IOException ex) {
+                System.out.println("could not get the image");
+            }
+
+    }
 }

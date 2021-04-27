@@ -25,6 +25,8 @@ public class Ev {
     private Time temps_fev;
     private int age_max;
     private int age_min;
+    private String image;
+
     private int id_act;
 
 //    public Ev(String text, String text0, String text1, Date valueOf, Date valueOf0, String text2, String text3, String text4, String text5) {
@@ -100,7 +102,7 @@ public class Ev {
         this.age_max = age_max; 
     }*/
 
-    public Ev(int id_ev, String titre, String type, String emplacement, Date date_dev, Date date_fev, String temps_dev, String temps_fev, int age_min, int age_max,int id_act) {
+    public Ev(int id_ev, String titre, String type, String emplacement, Date date_dev, Date date_fev, String temps_dev, String temps_fev, int age_min, int age_max,String image,int id_act) {
      this.id_ev=id_ev;
         this.titre_ev = titre;
         this.type_ev = type;
@@ -111,11 +113,37 @@ public class Ev {
         this.temps_fev =  Time.valueOf(LocalTime.parse(temps_fev));
         this.age_min = age_min;
         this.age_max = age_max;
-         
+        this.image=image;
         this.id_act=id_act;
     }
 
-    
+       public Ev(int id_ev, String titre, String type, String emplacement, Date date_dev, Date date_fev, String temps_dev, String temps_fev, int age_min, int age_max,String image) {
+     this.id_ev=id_ev;
+        this.titre_ev = titre;
+        this.type_ev = type;
+        this.emplacement_ev = emplacement;
+        this.date_dev = date_dev;
+        this.date_fev = date_fev;
+        this.temps_dev =  Time.valueOf(LocalTime.parse(temps_dev));
+        this.temps_fev =  Time.valueOf(LocalTime.parse(temps_fev));
+        this.age_min = age_min;
+        this.age_max = age_max;
+        this.image=image;
+       }
+
+    public Ev(String text, String value, String text0, Date valueOf, Date valueOf0, Time valueOf1, Time valueOf2, int parseInt, int parseInt0, String text1) {
+   this.titre_ev = text;
+        this.type_ev = value;
+        this.emplacement_ev = text0;
+        this.date_dev = valueOf;
+        this.date_fev = valueOf0;
+        this.temps_dev =  valueOf1;
+        this.temps_fev =  valueOf2;
+        this.age_min = parseInt;
+        this.age_max = parseInt0;
+        this.image= text1;
+    }
+      
 
 
 
@@ -236,9 +264,18 @@ public class Ev {
 
     @Override
     public String toString() {
-        return "Evenement{" + "titre=" + titre_ev + ", type=" + type_ev+ ", emplacement=" + emplacement_ev + ", date_dev=" + date_dev + ", date_fev=" + date_fev + ", temps_dev=" + temps_dev + ", temps_fev=" + temps_fev + ", age_max=" + age_max + ", age_min=" + age_min + '}';
+        return "Ev{" + "id_ev=" + id_ev + ", titre_ev=" + titre_ev + ", type_ev=" + type_ev + ", emplacement_ev=" + emplacement_ev + ", date_dev=" + date_dev + ", date_fev=" + date_fev + ", temps_dev=" + temps_dev + ", temps_fev=" + temps_fev + ", age_max=" + age_max + ", age_min=" + age_min + ", image=" + image + ", id_act=" + id_act + '}';
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+   
     @Override
     public int hashCode() {
         int hash = 7;

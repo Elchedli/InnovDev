@@ -15,7 +15,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="734.0" prefWidth="819.0" style="-fx-background-color: Transparent;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="PIGui.ActivitésController">
    <children>
-      <AnchorPane layoutX="23.0" layoutY="33.0" prefHeight="672.0" prefWidth="604.0" style="-fx-background-color: linear-gradient(to right top, #5dc0aa, #7bc9bc, #99d1cb, #b7d9d7, #d4e1e1); -fx-background-radius: 1em;">
+      <AnchorPane layoutX="23.0" layoutY="33.0" prefHeight="697.0" prefWidth="745.0" style="-fx-background-color: linear-gradient(to right top, #5dc0aa, #7bc9bc, #99d1cb, #b7d9d7, #d4e1e1); -fx-background-radius: 1em;">
          <children>
             <ImageView fitHeight="132.0" fitWidth="123.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -38,12 +38,15 @@
                   </Text>
                </children>
             </Pane>
-            <AnchorPane fx:id="zone_aj" layoutX="243.0" layoutY="169.0" prefHeight="172.0" prefWidth="264.0" style="-fx-background-color: linear-gradient(to right top, #e9deeb, #d9dafa, #b1dcff, #77e1ff, #43e3e3); -fx-background-radius: 12; -fx-effect: dropshadow(two-pass-box, black,15,0.0,0.5,3);">
+            <AnchorPane fx:id="zone_aj" layoutX="237.0" layoutY="65.0" prefHeight="341.0" prefWidth="363.0" style="-fx-background-color: linear-gradient(to right top, #e9deeb, #d9dafa, #b1dcff, #77e1ff, #43e3e3); -fx-background-radius: 12; -fx-effect: dropshadow(two-pass-box, black,15,0.0,0.5,3);">
                <children>
                   <TextField fx:id="text_nom" layoutX="24.0" layoutY="36.0" onKeyPressed="#Control" onKeyReleased="#Control" onKeyTyped="#Control" prefHeight="25.0" prefWidth="216.0" promptText="Nom :" />
                   <Label fx:id="nom" layoutX="6.0" layoutY="104.0" prefHeight="18.0" prefWidth="96.0" />
                   <TextField fx:id="text_nom1" layoutX="25.0" layoutY="78.0" onKeyPressed="#Control" onKeyReleased="#Control" onKeyTyped="#Control" prefHeight="26.0" prefWidth="216.0" promptText="Type:" />
-                  <Button fx:id="valider" layoutX="188.0" layoutY="122.0" mnemonicParsing="false" onAction="#valider" text="Valider" />
+                  <Button fx:id="valider" layoutX="296.0" layoutY="309.0" mnemonicParsing="false" onAction="#valider" text="Valider" />
+                  <TextField fx:id="text_nom11" layoutX="32.0" layoutY="127.0" onKeyPressed="#Control" onKeyReleased="#Control" onKeyTyped="#Control" prefHeight="26.0" prefWidth="210.0" promptText="Image:" />
+                  <Button fx:id="upload" layoutX="254.0" layoutY="127.0" mnemonicParsing="false" onAction="#AjouterPhoto" text="upload" />
+                  <ImageView fx:id="imview" fitHeight="150.0" fitWidth="200.0" layoutX="24.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </AnchorPane>
             <Pane layoutX="56.0" layoutY="389.0" prefHeight="41.0" prefWidth="167.0" style="-fx-background-color: #00a1a1; -fx-background-radius: 1em;">
@@ -56,19 +59,20 @@
                   <FontAwesomeIconView fx:id="btnactualiser" fill="#f8f7f7" glyphName="REFRESH" layoutX="20.0" layoutY="27.0" size="20" text="" wrappingWidth="41.571427166461945" />
                </children>
             </Pane>
-            <TextField fx:id="cherch" layoutX="275.0" layoutY="411.0" onAction="#cherchetab" onKeyPressed="#cherchetab" prefHeight="33.0" prefWidth="185.0" promptText="chercher.." />
-            <TableView fx:id="tabid" layoutX="243.0" layoutY="441.0" prefHeight="142.0" prefWidth="296.0">
+            <TextField fx:id="cherch" layoutX="268.0" layoutY="438.0" onAction="#cherchetab" onKeyPressed="#cherchetab" prefHeight="33.0" prefWidth="185.0" promptText="chercher.." />
+            <TableView fx:id="tabid" layoutX="243.0" layoutY="471.0" prefHeight="212.0" prefWidth="471.0">
                <columns>
-                  <TableColumn fx:id="colnom" onEditCommit="#modifNom" prefWidth="129.0" text="Nom" />
-                  <TableColumn fx:id="coltype" onEditCommit="#modifType" prefWidth="165.0" text="Type" />
+                  <TableColumn fx:id="colnom" onEditCommit="#modifNom" prefWidth="79.0" text="Nom" />
+                  <TableColumn fx:id="coltype" onEditCommit="#modifType" prefWidth="131.0" text="Type" />
+                  <TableColumn fx:id="colImage" prefWidth="260.0" text="image" />
                </columns>
             </TableView>
-            <ImageView fx:id="imgv5" fitHeight="33.0" fitWidth="32.0" layoutX="243.0" layoutY="411.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgv5" fitHeight="33.0" fitWidth="32.0" layoutX="236.0" layoutY="439.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../icons/téléchargement%20(1).png" />
                </image>
             </ImageView>
-            <Label layoutX="302.0" layoutY="41.0" text="Activité">
+            <Label layoutX="283.0" layoutY="14.0" text="Activité">
                <font>
                   <Font name="System Bold" size="32.0" />
                </font>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 25, 2021 at 05:34 AM
+-- Generation Time: Apr 27, 2021 at 05:30 AM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.16
 
@@ -30,15 +30,17 @@ SET time_zone = "+00:00";
 CREATE TABLE `act` (
   `id_act` int(11) NOT NULL,
   `nom_act` varchar(50) NOT NULL,
-  `type_act` varchar(50) NOT NULL
+  `type_act` varchar(50) NOT NULL,
+  `image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `act`
 --
 
-INSERT INTO `act` (`id_act`, `nom_act`, `type_act`) VALUES
-(1, 'mp', 'yoga');
+INSERT INTO `act` (`id_act`, `nom_act`, `type_act`, `image`) VALUES
+(1, 'mp', 'yoga', ''),
+(2, 'test', 'test', 'file:/C:/Users/chado/Desktop/Capture%20d’écran%202021-04-24%20130146.png');
 
 -- --------------------------------------------------------
 
@@ -84,12 +86,11 @@ CREATE TABLE `articles` (
 
 INSERT INTO `articles` (`id_art`, `titre_art`, `auteur_art`, `description_art`, `date_art`, `likes`, `id_cat`, `photo`) VALUES
 (22, 'régime guide complet pour perdre du poids', 'mgknutri', 'Pour perdre du poids durablement il est essentiel de combiner des changements alimentaires ET une activité sportive\nface à ce double défi certains régimes proposent de véritables plans d\'exercices\nnos experts ont élu les meilleurs régimes qui associent harmonieusement rééquilibrage alimentaire et activité physique', '2021-03-27 02:11:23', 6, 6, 'file:/C:/xampp/htdocs/img/palmares-des-regimes.jpg'),
-(23, 'pourquoi aimons nous dessiner', 'test1Coach', 'Dessiner nous pousse à expérimenter des méthodes\ndes techniques afin de se rapprocher le plus possible de la réalité dans le but de la figer dans le temps \nà tout jamais ou au contraire à s’en éloigner tout en l’exprimant à travers notre prisme émotionnel', '2021-03-27 02:22:15', 2, 61, 'file:/C:/xampp/htdocs/img/téléchargement.jpg'),
 (24, 'les bienfaits du sport sur la santé', 'mgkcoach', 'L\'activité physique est également un élément de prévention essentiel pour garder des os solides \net prévenir ainsi l\'ostéoporose Pratiquer un sport permet de prévenir les lombalgies et la récurrence des symptômes\nLe renforcement musculaire occasionné lors des exercices physiques est aussi bénéfique pour les rhumatismes inflammatoires chroniques', '2021-03-27 02:26:17', 5, 23, 'file:/C:/xampp/htdocs/img/sp.jpg'),
 (45, 'iuiuiu', 'mgkcoach', 'ityghtjty', '2021-04-01 01:40:34', 0, 27, 'http://www..'),
 (46, 'kkkk', 'mgkcoach', 'jjjjjjj', '2021-04-01 01:41:56', 0, 61, 'https://i.pinimg.com/736x/5b/b4/8b/5bb48b07fa6e3840bb3afa2bc821b882.jpg'),
-(47, 'nbnbnnbnn', 'mgkcoach', 'hfhfhfhfhfhfhf', '2021-04-01 01:42:59', 0, 23, 'http://www..'),
-(48, 'uuuuuuu', 'mgkcoach', 'uuuuuuuuuuuuuuuuuuuuuu', '2021-04-01 01:43:36', 0, 6, 'file:/C:/Users/HP/Desktop/Nouveau%20dossier/imgcache0.350705.jpg');
+(51, 'test', 'mgkcoach', 'test', '2021-04-27 05:18:18', 0, 27, 'Insérer Image...'),
+(52, 'ccss', 'mgkcoach', 'dsdsd', '2021-04-27 05:19:03', 0, 6, 'file:/C:/Users/chado/Desktop/Capture%20d’écran%202021-04-24%20130146.png');
 
 -- --------------------------------------------------------
 
@@ -164,7 +165,6 @@ CREATE TABLE `coach` (
 
 INSERT INTO `coach` (`id_user`, `username`, `password`, `mail`, `date_n`, `code`) VALUES
 (1, 'mgkcoach', '$2a$13$qBxEx/7EVV03YoUof1xGzOKVcAZyenXXL9SRGvljEpzZr2vXFwOgG', 'mgkcoach@mgk2.tn', '2021-03-11', 'ompo'),
-(785, 'finaltestcoach', '$2a$13$s25jOXth07SFlC0PQuMpWOGy2DBRbl9W7bHPI1Lq0/73r7ve0xJ1G', 'finaltestcoach@fff.ff', '2002-03-21', 'fdzddz'),
 (786, 'mourad', '$2a$13$UpkLwSCwnOXFPXUEMXmDuuQdTTUysX9yaLCM7vDLPq7eGgBCGS/Ke', 'mourad@esprit.tn', '1997-04-11', 'tgtgtg');
 
 -- --------------------------------------------------------
@@ -228,6 +228,7 @@ CREATE TABLE `evenement` (
   `temps_fev` time NOT NULL,
   `age_min` int(11) DEFAULT NULL,
   `age_max` int(11) DEFAULT NULL,
+  `image` varchar(255) NOT NULL,
   `id_act` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -235,24 +236,25 @@ CREATE TABLE `evenement` (
 -- Dumping data for table `evenement`
 --
 
-INSERT INTO `evenement` (`id_ev`, `titre_ev`, `type_ev`, `emplacement_ev`, `date_dev`, `date_fev`, `temps_dev`, `temps_fev`, `age_min`, `age_max`, `id_act`) VALUES
-(3, 'islem', 'sportif', 'ml', '2021-03-04', '2021-03-20', '15:00:00', '15:00:00', 13, 26, 1),
-(73, 'hello', 'sportif', 'from', '2021-03-12', '2021-03-12', '07:00:00', '07:00:00', 12, 26, NULL),
-(74, 'ev', 'sportif', 'terrain', '2021-03-04', '2021-03-04', '13:00:00', '13:00:00', 13, 13, NULL),
-(76, 'sport', 'sportif', 'tunis', '2021-03-01', '2021-03-02', '15:00:00', '15:00:00', 18, 18, NULL),
-(80, 'event', 'loisir', 'ariana', '2021-03-02', '2021-03-03', '15:00:00', '15:00:00', 16, 16, NULL),
-(81, 'event', 'loisir', 'ariana', '2021-03-02', '2021-03-03', '15:00:00', '15:00:00', 16, 16, NULL),
-(82, 'ayevTEST', 'loisir', 'eee', '2021-03-26', '2021-03-26', '12:00:00', '12:00:00', 15, 15, NULL),
-(90, 'islem', 'sportif', 'ml', '2021-03-11', '2021-03-12', '12:00:00', '12:00:00', 15, 15, NULL),
-(91, 'islem', 'educatif', 'esprit', '2021-03-04', '2021-03-04', '12:03:00', '12:03:00', 12, 12, NULL),
-(93, 'mm', 'sportif', 'ww', '2021-03-05', '2021-03-27', '21:42:00', '14:42:00', 12, 12, NULL),
-(94, 'ui', 'educatif', 'ml', '2021-03-14', '2021-03-21', '15:40:00', '15:40:00', 13, 13, NULL),
-(95, 'izlem', 'educatif', 'okkk', '2021-03-21', '2021-03-14', '14:51:00', '14:52:00', 12, 12, NULL),
-(96, 'islem', 'sportif', 'lmp', '2021-03-21', '2021-03-21', '15:54:00', '14:54:00', 15, 15, NULL),
-(97, 'islem', 'educatif', 'olo', '2021-03-21', '2021-03-20', '13:05:00', '15:05:00', 15, 15, NULL),
-(100, 'islem', 'educatif', 'qsdqsd', '2021-03-04', '2021-03-31', '13:28:00', '16:28:00', 5, 5, NULL),
-(101, 'hj', 'educatif', 'xthg', '2021-04-01', '2021-04-28', '10:23:00', '03:23:00', 22, 22, NULL),
-(102, 'hj', 'educatif', 'xthg', '2021-04-01', '2021-04-28', '10:23:00', '03:23:00', 22, 22, NULL);
+INSERT INTO `evenement` (`id_ev`, `titre_ev`, `type_ev`, `emplacement_ev`, `date_dev`, `date_fev`, `temps_dev`, `temps_fev`, `age_min`, `age_max`, `image`, `id_act`) VALUES
+(3, 'islem', 'sportif', 'ml', '2021-03-04', '2021-03-20', '15:00:00', '15:00:00', 13, 26, '', 1),
+(73, 'hello', 'sportif', 'from', '2021-03-12', '2021-03-12', '07:00:00', '07:00:00', 12, 26, '', NULL),
+(74, 'ev', 'sportif', 'terrain', '2021-03-04', '2021-03-04', '13:00:00', '13:00:00', 13, 13, '', NULL),
+(76, 'sport', 'sportif', 'tunis', '2021-03-01', '2021-03-02', '15:00:00', '15:00:00', 18, 18, '', NULL),
+(80, 'event', 'loisir', 'ariana', '2021-03-02', '2021-03-03', '15:00:00', '15:00:00', 16, 16, '', NULL),
+(81, 'event', 'loisir', 'ariana', '2021-03-02', '2021-03-03', '15:00:00', '15:00:00', 16, 16, '', NULL),
+(82, 'ayevTEST', 'loisir', 'eee', '2021-03-26', '2021-03-26', '12:00:00', '12:00:00', 15, 15, '', NULL),
+(90, 'islem', 'sportif', 'ml', '2021-03-11', '2021-03-12', '12:00:00', '12:00:00', 15, 15, '', NULL),
+(91, 'islem', 'educatif', 'esprit', '2021-03-04', '2021-03-04', '12:03:00', '12:03:00', 12, 12, '', NULL),
+(93, 'mm', 'sportif', 'ww', '2021-03-05', '2021-03-27', '21:42:00', '14:42:00', 12, 12, '', NULL),
+(94, 'ui', 'educatif', 'ml', '2021-03-14', '2021-03-21', '15:40:00', '15:40:00', 13, 13, '', NULL),
+(95, 'izlem', 'educatif', 'okkk', '2021-03-21', '2021-03-14', '14:51:00', '14:52:00', 12, 12, '', NULL),
+(96, 'islem', 'sportif', 'lmp', '2021-03-21', '2021-03-21', '15:54:00', '14:54:00', 15, 15, '', NULL),
+(97, 'islem', 'educatif', 'olo', '2021-03-21', '2021-03-20', '13:05:00', '15:05:00', 15, 15, '', NULL),
+(100, 'islem', 'educatif', 'qsdqsd', '2021-03-04', '2021-03-31', '13:28:00', '16:28:00', 5, 5, '', NULL),
+(101, 'hj', 'educatif', 'xthg', '2021-04-01', '2021-04-28', '10:23:00', '03:23:00', 22, 22, '', NULL),
+(102, 'hj', 'educatif', 'xthg', '2021-04-01', '2021-04-28', '10:23:00', '03:23:00', 22, 22, '', NULL),
+(103, 'ahmed', 'educatif', 'ennasr', '2021-04-14', '2021-04-29', '11:09:00', '14:09:00', 13, 13, 'file:/C:/Users/chado/Desktop/Capture%20d’écran%202021-04-24%20130146.png', NULL);
 
 -- --------------------------------------------------------
 
@@ -420,7 +422,8 @@ CREATE TABLE `psycho` (
 
 INSERT INTO `psycho` (`id_user`, `username`, `password`, `mail`, `date_n`, `code`) VALUES
 (1015, 'mgkpsy', '$2a$13$XqJEY.kvpYqNGbhlfCNyY.rb1ZlDRfB8FgJZSFpjqYVAsv0tidiS.', 'mgkpsy@mgk2.tn', '2021-03-03', 'fdsilfk'),
-(1016, 'finaltestpsy', '$2a$13$9m34hhoZLMMPcSPcE9zc/.bK/18/9FZXAC8Z60ee.f9cz1RUMX0Cu', 'finaltestpsy@ddd.dd', '2000-03-10', 'dsdzdzdz');
+(1016, 'finaltestpsy', '$2a$13$9m34hhoZLMMPcSPcE9zc/.bK/18/9FZXAC8Z60ee.f9cz1RUMX0Cu', 'finaltestpsy@ddd.dd', '2000-03-10', 'dsdzdzdz'),
+(1017, 'mgkpsy2', 'mgkpsy2', 'shidonosan@gmail.com', '2021-04-14', '');
 
 -- --------------------------------------------------------
 
@@ -519,7 +522,8 @@ CREATE TABLE `simple` (
 INSERT INTO `simple` (`id_user`, `username`, `password`, `mail`, `date_n`) VALUES
 (0, 'mgk', '$2a$13$L5cAtXVWc559U5FqH3U/EOCoiHMgzqLt7AszGKCG7EWmrpj0kd3aG', 'mgk@mgk2.tn', '2021-03-03'),
 (52, 'finaltestsimple', '$2a$13$7xaKYKJ4eRDUB5J.BWH3G.bIQy8bg5Yvri9N6iSPBE7Bre5GpmfRO', 'finaltestsimple@test.com', '2001-03-08'),
-(53, 'shidono', '$2a$13$aDk42uZG/wJ/6g/PdfsgcegAT7YA4yOF.i4/uqJKm/XrBOD6kWxZO', 'shidonosan@gmail.com', '2000-01-12');
+(53, 'shidono', '$2a$13$aDk42uZG/wJ/6g/PdfsgcegAT7YA4yOF.i4/uqJKm/XrBOD6kWxZO', 'shidonosan@gmail.com', '2000-01-12'),
+(54, 'ahmed', 'azerty123', 'shidonosan@gmail.com', '2016-01-01');
 
 -- --------------------------------------------------------
 
@@ -703,8 +707,8 @@ ALTER TABLE `evenement`
 --
 ALTER TABLE `invitation`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_id` (`id_user`),
-  ADD KEY `fk_id_ev` (`id_ev`) USING BTREE;
+  ADD KEY `FK_user` (`id_user`),
+  ADD KEY `FK_event` (`id_ev`);
 
 --
 -- Indexes for table `message`
@@ -812,6 +816,12 @@ ALTER TABLE `user`
 --
 
 --
+-- AUTO_INCREMENT for table `act`
+--
+ALTER TABLE `act`
+  MODIFY `id_act` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
@@ -821,7 +831,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
-  MODIFY `id_art` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
+  MODIFY `id_art` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `categorie`
@@ -845,7 +855,7 @@ ALTER TABLE `coach`
 -- AUTO_INCREMENT for table `commentaire`
 --
 ALTER TABLE `commentaire`
-  MODIFY `id_com` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_com` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `discussion`
@@ -857,13 +867,13 @@ ALTER TABLE `discussion`
 -- AUTO_INCREMENT for table `evenement`
 --
 ALTER TABLE `evenement`
-  MODIFY `id_ev` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
+  MODIFY `id_ev` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT for table `invitation`
 --
 ALTER TABLE `invitation`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `message`
@@ -893,7 +903,7 @@ ALTER TABLE `photo_publications`
 -- AUTO_INCREMENT for table `psycho`
 --
 ALTER TABLE `psycho`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1017;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1018;
 
 --
 -- AUTO_INCREMENT for table `publication`
@@ -917,7 +927,7 @@ ALTER TABLE `reclamation`
 -- AUTO_INCREMENT for table `simple`
 --
 ALTER TABLE `simple`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `suivi`
@@ -970,7 +980,7 @@ ALTER TABLE `discussion`
 -- Constraints for table `evenement`
 --
 ALTER TABLE `evenement`
-  ADD CONSTRAINT `fk_art_cat` FOREIGN KEY (`id_act`) REFERENCES `act` (`id_act`);
+  ADD CONSTRAINT `fk_art_act` FOREIGN KEY (`id_act`) REFERENCES `act` (`id_act`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `message`

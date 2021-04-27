@@ -43,7 +43,7 @@ catch (SQLException ex) {
     public void ajouter(Ev sp) {
             System.out.println(sp);
             try {
-            String requete = "INSERT INTO evenement VALUES (null,?,?,?,?,?,?,?,?,?,null)";
+            String requete = "INSERT INTO evenement VALUES (null,?,?,?,?,?,?,?,?,?,?,null)";
             PreparedStatement pst = cnx.prepareStatement(requete);
             pst.setString(1, sp.getTitre_ev());
             pst.setString(2, sp.getType_ev());
@@ -54,6 +54,7 @@ catch (SQLException ex) {
             pst.setTime(7, sp.getTemps_fev());
             pst.setInt(8, sp.getAge_max());
             pst.setInt(9, sp.getAge_min());
+            pst.setString(10, sp.getImage());
            
             pst.executeUpdate();
             System.out.println("Evenement ajoutée !");
@@ -100,7 +101,7 @@ try {
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
 
-                evenements.add(new Ev( rs.getInt(1), rs.getString(2), rs.getString (3),rs.getString (4),rs.getDate (5),rs.getDate (6),rs.getString (7),rs.getString(8),rs.getInt(9),rs.getInt(10)));
+                evenements.add(new Ev( rs.getInt(1), rs.getString(2), rs.getString (3),rs.getString (4),rs.getDate (5),rs.getDate (6),rs.getString (7),rs.getString(8),rs.getInt(9),rs.getInt(10),rs.getString(11)));
             }
         } catch (SQLException ex) {
             System.out.println("Erreur lors d'extraction des données \n" + ex.getMessage());
@@ -194,7 +195,7 @@ try {
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
 
-                evenements.add(new Ev( rs.getInt(1), rs.getString(2), rs.getString (3),rs.getString (4),rs.getDate (5),rs.getDate(6),rs.getString(7),rs.getString(8),rs.getInt(9),rs.getInt(10),rs.getInt(11)));
+                evenements.add(new Ev( rs.getInt(1), rs.getString(2), rs.getString (3),rs.getString (4),rs.getDate (5),rs.getDate(6),rs.getString(7),rs.getString(8),rs.getInt(9),rs.getInt(10),rs.getString(11)));
             }
         } catch (SQLException ex) {
             System.out.println("Erreur lors d'extraction des données \n" + ex.getMessage());

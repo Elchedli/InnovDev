@@ -25,11 +25,12 @@ java.sql.Connection cnx = MyConnection.getInstance().getCnx();
 @Override
     public void ajouter(Act t) {
         try {
-            String requete = "INSERT INTO act (id_act,nom_act,type_act) VALUES (?,?,?)";
+            String requete = "INSERT INTO act (id_act,nom_act,type_act,image) VALUES (?,?,?,?)";
             PreparedStatement pst1 = cnx.prepareStatement(requete);
             pst1.setInt(1,t.getId_act());
             pst1.setString(2,t.getNom_act());
             pst1.setString(3, t.getType_act());
+            pst1.setString(4, t.getImage());
             pst1.executeUpdate();
             System.out.println("activité ajoutée !");
 
@@ -58,12 +59,12 @@ catch (SQLException ex) {
            
      
 try { 
-            String requete = "UPDATE `act` SET nom_act=?, type_act=? WHERE id_act= ?";;
+            String requete = "UPDATE `act` SET nom_act=?, type_act=?, image=? WHERE id_act= ?";;
             PreparedStatement pst = cnx.prepareStatement(requete);
-            pst.setInt(3,t.getId_act());
+            pst.setInt(4,t.getId_act());
             pst.setString(1, t.getNom_act());
             pst.setString(2, t.getType_act());
-            
+              pst.setString(3, t.getImage());
             pst.executeUpdate();
             System.out.println("Activité modifié avec succés \n ");
         } catch (SQLException ex) {
@@ -80,7 +81,7 @@ try {
             PreparedStatement pst = cnx.prepareStatement(requete);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-             activite.add(new Act( rs.getInt(1), rs.getString(2), rs.getString(3)));
+             activite.add(new Act( rs.getInt(1), rs.getString(2), rs.getString(3),rs.getString(4)));
             }
         } catch (SQLException ex) {
             System.out.println("Erreur lors d'extraction des données \n" + ex.getMessage());

@@ -51,7 +51,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Button layoutX="50.0" layoutY="302.0" mnemonicParsing="false" onAction="#ParticiperAjout" prefHeight="38.0" prefWidth="171.0" style="-fx-background-color: linear-gradient(to right top, #00a1a1, #00a1a1, #00a1a1, #00a1a1, #00a1a1); -fx-background-radius: 1em;" text="Participer/Annuler" textFill="WHITE">
+            <Button layoutX="50.0" layoutY="302.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="171.0" style="-fx-background-color: linear-gradient(to right top, #00a1a1, #00a1a1, #00a1a1, #00a1a1, #00a1a1); -fx-background-radius: 1em;" text="Participer/Annuler" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
