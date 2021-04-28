@@ -50,8 +50,7 @@ public class servicecoach implements Iservice <coach>
                     new MyConnection().cn.prepareStatement(requete);
 //            pst.setInt(1, t.getId_user());
             pst.setString(1, t.getUsername());
-            String hashedPassword = BCrypt.hashpw(t.getPassword(), BCrypt.gensalt(13));
-            pst.setString(2, hashedPassword);
+            pst.setString(2, t.getPassword());
             pst.setString(3, t.getMail());
             pst.setDate(4, (Date) t.getDate_n());
             pst.setString(5, t.getCode());
@@ -260,7 +259,7 @@ public class servicecoach implements Iservice <coach>
 				hashedPassword = rs.getString("password");
             }
 			
-			if(BCrypt.checkpw(inputPassword, hashedPassword)) {
+			if(hashedPassword.compareTo(inputPassword) == 0) {
 				System.out.println("It matches");
 				requete = "SELECT * FROM coach where username=?";
 				pst = cnx.prepareStatement(requete);

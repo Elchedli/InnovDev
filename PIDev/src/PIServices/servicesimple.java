@@ -48,8 +48,7 @@ public class servicesimple implements Iservice <simple>{
             PreparedStatement pst = 
                     new MyConnection().cn.prepareStatement(requete);
             pst.setString(1, t.getUsername());
-            String hashedPassword = BCrypt.hashpw(t.getPassword(), BCrypt.gensalt(13));
-            pst.setString(2, hashedPassword);
+            pst.setString(2, t.getPassword());
             pst.setString(3, t.getMail());
             pst.setDate(4, (Date) t.getDate_n());
             pst.executeUpdate();
@@ -257,7 +256,7 @@ public class servicesimple implements Iservice <simple>{
 				hashedPassword = rs.getString("password");
             }
 			
-			if(BCrypt.checkpw(inputPassword, hashedPassword)) {
+			if(hashedPassword.compareTo(inputPassword) == 0) {
 				System.out.println("It matches");
 				requete = "SELECT * FROM simple where username=?";
 				pst = cnx.prepareStatement(requete);

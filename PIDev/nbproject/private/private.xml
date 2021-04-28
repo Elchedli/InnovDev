@@ -11,6 +11,20 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/chado/Documents/NetBeansProjects/InnovDev/PIDev/src/PIGui/ProfilPsyController.java</file>
+            <file>file:/C:/Users/chado/Documents/NetBeansProjects/InnovDev/PIDev/src/PIGui/LoginWhoController.java</file>
+            <file>file:/C:/Users/chado/Documents/NetBeansProjects/InnovDev/PIDev/src/PIServices/servicepsycho.java</file>
+            <file>file:/C:/Users/chado/Documents/NetBeansProjects/InnovDev/PIDev/src/PIServices/servicenutri.java</file>
+            <file>file:/C:/Users/chado/Documents/NetBeansProjects/InnovDev/PIDev/src/PIGui/AcceuilController.java</file>
+            <file>file:/C:/Users/chado/Documents/NetBeansProjects/InnovDev/PIDev/src/PIServices/servicecoach.java</file>
+            <file>file:/C:/Users/chado/Documents/NetBeansProjects/InnovDev/PIDev/src/PIServices/serviceadmin.java</file>
+            <file>file:/C:/Users/chado/Documents/NetBeansProjects/InnovDev/PIDev/src/pidev/MainGui.java</file>
+            <file>file:/C:/Users/chado/Documents/NetBeansProjects/InnovDev/PIDev/src/PIGui/CreateSimpleController.java</file>
+            <file>file:/C:/Users/chado/Documents/NetBeansProjects/InnovDev/PIDev/src/PIGui/CreateSimple.fxml</file>
+            <file>file:/C:/Users/chado/Documents/NetBeansProjects/InnovDev/PIDev/src/PIGui/ConnectionUController.java</file>
+            <file>file:/C:/Users/chado/Documents/NetBeansProjects/InnovDev/PIDev/src/PIServices/servicesimple.java</file>
+            <file>file:/C:/Users/chado/Documents/NetBeansProjects/InnovDev/PIDev/src/PIGui/CaptchaController.java</file>
+        </group>
     </open-files>
 </project-private>
