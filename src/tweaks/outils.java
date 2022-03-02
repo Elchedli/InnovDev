@@ -56,7 +56,7 @@ public class outils {
         properties.put("mail.smtp.port", "587");
         
         String myAccountEmail = "chedli.elloumi@esprit.tn";
-        String password = "Choulika123";
+        String password = "PASSWORD";
         
         Session session = Session.getInstance(properties, new Authenticator(){
             @Override
